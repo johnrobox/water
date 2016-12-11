@@ -79,3 +79,17 @@ footer {
 .text-red {
     color: red;
 }
+
+.loading-margin-top {
+    height: 30px; 
+    width: 30px; 
+    margin-top: 25px;
+}
+
+.white {
+    background-color : #fff;
+}
+
+.bg-eee {
+    background-color : #eee;
+}

@@ -106,16 +106,7 @@ class AdminCustomerController extends CI_Controller {
         if ($login['valid']) {
             $data['script'] = array('customer');
             $data['pageTitle'] = 'Admin - view customer';
-            $config = $this->paginatedesign->bootstrapPagination();
-            $config['base_url'] = base_url() . "index.php/AdminCustomerController/viewCustomer";
-            $config['total_rows'] = $this->CustomerModel->countCustomer();
-            $config['per_page'] = 10;
-            $config['uri_segment'] = 3;
-            $this->pagination->initialize($config);
-
-            $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-            $data["results"] = $this->CustomerModel->allCustomer($config["per_page"], $page);
-            $data["links"] = $this->pagination->create_links();
+            $data['customers'] = $this->Customer->getAll();
 
             $this->load->view('admin/default/header', $data);
             $this->load->view('admin/default/top-menu');
@@ -158,8 +149,22 @@ class AdminCustomerController extends CI_Controller {
     */
     public function getCustomeInfo() {
         $id = $this->input->post('id');
-        $customer = $this->Customer->getSingleData($id);
-        echo json_encode($customer);
+        $state = $this->input->post('state');
+        $previous = $this->Customer->getFirstLastId("min");
+        $next = $this->Customer->getFirstLastId("max");
+        if ($state == 0){
+            $result['customer'] = $this->Customer->getSingleData($id);
+            $result['previous'] = $previous;
+            $result['next'] = $next;
+        } else if ($state == 1) {
+            $result = $this->Customer->findPreviousNextById($id, "max", "<");
+            $result['previous'] = $previous;
+        } else if ($state == 2) {
+            $result = $this->Customer->findPreviousNextById($id, "min", ">");
+            $result['next'] = $next;
+        }
+        
+        echo json_encode($result);
     }
 
     /*
@@ -168,21 +173,85 @@ class AdminCustomerController extends CI_Controller {
     * @return void
     */
     public function updateCustomeInfo() {
-        $id = $this->input->post("id");
-        $data = array(
-            "customer_firstname" => $this->input->post('firstname'),
-            "customer_middlename" => $this->input->post("middlename"),
-            "customer_lastname" => $this->input->post("lastname"),
-            "customer_meter_no" => $this->input->post("meter_number"),
-            "customer_address" => $this->input->post("address"),
-            "customer_contact" => $this->input->post("contact")
-            );
-
-        $update = $this->Customer->updateCustomerById($id, $data);
-        if ($update['updated']){
-            $this->session->set_flashdata('success', $this->alert->successAlert('Customer Successfully updated'));
+        $validate = array(
+            array(
+                'field' => 'firstname',
+                'label' => 'Firstname',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'middlename',
+                'label' => 'Middlename',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'lastname',
+                'label' => 'Lastname',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'meter_number',
+                'label' => 'Meter Number',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'contact',
+                'label' => 'Contact',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'address',
+                'label' => 'Address',
+                'rules' => 'required'
+            )
+        );
+        $this->form_validation->set_rules($validate);
+        if ($this->form_validation->run() == false) {
+            $result = array(
+                    'error' => true,
+                    'messages' => $this->form_validation->error_array()
+                );
+        } else {
+            $id = $this->input->post('id');
+            $firstname = $this->input->post('firstname');
+            $middlename = $this->input->post('middlename');
+            $lastname = $this->input->post('lastname');
+            $meter_number = $this->input->post('meter_number');
+            $address = $this->input->post('address');
+            $contact = $this->input->post('contact');
+            
+            $check_meter_number = $this->Customer->checkMeterNoExist($id, $meter_number);
+            if ($check_meter_number) {
+                $result = array(
+                    'error' => true,
+                    'messages' => array(
+                        'meter_number' => 'Meter number is already exist!'
+                    )
+                );
+            } else {
+                $data = array(
+                    'customer_firstname' => $firstname,
+                    'customer_lastname' => $lastname,
+                    'customer_middlename' => $middlename,
+                    'customer_meter_no' => $meter_number,
+                    'customer_address' => $address,
+                    'customer_contact' => $contact
+                );
+                $update = $this->Customer->updateCustomerById($id, $data);
+                if(!$update) {
+                    $result = array(
+                        'error' => true,
+                        'messages' => array(
+                            'error' => 'Cannot update customer info, it might nothing has change!'
+                        )
+                    );
+                } else {
+                    $this->session->set_flashdata('success', $this->alert->successAlert('Customer Successfully updated'));
+                    $result['error'] = false;
+                }
+            }
         }
-        echo json_encode($update);
+        echo json_encode($result);
     }
 
 
@@ -190,12 +259,8 @@ class AdminCustomerController extends CI_Controller {
         $id = $this->input->post('id');
         $status = ($this->input->post('status')) ? 0 : 1;
         $changeStatus = $this->Customer->changeCustomerStatus($id, $status);
-
-        $data = array(
-                'id' => $this->input->post('id'),
-                'status' => $this->input->post('status')
-            );
-        echo json_encode($data);
+        $result['change'] = $changeStatus;
+        echo json_encode($result);
     }
 
     

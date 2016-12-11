@@ -17,6 +17,15 @@
         	foreach ($script as $js) { ?>
         	<script src="<?php echo base_url().'js/'.$js;?>.js"></script>
         <?php } }?>
-        <script src="<?php echo base_url();?>js/admin-script.js"></script>        
+        <script src="<?php echo base_url();?>js/admin-script.js"></script>    
+        
+            <link rel="stylesheet" href="<?php echo base_url();?>datatables/css/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="<?php echo base_url();?>datatables/css/dataTables.responsive.css">
+
+
+        <script src="<?php echo base_url();?>datatables/js/jquery.dataTables.min.js"></script>
+        <script src="<?php echo base_url();?>datatables/js/dataTables.bootstrap.min.js"></script>
+        <script src="<?php echo base_url();?>datatables/js/dataTables.responsive.js"></script>
+    
 	</head>
 	<body>

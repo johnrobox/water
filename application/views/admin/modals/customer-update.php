@@ -2,6 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">Edit
+                <div class="text-red commonError"></div>
                 <img id="loadingImageUpdateCustomer" style="height: 100px; width:100px; display: none" src="<?php echo base_url().'img/admin/loading.gif';?>" class="center-block">
                 <i class="pull-right fa fa-times" data-dismiss="modal"></i>
             </div>
@@ -26,7 +27,7 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <img src="<?php echo base_url();?>img/admin/loading/loading6.svg" class="img-responsive fnameRefreshImage" style="height: 30px; width: 30px;"/>
+                            <img src="<?php echo base_url();?>img/admin/loading/loading6.svg" class="img-responsive fnameRefreshImage loading-margin-top" />
                         </div>
 
                         <?php
@@ -45,7 +46,7 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <img src="<?php echo base_url();?>img/admin/loading/loading6.svg" class="img-responsive mnameRefreshImage" style="height: 30px; width: 30px;"/>
+                            <img src="<?php echo base_url();?>img/admin/loading/loading6.svg" class="img-responsive mnameRefreshImage loading-margin-top"/>
                         </div>
 
                         <?php $editLastname = array(
@@ -62,7 +63,7 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <img src="<?php echo base_url();?>img/admin/loading/loading6.svg" class="img-responsive lnameRefreshImage" style="height: 30px; width: 30px;"/>
+                            <img src="<?php echo base_url();?>img/admin/loading/loading6.svg" class="img-responsive lnameRefreshImage loading-margin-top" />
                         </div>
 
                         <?php
@@ -81,7 +82,7 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <img src="<?php echo base_url();?>img/admin/loading/loading6.svg" class="img-responsive meterNumberRefreshImage" style="height: 30px; width: 30px;"/>
+                            <img src="<?php echo base_url();?>img/admin/loading/loading6.svg" class="img-responsive meterNumberRefreshImage loading-margin-top"/>
                         </div>
 
                         <?php
@@ -100,7 +101,7 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <img src="<?php echo base_url();?>img/admin/loading/loading6.svg" class="img-responsive contactRefreshImage" style="height: 30px; width: 30px;"/>
+                            <img src="<?php echo base_url();?>img/admin/loading/loading6.svg" class="img-responsive contactRefreshImage loading-margin-top"/>
                         </div>
 
                         <?php
@@ -119,7 +120,7 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <img src="<?php echo base_url();?>img/admin/loading/loading6.svg" class="img-responsive addressRefreshImage" style="height: 30px; width: 30px;"/>
+                            <img src="<?php echo base_url();?>img/admin/loading/loading6.svg" class="img-responsive addressRefreshImage loading-margin-top"/>
                         </div>
                         
                     </form>
@@ -129,7 +130,7 @@
             </div>
             <div class="modal-footer">
                     <button class="btn btn-success" id="BtnRefreshUpCos" value="">Refresh Data</button>
-                    <button class="btn btn-primary" id="BtnSubmitUpCos">Update</button>
+                    <button class="btn btn-primary" id="BtnSubmitUpCos" value="">Update</button>
             </div>
         </div>
     </div>

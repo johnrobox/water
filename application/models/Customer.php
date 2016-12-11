@@ -7,10 +7,39 @@ class Customer extends CI_Model {
 	}
 
 	public function getInfo($customer_id) {
-		$this->db->where('id', $customer_id);
-		$query = $this->db->get($this->table);
-		return $query->row();
+            $this->db->where('id', $customer_id);
+            $query = $this->db->get($this->table);
+            return $query->row();
 	}
+        
+        public function getAll() {
+            $query = $this->db->query("SELECT 
+            customers.id,
+            customers.customer_firstname,
+            customers.customer_middlename,
+            customers.customer_lastname,
+            customers.customer_email,
+            customers.customer_meter_no,
+            customers.customer_address,
+            customers.customer_contact,
+            customers.customer_birthdate,
+            customer_logs.customer_status
+            FROM customers JOIN customer_logs ON customers.id = customer_logs.customer_id");
+            return $query->result();
+        }
+        
+        public function findPreviousNextById($id, $states, $operator) {
+            $query = $this->db->query("select * from ".$this->table." where id = (select $states(id) from ".$this->table." where id ".$operator." ".$id.")");
+            $result['select'] = ($this->db->affected_rows() > 0 ) ? true : false;
+            $result['customer'] = $query->result();
+            return $result;
+        }
+
+        public function getFirstLastId($states){
+            $query = $this->db->query("SELECT id FROM ".$this->table." WHERE id=(SELECT ".$states."(id) FROM ".$this->table.")");
+            $row = $query->row();
+            return (isset($row)) ? $row->id : false;
+        }
 
 	public function getSingleData($customer_id) {
 		$this->db->where('id', $customer_id);
@@ -19,23 +48,21 @@ class Customer extends CI_Model {
 	}
 
 	public function updateCustomerById($id, $data) {
-		$sql = "SELECT id FROM customers WHERE id != ? AND customer_meter_no = ?";
-		$query = $this->db->query($sql, array($id, $data['customer_meter_no']));
-		if ($query->num_rows() == 0){
-			$this->db->where("id", $id);
-			$this->db->update("customers", $data);
-			$result['updated'] = true;
-		} else {
-			$result = array(
-				'udpated' => false,
-				'error' => 'Meter number is already exist.'
-				);
-		}
-		return $result;
+            $this->db->where("id", $id);
+            $this->db->update($this->table, $data);
+            return ($this->db->affected_rows()) ? true : false;
 	}
+        
+        public function checkMeterNoExist($id, $meter_number) {
+            $sql = "SELECT id FROM customers WHERE id != ? AND customer_meter_no = ?";
+            $query = $this->db->query($sql, array($id, $meter_number));
+            return ($query->num_rows()) ? true :  false;
+        }
 	
-	public function changeCustomerStatus() {
-
+	public function changeCustomerStatus($id, $status) {
+            $this->db->where('customer_id', $id);
+            $this->db->update('customer_logs', array('customer_status' => $status));
+            return ($this->db->affected_rows()) ? true : false;
 	}
 	
 }
