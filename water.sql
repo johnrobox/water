@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2016 at 02:39 AM
+-- Generation Time: Dec 19, 2016 at 12:54 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `admin_logs` (
 --
 
 INSERT INTO `admin_logs` (`id`, `admin_id`, `admin_role`, `admin_status`, `admin_token`, `admin_last_login`, `admin_last_logout`, `admin_date_created`, `admin_date_modified`) VALUES
-(1, 1, 1, 1, 'AHIfjXKoXb0R0uJvqrBGHaSdMefs8JXfJhHW3XIn4mITezUlwc', '2015-12-10 10:34:12', NULL, '2015-10-17 01:33:07', '2015-10-17 01:33:07');
+(1, 1, 1, 1, 'LAl3zepCv01ijeGabLkORWsmxB0mX6tWkiNGmutGiyswPPdjb9', '2016-12-11 10:51:37', NULL, '2015-10-17 01:33:07', '2015-10-17 01:33:07');
 
 -- --------------------------------------------------------
 
@@ -82,28 +82,26 @@ CREATE TABLE IF NOT EXISTS `balance` (
   `balance_amount` double DEFAULT NULL,
   `balance_responsibility` tinyint(3) DEFAULT NULL COMMENT '1-company 2-customer',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `balance`
 --
 
 INSERT INTO `balance` (`id`, `customer_id`, `balance_amount`, `balance_responsibility`) VALUES
-(1, 1, -16, NULL),
+(1, 1, 0, NULL),
 (2, 2, 0, NULL),
 (3, 3, 0, NULL),
 (4, 4, 0, NULL),
-(5, 5, 0, NULL),
-(6, 6, 0, NULL),
-(7, 7, 0, NULL);
+(5, 5, 0, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Table structure for table `customers`
 --
 
-CREATE TABLE IF NOT EXISTS `customer` (
+CREATE TABLE IF NOT EXISTS `customers` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `customer_firstname` varchar(100) DEFAULT NULL,
   `customer_middlename` varchar(200) NOT NULL,
@@ -117,17 +115,15 @@ CREATE TABLE IF NOT EXISTS `customer` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
--- Dumping data for table `customer`
+-- Dumping data for table `customers`
 --
 
-INSERT INTO `customer` (`id`, `customer_firstname`, `customer_middlename`, `customer_lastname`, `customer_email`, `customer_meter_no`, `customer_address`, `customer_contact`, `customer_birthdate`) VALUES
-(1, 'Abella', '', 'Hector', NULL, 'EVER-100702374', 'SUNFLOWER', '09239117973', '1992-06-17'),
-(2, 'Ritchie', '', 'Acilo', NULL, 'EVER-110102249', 'SUNFLOWER', '09223454555', '1989-12-28'),
-(3, 'Vicente', '', 'Alaba', NULL, 'EVER 080805472', 'PHASE 2', '09062334357', '1988-12-30'),
-(4, 'Juvelyn', '', 'Alferez', NULL, 'EVER- 111276275', 'SUNFLOWER', '09059876765', '1984-12-23'),
-(5, 'Florifie', '', 'Batis', NULL, 'EVER- 05569', 'SINAI', '09876545456', '1990-12-23'),
-(6, 'Darlito', '', 'Baula', NULL, 'EVER- 100308955', 'SUNFLOWER', '09876545654', '1991-12-22'),
-(7, 'Dolly', '', 'Bautista', NULL, 'EVER- 08010000211', 'TABAYLAWON', '09568767656', '1995-12-23');
+INSERT INTO `customers` (`id`, `customer_firstname`, `customer_middlename`, `customer_lastname`, `customer_email`, `customer_meter_no`, `customer_address`, `customer_contact`, `customer_birthdate`) VALUES
+(2, 'Belucorass', 'Palautog', 'Belucora', NULL, '098-233-4345', 'Taga IT, unahan JP Morgans', '09334416469', '2016-09-07'),
+(4, 'Jerodiaz4', 'Meguizo', 'Jerodiaz', NULL, '3445-3434-23', 'Candabong Dumanjug Cebu', '0923485485757', '2016-10-24'),
+(5, '3johnrobert', 'pahayahay', 'jeroidiaz', 'johnrobert@gmail.com', '938JJJKJKJKJkk', 'Taga tapon', '09358439593439', '2016-12-15'),
+(6, '4johnrobert', 'pahayahay', 'jeroidiaz', 'johnrobert@gmail.com', '938JJJKJKJKJ', 'Taga tapon', '09358439593439', '2016-12-15'),
+(7, '5johnrobert', 'pahayahay', 'jeroidiaz', 'johnrobert@gmail.com', '938JJJKJKJKJs', 'Taga tapons', '09358439593439', '2016-12-15');
 
 -- --------------------------------------------------------
 
@@ -141,16 +137,7 @@ CREATE TABLE IF NOT EXISTS `customer_billing` (
   `paid_amount` double DEFAULT NULL,
   `paid_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `customer_billing`
---
-
-INSERT INTO `customer_billing` (`id`, `customer_reading_id`, `paid_amount`, `paid_date`) VALUES
-(1, 1, 450, '2015-12-10 01:20:40'),
-(2, 4, 145, '2015-12-10 01:33:59'),
-(3, 5, 700, '2015-12-10 01:34:21');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -174,13 +161,13 @@ CREATE TABLE IF NOT EXISTS `customer_logs` (
 --
 
 INSERT INTO `customer_logs` (`id`, `customer_id`, `customer_last_login`, `customer_last_logout`, `customer_status`, `customer_date_created`, `customer_date_modified`) VALUES
-(1, 1, NULL, NULL, 1, '2015-12-10 01:04:10', NULL),
-(2, 2, NULL, NULL, 1, '2015-12-10 01:05:50', NULL),
-(3, 3, NULL, NULL, 1, '2015-12-10 01:07:06', NULL),
-(4, 4, NULL, NULL, 1, '2015-12-10 01:08:53', NULL),
-(5, 5, NULL, NULL, 1, '2015-12-10 01:10:21', NULL),
-(6, 6, NULL, NULL, 1, '2015-12-10 01:11:41', NULL),
-(7, 7, NULL, NULL, 1, '2015-12-10 01:13:10', NULL);
+(1, 1, NULL, NULL, 1, '2016-09-28 10:26:21', NULL),
+(2, 2, NULL, NULL, 0, '2016-09-28 10:27:54', NULL),
+(3, 3, NULL, NULL, 1, '2016-10-13 07:12:24', NULL),
+(4, 4, NULL, NULL, 0, '2016-10-13 07:21:27', NULL),
+(5, 5, NULL, NULL, 1, '2016-10-22 11:41:14', NULL),
+(6, 6, NULL, NULL, 0, NULL, NULL),
+(7, 7, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -194,18 +181,7 @@ CREATE TABLE IF NOT EXISTS `customer_reading` (
   `customer_reading_amount` double DEFAULT NULL,
   `customer_reading_date` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `customer_reading`
---
-
-INSERT INTO `customer_reading` (`id`, `customer_id`, `customer_reading_amount`, `customer_reading_date`) VALUES
-(1, 1, 400, '9-2015'),
-(2, 2, 230, '9-2015'),
-(3, 3, 100, '9-2015'),
-(4, 1, 200, '10-2015'),
-(5, 1, 679, '11-2015');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
