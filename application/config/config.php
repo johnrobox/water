@@ -18,7 +18,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | environments.
   |
  */
-$config['base_url'] = 'http://localhost/water/';
+$base = 1;
+
+switch ($base) {
+    case 0:
+        $url = 'http://localhost/water/';
+        break;
+    case 1:
+        $url = 'http://practice.com/water/';
+        break;
+    case 3:
+        $url = 'https://water.com';
+        break;
+    default :
+        $url = 'https://steve-water.com';
+        break;
+}
+$config['base_url'] = $url;
 
 /*
   |--------------------------------------------------------------------------

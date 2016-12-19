@@ -28,9 +28,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach($customers as $row) { ?>
-                <?php $status = ($row->customer_status == 0)? 'Disable' : 'Enable';?>
-                <?php if ($row->customer_status) { 
+                <?php foreach($customers as $row) { 
+                $status = ($row->customer_status == 0)? 'Disable' : 'Enable';
+                $id = $row->id;
+                if ($row->customer_status) { 
                     $btn_type = "danger";
                     $btn_text = "Disable";
                     $tr_class = "bg-white";
@@ -40,17 +41,17 @@
                     $btn_text = "Enable";
                 } ?>
                 
-                <tr id="row<?php echo $row->id; ?>" class="<?php echo $tr_class; ?>">
+                <tr id="row<?php echo $id; ?>" class="<?php echo $tr_class; ?>">
                     <td><?php echo ucwords(strtolower($row->customer_firstname.' '.$row->customer_middlename.' '.$row->customer_lastname));?></td>
                     <td><?php echo $row->customer_meter_no;?></td>
                     <td><?php echo $row->customer_contact;?></td>
                     <td><?php echo $row->customer_address;?></td>
                     <td>
-                        <button value="<?php echo $row->id;?>" class="btn btn-default btn-xs viewCustomerInfoButton">View Info</button>
-                        <button class="btn btn-success btn-xs editCustomerButton" value="<?php echo $row->id; ?>">Edit</button>
-                        <button class="btn btn-<?php echo $btn_type;?> btn-xs changeStatusCustomerButton" id="changeStatusButton<?php echo $row->id;?>" value="<?php echo $row->id;?>" status="<?php echo $row->customer_status;?>">
-                            <?php echo $btn_text;?>
-                            <img src="<?php echo base_url();?>img/admin/loading/loading8.gif" id="changeStatusLoading<?php echo $row->id;?>" style="width: 20px; height: 20px; display: none"/>
+                        <button value="<?php echo $id;?>" class="btn btn-default btn-xs viewCustomerInfoButton">View Info</button>
+                        <button class="btn btn-success btn-xs editCustomerButton" value="<?php echo $id; ?>">Edit</button>
+                        <button class="btn btn-<?php echo $btn_type;?> btn-xs changeStatusCustomerButton" id="changeStatusButton<?php echo $id;?>" value="<?php echo $id;?>" status="<?php echo $row->customer_status;?>">
+                            <span id="changeStatusText<?php echo $id;?>"><?php echo $btn_text;?></span>
+                            <img src="<?php echo base_url();?>img/admin/loading/loading8.gif" id="changeStatusLoading<?php echo $id;?>" style="width: 20px; height: 20px; display: none"/>
                         </button>
                     </td>
                 </tr>
@@ -64,7 +65,7 @@
     </div>
 </div><!--/.container-->
 
-    <script>
+<script>
     $(document).ready(function(){
         $('#stagit-datatable').DataTable({
             responsive: true

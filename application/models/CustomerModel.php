@@ -10,8 +10,7 @@ class CustomerModel extends CI_Model {
         return $this->db->count_all("customers");
     }
     
-    public function allCustomer($limit, $start) {
-        $this->db->limit($limit, $start);
+    public function allCustomer() {
         $query = $this->db->query("SELECT 
             customers.id,
             customers.customer_firstname,
@@ -24,14 +23,9 @@ class CustomerModel extends CI_Model {
             customers.customer_birthdate,
             customer_logs.customer_status
             FROM customers JOIN customer_logs ON customers.id = customer_logs.customer_id");
+        return $query->result();
 
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
-                $data[] = $row;
-            }
-            return $data;
-        }
-        return false;
+        
     }
     
     public function changeStatus($data) {

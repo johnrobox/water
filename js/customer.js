@@ -328,6 +328,7 @@ $(document).ready(function(){
         var customer_status = this.getAttribute("status");
         var tr_tracker = $("#row"+customer_id);
         var view_button = $("#changeStatusButton"+customer_id);
+        var button_content = $("#changeStatusText"+customer_id);
         console.log(customer_id);
         console.log(customer_status);
         var loading_image = $("#changeStatusLoading"+customer_id);
@@ -359,7 +360,7 @@ $(document).ready(function(){
                 var alert_message = "Cannot change status!";
             }
             
-            view_button.text(button_text);
+            button_content.text(button_text);
             commonAlertMessage.addClass(add_class);
             commonAlertMessage.text(alert_message);
             commonAlertMessage.fadeIn('slow');
