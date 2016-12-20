@@ -42,7 +42,7 @@
                           </select>
                       </td>
                       <td>
-                          <button class="btn btn-primary" type="submit">View all</button>
+                          <?php echo form_button(array('class' => 'btn btn-primary', 'type' => 'sumbit', 'content' => 'View All')); ?>
                       </td>
                   </tr>
               </table>
@@ -88,17 +88,13 @@
                                             <input type="text" name="reading_amount" required="" class="form-control" style="height:25px;"/>
                                         </td>
                                         <td>
-                                            <button class="btn btn-primary btn-xs" type="submit">Submit</button>
+                                            <?php echo form_button(array('class' => 'btn btn-primary btn-xs', 'type' => 'submit', 'content' => 'Submit')); ?>
                                         </td>
                                     </tr>
                                 </table>
                                <?php echo form_close(); ?>
-
-
                             </td>
                             <?php } ?>
-
-
                         </tr>
                       <?php endforeach; ?>
                       </tbody>
