@@ -1,6 +1,6 @@
 <?php
 
-class AdminRequestController extends CI_Controller{
+class RequestController extends CI_Controller{
     
     public function __construct() {
         parent::__construct();

@@ -1,6 +1,6 @@
 <?php
 
-class AdminAdduserController extends CI_Controller {
+class AdduserController extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
@@ -18,7 +18,7 @@ class AdminAdduserController extends CI_Controller {
             $this->load->view('admin/pages/user/add-user');
             $this->load->view('admin/default/footer');
         } else {
-            redirect(base_url().'index.php/AdminLogoutController');
+            redirect(base_url().'index.php/admin/LogoutController');
         }
     }
     
@@ -74,7 +74,7 @@ class AdminAdduserController extends CI_Controller {
             );
             $this->AdminModel->addAdmin($prepare);
             $this->session->set_flashdata('okay', $this->alert->successAlert('Admin successfully added.'));
-            redirect(base_url().'index.php/AdminAdduserController/index');
+            redirect(base_url().'index.php/admin/AdduserController/index');
             exit();
         }
     }

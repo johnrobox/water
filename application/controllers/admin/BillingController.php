@@ -1,6 +1,6 @@
 <?php
 
-class AdminBillingController extends CI_Controller {
+class BillingController extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
@@ -28,7 +28,7 @@ class AdminBillingController extends CI_Controller {
             }
             
             $config = $this->paginatedesign->bootstrapPagination();
-            $config['base_url'] = base_url() . "index.php/AdminCustomerController/viewCustomer";
+            $config['base_url'] = base_url() . "index.php/admin/CustomerController/viewCustomer";
             $config['total_rows'] = $this->CustomerModel->countCustomer();
             $config['per_page'] = 10;
             $config['uri_segment'] = 3;
@@ -44,7 +44,7 @@ class AdminBillingController extends CI_Controller {
             $this->load->view('admin/pages/billing/index');
             $this->load->view('admin/default/footer');
         } else {
-            redirect(base_url().'index.php/AdminLogoutController');
+            redirect(base_url().'index.php/admin/LogoutController');
         }
     }
     

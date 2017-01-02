@@ -1,6 +1,6 @@
 <?php
 
-class AdminLogoutController extends CI_Controller {
+class LogoutController extends CI_Controller {
     
     public function index(){
         $adminUser = array(

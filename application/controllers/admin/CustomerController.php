@@ -2,7 +2,7 @@
 /**
  * Admin Customer Controller
  */
-class AdminCustomerController extends CI_Controller {
+class CustomerController extends CI_Controller {
     
     /**
      * Construct function

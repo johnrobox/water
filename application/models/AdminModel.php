@@ -7,17 +7,7 @@ class AdminModel extends CI_Model {
     }
     
     public function checkAuthentication() {
-        if ( $this->session->has_userdata('AdminId') &&
-             $this->session->has_userdata('AdminFirstname') &&
-             $this->session->has_userdata('AdminLastname') &&
-             $this->session->has_userdata('AdminEmail') &&
-             $this->session->has_userdata('AdminToken')
-            ) {
-        $response['valid'] = true;    
-        } else {
-        $response['valid'] = false;   
-        }
-        return $response;
+        
     } 
     
     public function addAdmin($array){

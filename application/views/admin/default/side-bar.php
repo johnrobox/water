@@ -8,38 +8,38 @@
            
             <ul class="nav nav-sidebar">
               <li <?php echo ($pageTitle == 'Admin - homepage')? 'class="active"' : ''?> >
-                  <a href="<?php echo base_url();?>index.php/AdminHomepageController/index">Dashboard</a>
+                  <a href="<?php echo base_url();?>index.php/admin/HomepageController/index">Dashboard</a>
               </li>
               <hr>
               <li <?php echo ($pageTitle == 'Admin - view customer')? 'class="active"' : ''?> >
-                  <a href="<?php echo base_url();?>index.php/AdminCustomerController/viewCustomer">All Customer</a>
+                  <a href="<?php echo base_url();?>index.php/admin/CustomerController/viewCustomer">All Customer</a>
               </li>
               <li <?php echo ($pageTitle == 'Admin - add customer')? 'class="active"' : ''?> >
-                  <a href="<?php echo base_url();?>index.php/AdminCustomerController/addField">Add Customer</a>
+                  <a href="<?php echo base_url();?>index.php/admin/CustomerController/addField">Add Customer</a>
               </li>
               <li <?php echo ($pageTitle == 'Admin - reading')? 'class="active"' : ''?> >
-                  <a href="<?php echo base_url();?>index.php/AdminReadingController/index">Reading</a>
+                  <a href="<?php echo base_url();?>index.php/admin/ReadingController/index">Reading</a>
               </li>
               <li <?php echo ($pageTitle == 'Admin - billing')? 'class="active"' : ''?> >
-                  <a href="<?php echo base_url();?>index.php/AdminBillingController/index">Billing</a>
+                  <a href="<?php echo base_url();?>index.php/admin/BillingController/index">Billing</a>
               </li>
               <li <?php echo ($pageTitle == 'Admin - overdue') ? 'class="active"' : ''?> >
-                  <a href="<?php echo base_url();?>index.php/AdminOverdueController/index">Overdue</a>
+                  <a href="<?php echo base_url();?>index.php/admin/OverdueController/index">Overdue</a>
               </li>
               <li <?php echo ($pageTitle == 'Admin - report')? 'class="active"' : ''?> >
-                  <a href="<?php echo base_url();?>index.php/AdminReportController/index">Report</a>
+                  <a href="<?php echo base_url();?>index.php/admin/ReportController/index">Report</a>
               </li>
               <li <?php echo ($pageTitle == 'Admin - request')? 'class="active"' : ''?> >
-                  <a href="<?php echo base_url();?>index.php/AdminRequestController/index">Customer Request</a>
+                  <a href="<?php echo base_url();?>index.php/admin/RequestController/index">Customer Request</a>
               </li>
               <li <?php echo ($pageTitle == 'Admin - notice')? 'class="active"' : ''?> >
-                  <a href="<?php echo base_url();?>index.php/AdminNoticeController/index">Notice to Customer</a>
+                  <a href="<?php echo base_url();?>index.php/admin/NoticeController/index">Notice to Customer</a>
               </li>
               <li <?php echo ($pageTitle == 'Admin - add user')? 'class="active"' : ''?> >
-                  <a href="<?php echo base_url();?>index.php/AdminAdduserController/index">Add Admin</a>
+                  <a href="<?php echo base_url();?>index.php/admin/AdduserController/index">Add Admin</a>
               </li>
               <li <?php echo ($pageTitle == 'Admin - view user')? 'class="active"' : ''?> >
-                  <a href="<?php echo base_url();?>index.php/AdminViewuserController/index">View Admin</a>
+                  <a href="<?php echo base_url();?>index.php/admin/ViewuserController/index">View Admin</a>
               </li>
               
             </ul>

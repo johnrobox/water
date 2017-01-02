@@ -1,6 +1,6 @@
 <?php
 
-class AdminNoticeController extends CI_Controller {
+class NoticeController extends CI_Controller {
     
     public function __construct() {
         parent::__construct();

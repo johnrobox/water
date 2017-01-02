@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class AdminLoginController extends CI_Controller {
+class LoginController extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
@@ -40,10 +40,10 @@ class AdminLoginController extends CI_Controller {
             $login = $this->LoginModel->checkLogin($loginData);
             if ($login['valid']) {
                 $this->session->set_userdata($login['data']);
-                redirect(base_url().'index.php/AdminHomepageController/index');
+                redirect(base_url().'index.php/admin/HomepageController/index');
             } else {
                 $this->session->set_flashdata('error', $this->alert->dangerAlert('Invalid Email / Password'));
-                redirect(base_url().'index.php/adminlogincontroller/index');
+                redirect(base_url().'index.php/admin/logincontroller/index');
                 exit();
             }
         }

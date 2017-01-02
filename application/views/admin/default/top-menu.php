@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li>
-                <a href="<?php echo base_url();?>index.php/AdminLogoutController"> Logout</a>
+                <a href="<?php echo base_url();?>index.php/admin/LogoutController"> Logout</a>
             </li>
           </ul>
         </div>
