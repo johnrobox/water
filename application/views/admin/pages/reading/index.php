@@ -42,7 +42,7 @@
                           </select>
                       </td>
                       <td>
-                          <button class="btn btn-primary" type="submit">View all</button>
+                          <?php echo form_button(array('class' => 'btn btn-primary', 'type' => 'sumbit', 'content' => 'View All')); ?>
                       </td>
                   </tr>
               </table>
@@ -51,53 +51,53 @@
           
           <div class="panel panel-default">
               <div class="panel-body">
-                  <table class="table table-bordered table-hover">
-                      <tr style="background-color: #eee">
-                          <th>Name</th>
-                          <th>Meter No.</th>
-                          <th>Reading Amount</th>
-                          <th>Action</th>
-                      </tr>
-                      <?php foreach($results as $row): ?>
-                      <tr>
-                          <td><?php echo ucwords(strtolower($row->customer_firstname.' '.$row->customer_middlename.' '.$row->customer_lastname));?></td>
-                          <td><?php echo $row->customer_meter_no;?></td>
+                  <table class="table table-bordered table-hover" id="reading-datatable">
+                      <thead>
+                        <tr style="background-color: #eee">
+                            <th>Name</th>
+                            <th>Meter No.</th>
+                            <th>Reading Amount</th>
+                            <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php foreach($results as $row): ?>
+                        <tr>
+                            <td><?php echo ucwords(strtolower($row->customer_firstname.' '.$row->customer_middlename.' '.$row->customer_lastname));?></td>
+                            <td><?php echo $row->customer_meter_no;?></td>
 
-                          <?php $this->db->where('customer_id', $row->id); ?>
-                          <?php $this->db->where('customer_reading_date', $this->session->userdata('setReadingMonthValue').'-'.$this->session->userdata('setReadingYear')); ?>
-                          <?php $query = $this->db->get('customer_reading');?>
-                          <?php if ($query->num_rows() > 0) { ?>
-                          <?php $amount = $query->row(); ?>
-                          <td class="rows<?php echo $amount->id;?>"style="color:orange; text-align: center">
-                              <?php echo number_format($amount->customer_reading_amount, 2); ?>
-                          </td>
-                          <td>
-                              <button class="btn btn-success btn-xs" onclick="updateReading(<?php echo $amount->id;?>,'<?php echo $amount->customer_reading_amount;?>')">Update</button>
-                          </td>
-                          <?php } else { ?>
-                          <td></td>
-                          <td>
-                              <?php echo form_open(base_url().'index.php/AdminReadingController/addReading'); ?>
-                              <table>
-                                  <tr>
-                                      <td>
-                                          <input type="hidden" name="customer_id" value="<?php echo $row->id;?>"/>
-                                          <input type="text" name="reading_amount" required="" class="form-control" style="height:25px;"/>
-                                      </td>
-                                      <td>
-                                          <button class="btn btn-primary btn-xs" type="submit">Submit</button>
-                                      </td>
-                                  </tr>
-                              </table>
-                             <?php echo form_close(); ?>
-
-
-                          </td>
-                          <?php } ?>
-
-
-                      </tr>
+                            <?php $this->db->where('customer_id', $row->id); ?>
+                            <?php $this->db->where('customer_reading_date', $this->session->userdata('setReadingMonthValue').'-'.$this->session->userdata('setReadingYear')); ?>
+                            <?php $query = $this->db->get('customer_reading');?>
+                            <?php if ($query->num_rows() > 0) { ?>
+                            <?php $amount = $query->row(); ?>
+                            <td class="rows<?php echo $amount->id;?>"style="color:orange; text-align: center">
+                                <?php echo number_format($amount->customer_reading_amount, 2); ?>
+                            </td>
+                            <td>
+                                <button class="btn btn-success btn-xs" onclick="updateReading(<?php echo $amount->id;?>,'<?php echo $amount->customer_reading_amount;?>')">Update</button>
+                            </td>
+                            <?php } else { ?>
+                            <td></td>
+                            <td>
+                                <?php echo form_open(base_url().'index.php/AdminReadingController/addReading'); ?>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" name="customer_id" value="<?php echo $row->id;?>"/>
+                                            <input type="text" name="reading_amount" required="" class="form-control" style="height:25px;"/>
+                                        </td>
+                                        <td>
+                                            <?php echo form_button(array('class' => 'btn btn-primary btn-xs', 'type' => 'submit', 'content' => 'Submit')); ?>
+                                        </td>
+                                    </tr>
+                                </table>
+                               <?php echo form_close(); ?>
+                            </td>
+                            <?php } ?>
+                        </tr>
                       <?php endforeach; ?>
+                      </tbody>
                   </table>
                   </div>
               <div class="panel-footer"></div>
@@ -107,3 +107,12 @@
       
 	</div>
 </div><!--/.container-->
+
+
+<script>
+    $(document).ready(function(){
+        $('#reading-datatable').DataTable({
+            responsive: true
+        });
+    });
+</script>

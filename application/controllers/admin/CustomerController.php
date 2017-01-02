@@ -54,7 +54,7 @@ class CustomerController extends CI_Controller {
             array(
                 'field' => 'meterNo',
                 'label' => 'Customer Meter No.',
-                'rules' => 'required|is_unique[customer_lastname.customer_meter_no]'
+                'rules' => 'required|is_unique[customers.customer_meter_no]'
             ),
             array(
                 'field' => 'address',

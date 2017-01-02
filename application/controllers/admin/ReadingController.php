@@ -31,16 +31,7 @@ class ReadingController extends CI_Controller {
                 $this->session->set_userdata($toSet);
             }
             
-            $config = $this->paginatedesign->bootstrapPagination();
-            $config['base_url'] = base_url() . "index.php/AdminCustomerController/viewCustomer";
-            $config['total_rows'] = $this->CustomerModel->countCustomer();
-            $config['per_page'] = 3;
-            $config['uri_segment'] = 3;
-            $this->pagination->initialize($config);
-
-            $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-            $data["results"] = $this->CustomerModel->allCustomer($config["per_page"], $page);
-            $data["links"] = $this->pagination->create_links();
+            $data["results"] = $this->CustomerModel->allCustomer();
             
             $this->load->view('admin/default/header', $data);
             $this->load->view('admin/default/top-menu');
