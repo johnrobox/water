@@ -27,18 +27,49 @@
                         <span class="text-red"><?php echo form_error('email');?></span>
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                            <input type="text" name="email" class="form-control" placeholder="Email" aria-describedby="basic-addon1"/>
+                            <?php 
+                            $email_login = array(
+                                'type' => 'text',
+                                'name' => 'email',
+                                'class' => 'form-control',
+                                'placeholder' => 'Email',
+                                'aria-describedby' => 'basic-addon1'
+                            );
+                            echo form_input($email_login);
+                            ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <span class="text-red"><?php echo form_error('password'); ?></span>
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
-                            <input type="password" name="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1"/>
+                            <?php 
+                            $password_login = array(
+                                'type' => 'password',
+                                'name' => 'password',
+                                'class' => 'form-control',
+                                'placeholder' => 'Password',
+                                'aria-describedby' => 'basic-addon1'
+                            );
+                            echo form_input($password_login);
+                            ?>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary justify">Login</button>
-                    <button type="reset" class="btn btn-default">Clear</button>
+                    <?php
+                    $login_button = array(
+                        'type' => 'submit',
+                        'class' => 'btn btn-primary justify',
+                        'content' => 'Login'
+                    );
+                    echo form_button($login_button);
+                    
+                    $clear_button = array(
+                        'type' => 'reset',
+                        'class' => 'btn btn-default',
+                        'content' => 'Clear'
+                    );
+                    echo form_button($clear_button);
+                    ?>
                 </div>
                 <div class="panel-footer">
                 </div>
