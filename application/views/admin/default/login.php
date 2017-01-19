@@ -20,7 +20,7 @@
                 <div class="panel-heading">
                     Admin
                 </div>
-                <?php echo form_open(base_url().'index.php/AdminLoginController/loginExec');?>
+                <?php echo form_open(base_url().'index.php/admin/AuthController/loginExec');?>
                 <div class="panel-body">
                     <span class="text-red"><?php echo $this->session->flashdata('error');?></span>
                     <div class="form-group">
