@@ -18,4 +18,5 @@ class HomepageController extends CI_Controller {
         $this->load->view('admin/pages/homepage/index');
         $this->load->view('admin/default/footer');
     }
+    
 }

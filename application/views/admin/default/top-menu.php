@@ -13,7 +13,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="">
+                <a href="<?php echo base_url();?>index.php/admin/AccountController/settings">
                     <i class="fa fa-user"></i>
                   <?php echo ucwords(strtolower($this->session->userdata('AdminFirstname').' '.$this->session->userdata('AdminLastname')));;?>  
                 </a>
