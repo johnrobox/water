@@ -5,32 +5,74 @@
           <h1 class="page-header">
                 Add Admin
           </h1>
-          <?php echo $this->session->flashdata('okay'); ?>
-          <?php echo form_open(base_url().'index.php/AdminAdduserController/addExec'); ?>
+          <?php echo form_open(base_url().'index.php/admin/AdminUserController/addExec'); ?>
           <div class="form-group">
-              <label for="firstname">Firstname</label>
-              <span class="text-red"><?php echo form_error('firstname');?></span>
-              <input type="text" name="firstname" id="firstname" value="<?php echo set_value('firstname');?>" class="form-control"/>
+              <?php 
+              echo form_label('Firstname', 'firstname');
+              echo form_error('firstname', '<span class="text-red">', '</span>');
+              $firstname = array(
+                  'type' => 'text',
+                  'name' => 'firstname',
+                  'id' => 'firstname',
+                  'value' => set_value('firstname'),
+                  'class' => 'form-control'
+              );
+              echo form_input($firstname);
+              ?>
           </div>
           <div class="form-group">
-              <label for="lastname">Lastname</label>
-              <span class="text-red"><?php echo form_error('lastname');?></span>
-              <input type="text" name="lastname" id="lastname" value="<?php echo set_value('lastname');?>" class="form-control"/>
+              <?php
+              echo form_label('Lastname', 'lastname');
+              echo form_error('lastname', '<span class="text-red">', '</span>');
+              $lastname = array(
+                  'type' => 'text',
+                  'name' => 'lastname',
+                  'id' => 'lastname',
+                  'value' => set_value('lastname'),
+                  'class' => 'form-control'
+              );
+              echo form_input($lastname);
+              ?>
           </div>
           <div class="form-group">
-              <label for="email">Email</label>
-              <span class="text-red"><?php echo form_error('email');?></span>
-              <input type="email" name="email" id="email" value="<?php echo set_value('email');?>" class="form-control"/>
+              <?php
+              echo form_label('Email', 'email');
+              echo form_error('email', '<span class="text-red">', '</span>');
+              $email = array(
+                  'type' => 'text',
+                  'name' => 'email',
+                  'id' => 'email',
+                  'value' => set_value('email'),
+                  'class' => 'form-control'
+              );
+              echo form_input($email);
+              ?>
           </div>
           <div class="form-group">
-              <label for="password">Password</label>
-              <span class="text-red"><?php echo form_error('password');?></span>
-              <input type="password" name="password" id="password" class="form-control"/>
+              <?php
+              echo form_label('Password', 'password');
+              echo form_error('password', '<span class="text-red">', '</span>');
+              $password = array(
+                  'type' => 'password',
+                  'name' => 'password',
+                  'id' => 'password',
+                  'class' => 'form-control'
+              );
+              echo form_input($password);
+              ?>
           </div>
           <div class="form-group">
-              <label for="repeat_password">Repeat Password</label>
-              <span class="text-red"><?php echo form_error('repeat_password');?></span>
-              <input type="password" name="repeat_password" id="repeat_password" class="form-control"/>
+              <?php
+              echo form_label('Repeat Password', 'repeat_password');
+              echo form_error('repeat_password', '<span class="text-red">', '</span>');
+              $repeat_password = array(
+                  'type' => 'password',
+                  'name' => 'repeat_password',
+                  'id' => 'repeat_password',
+                  'class' => 'form-control'
+              );
+              echo form_input($repeat_password);
+              ?>
           </div>
           <div class="form-group">
               <label for="gender">Gender</label>
@@ -45,12 +87,34 @@
               </div>
           </div>
           <div class="form-group">
-              <label for="birthdate">Birthdate</label>
-              <span class="text-red"><?php echo form_error('birthdate');?></span>
-              <input type="text" name="birthdate" id="example1" value="<?php echo set_value('birthdate'); ?>" class="form-control"/>
+              <?php
+              echo form_label('Birthdate', 'birthdate');
+              echo form_error('birthdate', '<span class="text-red">', '</span>');
+              $birthdate = array(
+                  'type' => 'text',
+                  'name' => 'birthdate',
+                  'id' => 'example1',
+                  'value' => set_value('birthdate'),
+                  'class' => 'form-control'
+              );
+              echo form_input($birthdate);
+              ?>
           </div>
-          <button class="btn btn-default pull-right" type="reset">Clear</button>
-          <button class="btn btn-primary pull-right" type="submit">Add</button>
+          <?php
+          $clear_button = array(
+              'class' => 'btn btn-default pull-right',
+              'type' => 'reset',
+              'content' => 'Clear'
+          );
+          echo form_button($clear_button);
+          
+          $add_button = array(
+              'class' => 'btn btn-primary pull-right',
+              'type' => 'submit',
+              'content' => 'Add'
+          );
+          echo form_button($add_button);
+          ?>
           <?php echo form_close(); ?>
         </div>
     </div>

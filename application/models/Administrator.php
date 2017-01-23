@@ -1,29 +1,28 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Administrator extends CI_Model {
     
     public function __construct() {
         parent::__construct();
+        $this->table = 'admin';
     }
     
-    public function checkLoginData($loginData) {
-        $check = $this->db->get_where('admin', $loginData);
-        if  ($check->num_rows() > 0) {
-            $data = array(
-                'valid' => 'true',
-                'data' => $check->row()
-            );
-        } else {
-            $data = array('valid' => 'false');
-        }
-        return $data;
+    public function getAll() {  
+        $data = $this->db->get($this->table);
+        return $data->result();
     }
     
-    public function loginLog($id, $login_time, $token) {
-        $this->db->where('admin_id', $id);
-        $this->db->update('admin_logs', array('admin_last_login' => $login_time, 'admin_token' => $token));
-        $result = ($this->db->affected_rows() > 0) ? true : false;
-        return $result;
+    public function addAdmin($data) {
+        $this->db->insert($this->table, $data);
+        $result = ($this->db->affected_rows() != 0) ? $this->db->insert_id() : 0;
+        return $result;      
     }
     
+    public function getById($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get($this->table);
+        return $query->result();
+    }
+        
 }

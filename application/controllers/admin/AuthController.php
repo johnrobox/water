@@ -1,5 +1,7 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 class AuthController extends CI_Controller {
     
     public function __construct() {
@@ -55,7 +57,7 @@ class AuthController extends CI_Controller {
                         'AdminToken' => $login_token
                     );
                     $this->session->set_userdata($session);
-                    redirect(base_url().'index.php/admin/HomepageController/index');
+                    redirect(base_url().'index.php/admin/DashboardController/index');
                     exit();
                 } else {
                     $this->session->set_flashdata('error', $this->alert->dangerAlert('Cannot login your account.'));

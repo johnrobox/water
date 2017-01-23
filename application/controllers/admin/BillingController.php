@@ -1,42 +1,38 @@
 <?php
 
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 class BillingController extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
-        $this->load->model('AdminModel');
         $this->load->model('CustomerModel');
         $this->load->model('CustomerBillingModel');
-        $this->load->library("pagination");
-        $this->load->library("paginatedesign");
         $this->load->library('alert');
+        $this->auth->checkLogin();
     }
     
     public function index() {
-        $login = $this->AdminModel->checkAuthentication();
-        if ($login['valid']) {
-            $data['pageTitle'] = 'Admin - billing';
-            
-            // Session the month you like
-            if (!$this->session->has_userdata('setBillingMonth') && !$this->session->has_userdata('setBillingYear')) {
-                $toSet = array(
-                    'setBillingMonthValue' => date('m'),
-                    'setBillingMonth' => date('F'),
-                    'setBillingYear' => date('Y')
-                );
-                $this->session->set_userdata($toSet);
-            }
-            
-            $data["results"] = $this->CustomerModel->allCustomer();
-            
-            $this->load->view('admin/default/header', $data);
-            $this->load->view('admin/default/top-menu');
-            $this->load->view('admin/default/side-bar');
-            $this->load->view('admin/pages/billing/index');
-            $this->load->view('admin/default/footer');
-        } else {
-            redirect(base_url().'index.php/admin/LogoutController');
+        $data['page_number'] = 5;
+        $data['page_title'] = 'Admin - billing';
+
+        // Session the month you like
+        if (!$this->session->has_userdata('setBillingMonth') && !$this->session->has_userdata('setBillingYear')) {
+            $toSet = array(
+                'setBillingMonthValue' => date('m'),
+                'setBillingMonth' => date('F'),
+                'setBillingYear' => date('Y')
+            );
+            $this->session->set_userdata($toSet);
         }
+
+        $data["results"] = $this->CustomerModel->allCustomer();
+
+        $this->load->view('admin/default/header', $data);
+        $this->load->view('admin/default/top-menu');
+        $this->load->view('admin/default/side-bar');
+        $this->load->view('admin/pages/billing/index');
+        $this->load->view('admin/default/footer');       
     }
     
     

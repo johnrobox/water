@@ -1,7 +1,7 @@
 <?php 
-/**
- * Admin Customer Controller
- */
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 class CustomerController extends CI_Controller {
     
     /**
@@ -10,14 +10,9 @@ class CustomerController extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('CustomerModel');
-        $this->load->model('AdminModel');
         $this->load->model('Customer');
         $this->load->library('alert');
-        $this->load->library("pagination");
-        $this->load->library("paginatedesign");
-        $login = $this->AdminModel->checkAuthentication();
-        if (!$login['valid'])
-            redirect(base_url().'index.php/AdminLogoutController');
+        $this->auth->checkLogin();
     }
     
     /**
@@ -26,7 +21,8 @@ class CustomerController extends CI_Controller {
      * @return void
      */
     public function addField() {
-        $data['pageTitle'] = 'Admin - add customer';
+        $data['page_number'] = 3;
+        $data['page_title'] = 'Admin - add customer';
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');
         $this->load->view('admin/default/side-bar');
@@ -101,26 +97,23 @@ class CustomerController extends CI_Controller {
      * @param
      * @return void
      */
-    public function viewCustomer() {
-        $login = $this->AdminModel->checkAuthentication();
-        if ($login['valid']) {
-            $data['script'] = array('customer');
-            $data['pageTitle'] = 'Admin - view customer';
-            $data['customers'] = $this->Customer->getAll();
+    public function viewCustomer() {    
+        $data['script'] = array('customer');
+        $data['page_number'] = 2;
+        $data['page_title'] = 'Admin - view customer';
+        $data['customers'] = $this->Customer->getAll();
 
-            $this->load->view('admin/default/header', $data);
-            $this->load->view('admin/default/top-menu');
-            $this->load->view('admin/default/side-bar');
-            $this->load->view('admin/pages/customer/view-customer');
-            
-            $this->load->view('admin/modals/customer-view-info');
-            $this->load->view('admin/modals/customer-update');
-            $this->load->view('admin/modals/customer-change-status');
-            
-            $this->load->view('admin/default/footer');
-        } else {
-            redirect(base_url().'index.php/AdminLogoutController');
-        }
+        $this->load->view('admin/default/header', $data);
+        $this->load->view('admin/default/top-menu');
+        $this->load->view('admin/default/side-bar');
+        $this->load->view('admin/pages/customer/view-customer');
+
+        $this->load->view('admin/modals/customer-view-info');
+        $this->load->view('admin/modals/customer-update');
+        $this->load->view('admin/modals/customer-change-status');
+
+        $this->load->view('admin/default/footer');
+        
     }
     
     /**
@@ -129,17 +122,14 @@ class CustomerController extends CI_Controller {
      * @return void
      */
     public function changeStatusCustomer() {
-        $login = $this->AdminModel->checkAuthentication();
-        if ($login['valid']) {
+       
             $data = array(
                 'id' => $this->input->post('id'),
                 'status' => $this->input->post('status')
             );
             $result  = $this->CustomerModel->changeStatus($data);
             echo ($result['valid'])? 'okay' : 'error';
-        } else {
-            redirect(base_url().'index.php/AdminLogoutController');
-        }
+       
     }
 
     /*

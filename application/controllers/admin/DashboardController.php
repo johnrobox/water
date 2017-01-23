@@ -1,6 +1,8 @@
 <?php
 
-class HomepageController extends CI_Controller {
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class DashboardController extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
@@ -10,7 +12,8 @@ class HomepageController extends CI_Controller {
     }
     
     public function index(){
-        $data['pageTitle'] = 'Admin - homepage';
+        $data['page_number'] = 1;
+        $data['page_title'] = 'Admin - homepage';
         $data['overdue'] = $this->CustomerOverdueModel->getCustomerWithOverDue();
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');

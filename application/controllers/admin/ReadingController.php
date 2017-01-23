@@ -1,47 +1,39 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 class ReadingController extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
-        $this->load->model('AdminModel');
         $this->load->model('CustomerModel');
         $this->load->model('CustomerReadingModel');
-        $this->load->library("pagination");
-        $this->load->library("paginatedesign");
         $this->load->library('alert');
+        $this->auth->checkLogin();
     }
     
     public function index() {
-        $login = $this->AdminModel->checkAuthentication();
-        if ($login['valid']) {
-            $data['pageTitle'] = 'Admin - reading';
-            
-            // Session the month you like
-            if (!$this->session->has_userdata('setReadingMonth') && !$this->session->has_userdata('setReadingYear')) {
-                $toSet = array(
-                    'setReadingMonthValue' => date('m'),
-                    'setReadingMonth' => date('F'),
-                    'setReadingYear' => date('Y')
-                );
-                $this->session->set_userdata($toSet);
-            }
-            
-            $data["results"] = $this->CustomerModel->allCustomer();
-            
-            $this->load->view('admin/default/header', $data);
-            $this->load->view('admin/default/top-menu');
-            $this->load->view('admin/default/side-bar');
-            $this->load->view('admin/pages/reading/index');
-            $this->load->view('admin/modals/update-reading');
-            $this->load->view('admin/default/footer');
-        } else {
-            redirect(base_url().'index.php/AdminLogoutController');
+        $data['page_number'] = 4;
+        $data['page_title'] = 'Admin - reading';
+
+        // Session the month you like
+        if (!$this->session->has_userdata('setReadingMonth') && !$this->session->has_userdata('setReadingYear')) {
+            $toSet = array(
+                'setReadingMonthValue' => date('m'),
+                'setReadingMonth' => date('F'),
+                'setReadingYear' => date('Y')
+            );
+            $this->session->set_userdata($toSet);
         }
+
+        $data["results"] = $this->CustomerModel->allCustomer();
+
+        $this->load->view('admin/default/header', $data);
+        $this->load->view('admin/default/top-menu');
+        $this->load->view('admin/default/side-bar');
+        $this->load->view('admin/pages/reading/index');
+        $this->load->view('admin/modals/update-reading');
+        $this->load->view('admin/default/footer');
     }
     
     
