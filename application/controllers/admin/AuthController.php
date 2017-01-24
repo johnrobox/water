@@ -7,11 +7,13 @@ class AuthController extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Administrator');
+        $this->load->model('AdministratorLog');
         $this->load->library('alert');
         $this->load->library('random');
     }
 
     public function index() {
+        $this->auth->checkAuth();
         $this->load->view('admin/default/login');
     }
     
@@ -36,7 +38,7 @@ class AuthController extends CI_Controller {
                 'admin_email' => $this->input->post('email'),
                 'admin_password' => md5(md5($this->input->post('password')))
             );
-            $login = $this->Administrator->checkLoginData($loginData);
+            $login = $this->Administrator->login($loginData);
             if ($login['valid'] == false) {
                 $this->session->set_flashdata('error', $this->alert->dangerAlert('Invalid Email / Password'));
                 redirect(base_url().'admin');
@@ -46,8 +48,11 @@ class AuthController extends CI_Controller {
                 $id = $row->id;
                 $login_token = $this->random->generateRandomString(50);
                 date_default_timezone_set("Asia/Manila");
-                $login_time = date('Y-m-d h:i:s');
-                $response = $this->Administrator->loginLog($id, $login_time, $login_token);
+                $log_data = array(
+                    'admin_last_login' => date('Y-m-d h:i:s'),
+                    'admin_token' => $login_token
+                );
+                $response = $this->AdministratorLog->update($id, $log_data);
                 if ($response ==  true) {
                     $session = array(
                         'AdminId' => $id,

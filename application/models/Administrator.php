@@ -8,6 +8,20 @@ class Administrator extends CI_Model {
         $this->table = 'admin';
     }
     
+    public function login($data) {
+        $check = $this->db->get_where($this->table, $data);
+        if ($check->num_rows() > 0) {
+            $row = $check->row();
+            $result = array(
+                'valid' => true,
+                'data' => $row
+            );
+        } else {
+            $result['valid'] = false;
+        }
+        return $result;
+    }
+    
     public function getAll() {  
         $data = $this->db->get($this->table);
         return $data->result();
@@ -23,6 +37,12 @@ class Administrator extends CI_Model {
         $this->db->where('id', $id);
         $query = $this->db->get($this->table);
         return $query->result();
+    }
+    
+    public function updateById($id, $data) {
+        $this->db->where('id', $id);
+        $this->db->update($this->table, $data);
+        return ($this->db->affected_rows()) ? true : false;
     }
         
 }

@@ -14,4 +14,10 @@ class AdministratorLog extends CI_Model {
         return ($this->db->affected_rows() != 0) ? true : false;
     }
     
+    public function update($id, $data) {
+        $this->db->where('admin_id', $id);
+        $this->db->update($this->table, $data);
+        $result = ($this->db->affected_rows() != 0) ? true : false;
+        return $result;   
+    }
 }

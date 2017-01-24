@@ -4,6 +4,7 @@ class AccountAuthentication {
     
     public function __construct() {
         $this->ses =& get_instance();
+        $this->base = base_url().'index.php/admin/';
     }
     
     public function checkLogin() {    
@@ -13,8 +14,19 @@ class AccountAuthentication {
              !$this->ses->session->has_userdata('AdminEmail') ||
              !$this->ses->session->has_userdata('AdminToken')
             ) {
-            redirect(base_url().'index.php/admin/AuthController/logoutExec');
+            redirect($this->base.'AuthController/logoutExec');
         }  
+    }
+    
+    public function checkAuth(){
+        if ( $this->ses->session->has_userdata('AdminId') &&
+             $this->ses->session->has_userdata('AdminFirstname') &&
+             $this->ses->session->has_userdata('AdminLastname') &&
+             $this->ses->session->has_userdata('AdminEmail') &&
+             $this->ses->session->has_userdata('AdminToken')
+            ) {
+            redirect($this->base.'DashboardController/index');
+        } 
     }
     
     public function forceLogout(){
@@ -28,7 +40,7 @@ class AccountAuthentication {
         $this->ses->session->unset_userdata($adminUser);
         $this->ses->session->sess_destroy();
         redirect(base_url().'admin');
-    }
-    
+    }   
 }
+
 ?>

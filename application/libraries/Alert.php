@@ -20,7 +20,9 @@ class Alert{
     }
     
     private function alertDiv($alert,$font){
-        $alertStyle = '<div class="alert '.$alert.'" role="alert"><span class="fa '.$font.'"></span> ';
+        $alertStyle = '<div class="alert '.$alert.'" role="alert">'
+                . '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'
+                . '<span class="fa '.$font.'"></span> ';
         return $alertStyle;
     }
     
