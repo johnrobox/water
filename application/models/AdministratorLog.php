@@ -20,4 +20,20 @@ class AdministratorLog extends CI_Model {
         $result = ($this->db->affected_rows() != 0) ? true : false;
         return $result;   
     }
+    
+    public function selectById($id, $fields) {
+        $this->db->select($fields);
+        $this->db->where('admin_id', $id);
+        $this->db->from($this->table);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $result = array(
+                'select' => true,
+                'data' => $query->row()
+            );
+        } else {
+            $result['select'] = false;
+        }
+        return $result;
+    }
 }

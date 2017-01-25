@@ -75,17 +75,19 @@
               ?>
           </div>
           <div class="form-group">
-              <label for="gender">Gender</label>
-              <span class="text-red"><?php echo form_error('gender');?></span>
-              <div class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-default">
-                    <input type="radio" name="gender" id="gender" value="1"> Male
-                  </label>
-                  <label class="btn btn-default">
-                    <input type="radio" name="gender" id="gender" value="2"> Female
-                  </label>
-              </div>
+              
+              <?php 
+              echo form_label('Gender', 'gender');
+              echo form_error('gender', '<span class="text-red">', '</span>');
+              $gender = array(
+                  '' => 'Select Gender',
+                  '1' => 'Male',
+                  '2' => 'Female'
+              );
+              echo form_dropdown('gender', $gender, set_value('gender'), array('id' => 'gender', 'class' => 'form-control'));
+              ?>
           </div>
+          
           <div class="form-group">
               <?php
               echo form_label('Birthdate', 'birthdate');
@@ -102,14 +104,14 @@
           </div>
           <?php
           $clear_button = array(
-              'class' => 'btn btn-default pull-right',
+              'class' => 'btn btn-default',
               'type' => 'reset',
               'content' => 'Clear'
           );
           echo form_button($clear_button);
           
           $add_button = array(
-              'class' => 'btn btn-primary pull-right',
+              'class' => 'btn btn-primary',
               'type' => 'submit',
               'content' => 'Add'
           );

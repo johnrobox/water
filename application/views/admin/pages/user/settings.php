@@ -6,9 +6,21 @@
           <p class="visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
           </p>
+          <?php
+          $change_password = array(
+              'class' => 'btn btn-primary pull-right',
+              'id' => 'change_password',
+              'content' => 'Change Password'
+          );
+          echo form_button($change_password);
+          ?>
           <h1 class="page-header">
                 Settings
           </h1>
+          <div class="alert alert-success" id="success_message">
+              <span id="success_message_cont"></span>
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          </div>
           <?php 
           echo $this->session->flashdata('error');
           echo $this->session->flashdata('success');

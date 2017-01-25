@@ -44,5 +44,21 @@ class Administrator extends CI_Model {
         $this->db->update($this->table, $data);
         return ($this->db->affected_rows()) ? true : false;
     }
+    
+    public function selectById($id, $fields) {
+        $this->db->select($fields);
+        $this->db->where('id', $id);
+        $this->db->from($this->table);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $result = array(
+                'select' => true,
+                'data' => $query->row()
+            );
+        } else {
+            $result['select'] = false;
+        }
+        return $result;
+    }
         
 }
