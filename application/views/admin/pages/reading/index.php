@@ -13,11 +13,11 @@
           <?php echo $this->session->flashdata('success'); ?>
           <?php echo $this->session->flashdata('error'); ?>
           
-          <div class="pull-right">
+          <div class="breadcrumb" style="border: 1px solid #428bca">
               <?php echo form_open(base_url().'index.php/AdminReadingController/setReadingDate');?>
               <table class="table">
                   <tr>
-                      <td>As of </td>
+                      <td class="pull-right">As of </td>
                       <td>
                           <select class="form-control" name="readingMonth" id="month">
                               <option value="<?php echo $this->session->userdata('setReadingMonthValue');?>"><?php echo $this->session->userdata('setReadingMonth');?></option>

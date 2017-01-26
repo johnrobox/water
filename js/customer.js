@@ -329,8 +329,8 @@ $(document).ready(function(){
         var tr_tracker = $("#row"+customer_id);
         var view_button = $("#changeStatusButton"+customer_id);
         var button_content = $("#changeStatusText"+customer_id);
-        console.log(customer_id);
-        console.log(customer_status);
+        console.log("customer id = " + customer_id);
+        console.log("customer status = " + customer_status);
         var loading_image = $("#changeStatusLoading"+customer_id);
         loading_image.show();
         
@@ -340,7 +340,7 @@ $(document).ready(function(){
             if (data.change == true) {
                 var add_class = "alert alert-info";
                 var alert_message = "Status successfully change!";
-                $(".changeStatusCustomerButton").attr("status", (customer_status==1) ? 0 : 1 );
+                view_button.attr("status", (customer_status==1) ? 0 : 1 );
                 if (customer_status == 0) {
                     tr_tracker.addClass("bg-white");
                     tr_tracker.removeClass("bg-eee")

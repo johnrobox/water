@@ -10,40 +10,40 @@
                 Billing Information
           </h1>
           
-          <div class="pull-right">
-              <?php echo form_open(base_url().'index.php/AdminBillingController/setBillingDate');?>
-              <table class="table">
-                  <tr>
-                      <td>Billing Information of</td>
-                      <td>
-                          <select class="form-control" name="billingMonth" id="month">
-                              <option value="<?php echo $this->session->userdata('setBillingMonthValue');?>"><?php echo $this->session->userdata('setBillingMonth');?></option>
-                              <?php for($i = 1 ; $i <= 12 ; $i++) { ?>
-                              <?php $monthName = date("F", mktime(0, 0, 0, $i, 10)); ?>
-                              <?php if ($this->session->userdata('setBillingMonth') != $monthName) { ?>
-                              <option value="<?php echo $i;?>"><?php echo $monthName;?></option>
-                              <?php } ?>
-                              <?php } ?>
-                          </select>
-                      </td>
-                      <td>
-                          <select class="form-control" name="billingYear" id="year">
-                              <option><?php echo $this->session->userdata('setBillingYear') ?></option>
-                              <?php $current = date('Y');?>
-                              <?php $from = $current - 3;?>
-                              <?php for($current; $current >= $from; $current--) { ?>
-                                  <?php if ($this->session->userdata('setBillingYear') != $current) { ?>
-                                  <option value="<?php echo $current;?>"><?php echo $current;?></option>
-                                  <?php } ?>
-                              <?php } ?>
-                          </select>
-                      </td>
-                      <td>
-                          <button class="btn btn-primary" type="submit">View all</button>
-                      </td>
-                  </tr>
-              </table>
-              <?php echo form_close();?>
+          <div class="breadcrumb" style="border: 1px solid #428bca">
+            <?php echo form_open(base_url().'index.php/AdminBillingController/setBillingDate');?>
+                <table class="table">
+                    <tr>
+                        <td class="pull-right">Billing Information of</td>
+                        <td>
+                            <select class="form-control" name="billingMonth" id="month">
+                                <option value="<?php echo $this->session->userdata('setBillingMonthValue');?>"><?php echo $this->session->userdata('setBillingMonth');?></option>
+                                <?php for($i = 1 ; $i <= 12 ; $i++) { ?>
+                                <?php $monthName = date("F", mktime(0, 0, 0, $i, 10)); ?>
+                                <?php if ($this->session->userdata('setBillingMonth') != $monthName) { ?>
+                                <option value="<?php echo $i;?>"><?php echo $monthName;?></option>
+                                <?php } ?>
+                                <?php } ?>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control" name="billingYear" id="year">
+                                <option><?php echo $this->session->userdata('setBillingYear') ?></option>
+                                <?php $current = date('Y');?>
+                                <?php $from = $current - 3;?>
+                                <?php for($current; $current >= $from; $current--) { ?>
+                                    <?php if ($this->session->userdata('setBillingYear') != $current) { ?>
+                                    <option value="<?php echo $current;?>"><?php echo $current;?></option>
+                                    <?php } ?>
+                                <?php } ?>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" type="submit">View all</button>
+                        </td>
+                    </tr>
+                </table>
+            <?php echo form_close();?>
           </div>
           
           <table class="table table-bordered table-hover" id="billing-datatable">

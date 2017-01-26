@@ -87,7 +87,7 @@ class CustomerController extends CI_Controller {
             } else {
                 $this->session->set_flashdata('error', $this->alert->dangerAlert('Customer doesnt add to database. An internal error occured.'));
             }
-            redirect(base_url().'index.php/AdminCustomerController/viewCustomer');
+            redirect(base_url().'index.php/admin/CustomerController/viewCustomer');
             exit();
         }
     }
@@ -108,9 +108,8 @@ class CustomerController extends CI_Controller {
         $this->load->view('admin/default/side-bar');
         $this->load->view('admin/pages/customer/view-customer');
 
-        $this->load->view('admin/modals/customer-view-info');
-        $this->load->view('admin/modals/customer-update');
-        $this->load->view('admin/modals/customer-change-status');
+        $this->load->view('admin/modals/customer/customer-view-info');
+        $this->load->view('admin/modals/customer/customer-update');
 
         $this->load->view('admin/default/footer');
         

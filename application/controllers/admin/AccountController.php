@@ -20,7 +20,7 @@ class AccountController extends CI_Controller {
                 );
     }
     
-    public function settings(){
+    public function settings() {
         $data['script'] = array('admin');
         $data['page_number'] = 12;
         $data['page_title'] = 'Admin - Account Settings';

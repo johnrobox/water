@@ -1,31 +1,19 @@
-<style type="text/css">
-    .pagination {
-    display: inline-block;
-    padding-left: 0;
-    margin-bottom: 15px;
-    margin-top: -5px;
-    border-radius: 4px;
-    float:right;
-}
-.datepicker {z-index: 1151 !important;}
-</style>
+
         <div class="col-sm-9 col-md-10 main">
             <h1 class="page-header"><span class="fa fa-pencil"></span> View Customer </h1>
-            <?php// echo $links; ?>
-            
             <?php echo $this->session->flashdata('error');?>
             <?php echo $this->session->flashdata('success');?>
             <div id="commonAlertMessage"></div>
             <div class="dataTable_wrapper">
-            <table class="table table-bordered" id="stagit-datatable">
-                <thead >
-                <tr>
-                    <th>Name</th>
-                    <th>Meter No</th>
-                    <th>Contact</th>
-                    <th>Address</th>
-                    <th>Option</th>
-                </tr>
+            <table class="table table-bordered" id="customer-datatable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Meter No</th>
+                        <th>Contact</th>
+                        <th>Address</th>
+                        <th>Option</th>
+                    </tr>
                 </thead>
                 <tbody>
                 <?php foreach($customers as $row) { 
@@ -47,8 +35,21 @@
                     <td><?php echo $row->customer_contact;?></td>
                     <td><?php echo $row->customer_address;?></td>
                     <td>
-                        <button value="<?php echo $id;?>" class="btn btn-default btn-xs viewCustomerInfoButton">View Info</button>
-                        <button class="btn btn-success btn-xs editCustomerButton" value="<?php echo $id; ?>">Edit</button>
+                        <?php
+                        $view_info_button = array(
+                            'value' => $id,
+                            'class' => 'btn btn-default btn-xs viewCustomerInfoButton',
+                            'content' => 'View Info'
+                        );
+                        echo form_button($view_info_button);
+                        
+                        $edit_button = array(
+                            'value' => $id,
+                            'class' => 'btn btn-success btn-xs editCustomerButton',
+                            'content' => 'Edit'
+                        );
+                        echo form_button($edit_button);
+                        ?>
                         <button class="btn btn-<?php echo $btn_type;?> btn-xs changeStatusCustomerButton" id="changeStatusButton<?php echo $id;?>" value="<?php echo $id;?>" status="<?php echo $row->customer_status;?>">
                             <span id="changeStatusText<?php echo $id;?>"><?php echo $btn_text;?></span>
                             <img src="<?php echo base_url();?>img/admin/loading/loading8.gif" id="changeStatusLoading<?php echo $id;?>" style="width: 20px; height: 20px; display: none"/>
@@ -67,7 +68,7 @@
 
 <script>
     $(document).ready(function(){
-        $('#stagit-datatable').DataTable({
+        $('#customer-datatable').DataTable({
             responsive: true
         });
     });
