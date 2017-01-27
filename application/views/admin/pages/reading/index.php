@@ -14,36 +14,38 @@
           <?php echo $this->session->flashdata('error'); ?>
           
           <div class="breadcrumb" style="border: 1px solid #428bca">
-              <?php echo form_open(base_url().'index.php/AdminReadingController/setReadingDate');?>
+              <?php echo form_open(base_url().'index.php/admin/ReadingController/setReadingDate');?>
               <table class="table">
                   <tr>
                       <td class="pull-right">As of </td>
                       <td>
                           <select class="form-control" name="readingMonth" id="month">
                               <option value="<?php echo $this->session->userdata('setReadingMonthValue');?>"><?php echo $this->session->userdata('setReadingMonth');?></option>
-                              <?php for($i = 1 ; $i <= 12 ; $i++) { ?>
-                              <?php $monthName = date("F", mktime(0, 0, 0, $i, 10)); ?>
-                              <?php if ($this->session->userdata('setReadingMonth') != $monthName) { ?>
+                              <?php for($i = 1 ; $i <= 12 ; $i++) { 
+                              $monthName = date("F", mktime(0, 0, 0, $i, 10)); 
+                               if ($this->session->userdata('setReadingMonth') != $monthName) { ?>
                               <option value="<?php echo $i;?>"><?php echo $monthName;?></option>
-                              <?php } ?>
-                              <?php } ?>
+                              <?php } 
+                              } ?>
                           </select>
                       </td>
-                      <td>
-                          <select class="form-control" name="readingYear" id="year">
-                              <option><?php echo $this->session->userdata('setReadingYear') ?></option>
-                              <?php $current = date('Y');?>
-                              <?php $from = $current - 3;?>
-                              <?php for($current; $current >= $from; $current--) { ?>
-                                  <?php if ($this->session->userdata('setReadingYear') != $current) { ?>
-                                  <option value="<?php echo $current;?>"><?php echo $current;?></option>
-                                  <?php } ?>
-                              <?php } ?>
-                          </select>
-                      </td>
-                      <td>
-                          <?php echo form_button(array('class' => 'btn btn-primary', 'type' => 'sumbit', 'content' => 'View All')); ?>
-                      </td>
+                        <td>
+                            <select class="form-control" name="readingYear" id="year">
+                                <option><?php echo $this->session->userdata('setReadingYear') ?></option>
+                                <?php 
+                                $current = date('Y');
+                                $from = $current - 3;
+                                for($current; $current >= $from; $current--) { 
+                                     if ($this->session->userdata('setReadingYear') != $current) { ?>
+                                    <option value="<?php echo $current;?>"><?php echo $current;?></option>
+                               <?php  
+                                     } 
+                                } ?>
+                            </select>
+                        </td>
+                        <td>
+                            <?php echo form_button(array('class' => 'btn btn-primary', 'type' => 'sumbit', 'content' => 'View All')); ?>
+                        </td>
                   </tr>
               </table>
               <?php echo form_close();?>
@@ -57,7 +59,9 @@
                             <th>Name</th>
                             <th>Meter No.</th>
                             <th>Reading Amount</th>
-                            <th>Action</th>
+                            <th>Reading Date</th>
+                            <th>Action
+                            </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -65,27 +69,48 @@
                         <tr>
                             <td><?php echo ucwords(strtolower($row->customer_firstname.' '.$row->customer_middlename.' '.$row->customer_lastname));?></td>
                             <td><?php echo $row->customer_meter_no;?></td>
-
-                            <?php $this->db->where('customer_id', $row->id); ?>
-                            <?php $this->db->where('customer_reading_date', $this->session->userdata('setReadingMonthValue').'-'.$this->session->userdata('setReadingYear')); ?>
-                            <?php $query = $this->db->get('customer_reading');?>
-                            <?php if ($query->num_rows() > 0) { ?>
-                            <?php $amount = $query->row(); ?>
+                            <?php 
+                                $this->db->where('customer_id', $row->id); 
+                                $this->db->where('customer_reading_month_cover', $this->session->userdata('setReadingMonthValue').'-'.$this->session->userdata('setReadingYear')); 
+                                $query = $this->db->get('customer_readings');
+                                if ($query->num_rows() > 0) { 
+                                $amount = $query->row(); 
+                            ?>
+                            
                             <td class="rows<?php echo $amount->id;?>"style="color:orange; text-align: center">
                                 <?php echo number_format($amount->customer_reading_amount, 2); ?>
                             </td>
                             <td>
-                                <button class="btn btn-success btn-xs" onclick="updateReading(<?php echo $amount->id;?>,'<?php echo $amount->customer_reading_amount;?>')">Update</button>
+                                <?php echo date('M d, Y', strtotime($amount->customer_reading_date)); ?>
+                            </td>
+                            <td>
+                                <button class="btn btn-success btn-xs update_reading_amount_button" reading_id="<?php echo $row->id; ?>" amount="<?php echo $amount->customer_reading_amount; ?>">Update</button>
                             </td>
                             <?php } else { ?>
                             <td></td>
+                            <td></td>
                             <td>
-                                <?php echo form_open(base_url().'index.php/AdminReadingController/addReading'); ?>
+                                <?php echo form_open(base_url().'index.php/admin/ReadingController/addReading'); ?>
                                 <table>
                                     <tr>
                                         <td>
-                                            <input type="hidden" name="customer_id" value="<?php echo $row->id;?>"/>
-                                            <input type="text" name="reading_amount" required="" class="form-control" style="height:25px;"/>
+                                            <?php 
+                                            echo form_input(array(
+                                                'type' => 'hidden',
+                                                'name' => 'customer_id',
+                                                'value' => $row->id
+                                            ));
+                                            
+                                            echo form_input(array(
+                                                'type' => 'number',
+                                                'step' => '0.01',
+                                                'name' => 'reading_amount',
+                                                'required' => '',
+                                                'class' => 'form-control',
+                                                'style' => 'height:25px'
+                                            ));
+                                            
+                                            ?>
                                         </td>
                                         <td>
                                             <?php echo form_button(array('class' => 'btn btn-primary btn-xs', 'type' => 'submit', 'content' => 'Submit')); ?>
