@@ -50,7 +50,10 @@
               </table>
               <?php echo form_close();?>
           </div>
-          
+          <div class="alert alert-success alert-dismissable" id="success_display_text">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                <span class="success_text_content"></span>
+          </div>
           <div class="panel panel-default">
               <div class="panel-body">
                   <table class="table table-bordered table-hover" id="reading-datatable">
@@ -60,6 +63,7 @@
                             <th>Meter No.</th>
                             <th>Reading Amount</th>
                             <th>Reading Date</th>
+                            <th>Status</th>
                             <th>Action
                             </th>
                         </tr>
@@ -77,16 +81,20 @@
                                 $amount = $query->row(); 
                             ?>
                             
-                            <td class="rows<?php echo $amount->id;?>"style="color:orange; text-align: center">
+                            <td id="row<?php echo $amount->id;?>"style="color:orange; text-align: center">
                                 <?php echo number_format($amount->customer_reading_amount, 2); ?>
                             </td>
                             <td>
                                 <?php echo date('M d, Y', strtotime($amount->customer_reading_date)); ?>
                             </td>
                             <td>
+                                <?php echo ($amount->customer_billing_flag) ? "Paid" : "Unpaid"; ?>
+                            </td>
+                            <td>
                                 <button class="btn btn-success btn-xs update_reading_amount_button" reading_id="<?php echo $row->id; ?>" amount="<?php echo $amount->customer_reading_amount; ?>">Update</button>
                             </td>
                             <?php } else { ?>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td>

@@ -6,13 +6,14 @@ class BillingController extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
-        $this->load->model('CustomerModel');
-        $this->load->model('CustomerBillingModel');
+        $this->load->model('Customer');
+        $this->load->model('CustomerReading');
         $this->load->library('alert');
         $this->auth->checkLogin();
     }
     
     public function index() {
+        $data['script'] = array('customer_billing');
         $data['page_number'] = 5;
         $data['page_title'] = 'Admin - billing';
 
@@ -26,13 +27,57 @@ class BillingController extends CI_Controller {
             $this->session->set_userdata($toSet);
         }
 
-        $data["results"] = $this->CustomerModel->allCustomer();
+        $data["results"] = $this->Customer->getAll();
 
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');
         $this->load->view('admin/default/side-bar');
         $this->load->view('admin/pages/billing/index');
+        $this->load->view('admin/modals/billing/mark-as-paid');
+        $this->load->view('admin/modals/billing/mark-as-unpaid');
         $this->load->view('admin/default/footer');       
+    }
+    
+    public function payBilling() {
+        $id = $this->input->post('id');
+        $amount = $this->input->post('amount');
+        date_default_timezone_set("Asia/Manila");
+        $paid_date = date('Y-m-d h:i:s');
+        $data = array(
+            'customer_billing_amount' => $amount,
+            'customer_billing_date' => $paid_date,
+            'customer_billing_flag' => 1
+        );
+        $result = $this->CustomerReading->updateById($id, $data);
+        if ($result ==  false) {
+            $response = array(
+                'error' => true,
+                'message' => 'System cannot process request! Please contact administrator!'
+            );
+        } else {
+            $response = array('error' => false, 'date' => $paid_date);
+        }
+        echo json_encode($response);
+    }
+    
+    public function unPayBilling() {
+        $id = $this->input->post('id');
+        $paid_date = date('Y-m-d h:i:s');
+        $data = array(
+            'customer_billing_amount' => '',
+            'customer_billing_date' => '',
+            'customer_billing_flag' => 0
+        );
+        $result = $this->CustomerReading->updateById($id, $data);
+        if ($result ==  false) {
+            $response = array(
+                'error' => true,
+                'message' => 'System cannot process request! Please contact administrator!'
+            );
+        } else {
+            $response = array('error' => false, 'date' => $paid_date);
+        }
+        echo json_encode($response);
     }
     
     
@@ -57,12 +102,12 @@ class BillingController extends CI_Controller {
         $monthNumber = $this->input->post('billingMonth');
         $monthName = date("F", mktime(0, 0, 0, $monthNumber, 10));
         $data = array(
-            'setBillingMonthValue' => $monthNumber,
+            'setBillingMonthValue' => sprintf('%02d', $monthNumber),
             'setBillingMonth' => $monthName,
             'setBillingYear' => $this->input->post('billingYear')
         );
         $this->session->set_userdata($data);
-        redirect(base_url().'index.php/AdminBillingController/index');
+        redirect(base_url().'index.php/admin/BillingController/index');
         exit();
     }
     

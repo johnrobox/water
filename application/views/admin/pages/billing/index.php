@@ -11,7 +11,7 @@
           </h1>
           
           <div class="breadcrumb" style="border: 1px solid #428bca">
-            <?php echo form_open(base_url().'index.php/AdminBillingController/setBillingDate');?>
+            <?php echo form_open(base_url().'index.php/admin/BillingController/setBillingDate');?>
                 <table class="table">
                     <tr>
                         <td class="pull-right">Billing Information of</td>
@@ -46,14 +46,19 @@
             <?php echo form_close();?>
           </div>
           
+          <div class="alert alert-success alert-dismissable" id="success_display_text">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                <span class="success_text_content"></span>
+          </div>
+          
           <table class="table table-bordered table-hover" id="billing-datatable">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Meter No.</th>
                         <th>Reading Amount</th>
-                        <th>Last Balance</th>
-                        <th>Total Amount to Pay</th>
+                        <th>Status</th>
+                        <th>Date Paid</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -67,91 +72,68 @@
                     <td class="text-center">
                         <?php 
                         $this->db->where('customer_id', $row->id); 
-                        $this->db->where('customer_reading_date', $this->session->userdata('setBillingMonthValue').'-'.$this->session->userdata('setBillingYear')); 
-                        $query = $this->db->get('customer_reading');
+                        $this->db->where('customer_reading_month_cover', $this->session->userdata('setBillingMonthValue').'-'.$this->session->userdata('setBillingYear')); 
+                        $query = $this->db->get('customer_readings');
                         if ($query->num_rows() > 0) { 
-                           $amount = $query->row(); 
-                           $readingAmount = $amount->customer_reading_amount;
-                           $readingId = $amount->id;
+                           $reading_row = $query->row(); 
+                           $readingAmount = $reading_row->customer_reading_amount;
                            echo number_format($readingAmount, 2); 
                         } else { 
-                            $readingAmount = 0; 
-                            $readingId = 0; 
+                           echo '<small><i style="color: red">No Reading</i></small>';
                         } ?>
                     </td>
-
-                    <?php $this->db->where('customer_reading_id', $readingId); ?>
-                    <?php $checkPay = $this->db->get('customer_billing'); ?>
-
-                    <td class="text-center">
-                        <?php if ($readingAmount != 0) { 
-                                 $this->db->where('customer_id', $row->id);
-                                 $getBalance = $this->db->get('balance'); 
-                                 if ($getBalance->num_rows() > 0) { 
-                                     $balance = $getBalance->row();
-                                     $balanceAmount = $balance->balance_amount;
-                                     $balanceId = $balance->id;
-                                     if ($balanceAmount > 0) {
-                                         echo 'Customer Balance :';  
-                                         echo number_format($balanceAmount, 2);
-                                     } else if($balanceAmount < 0) { 
-                                         echo 'Company Balance :';
-                                         echo number_format(abs($balanceAmount), 2); 
-                                     } else { 
-                                         echo number_format(0, 2); 
-                                     } 
-                                 } else { 
-                                     $balanceAmount = 0; 
-                                 } 
-                              } ?>
+                    
+                    <!-- this is for status TD -->
+                     <?php 
+                     if ($query->num_rows() > 0) { ?>
+                        <td class="text-center" id="status_td<?php echo $reading_row->id;?>">
+                         <?php   echo ($reading_row->customer_billing_flag) ? "Paid" : "Unpaid"; ?>
+                        </td>
+                    <?php } else { ?>
+                        <td></td>
+                    <?php } ?>
+                        
+                        
+                    
+                    <?php
+                    // this is for date TD 
+                    if ($query->num_rows() > 0){
+                        echo '<td id="date_td'.$reading_row->id.'">';
+                        if ($reading_row->customer_billing_flag == 1) {
+                            echo $reading_row->customer_billing_date;
+                        } 
+                        echo '</td>';
+                    } else {
+                        echo '<td></td>';
+                    }
+                    ?>
+                     
+                    <!-- this is for billing TD -->
+                    <td>
+                        <?php
+                        if ($query->num_rows() > 0) {
+                            if ($reading_row->customer_billing_flag == 0) { 
+                                $btn_class = 'primary';
+                                $status = 0;
+                                $btn_text = 'Mark as Paid';
+                            } else {
+                                $btn_class = 'warning';
+                                $status = 1;
+                                $btn_text = 'Mark as Unpaid';
+                            } 
+                            $billing_button = array(
+                                'class' => 'btn btn-'.$btn_class.' btn-xs mark_as_paid_button',
+                                'id' => 'mark_as_paid_button' . $reading_row->id,
+                                'status' => $status,
+                                'reading_id' => $reading_row->id,
+                                'reading_amount' => $reading_row->customer_reading_amount,
+                                'content' => $btn_text
+                            );
+                            echo form_button($billing_button);
+                        }
+                        ?>
                     </td>
-
-                    <td style="background-color: #eee;">
-                        <?php if($readingAmount != 0) { ?>
-                            <?php if ($checkPay->num_rows() == 0) { ?>
-                                <?php $totalToPay = $readingAmount + $balanceAmount; ?>
-                                <?php echo number_format($totalToPay, 2); ?>
-                            <?php } else { ?>
-                              <span style="color: green" class="fa fa-check"></span>
-                              Already paid in this month.
-                            <?php } ?>
-                        <?php } ?>
-                    </td>
-                    <td class="text-center">
-
-                        <?php if ($checkPay->num_rows() == 0) { ?>
-                            <?php if ($readingAmount != 0) { ?>
-                            <?php echo form_open(base_url().'index.php/AdminBillingController/calculateBilling');?>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <input type="hidden" name="customer" class="form-control" value="<?php echo $row->id;?>"/>
-                                        <input type="hidden" name="amount" class="form-control" value="<?php echo $totalToPay;?>"/>
-                                        <input type="hidden" name="readingId" class="form-control" value="<?php echo $readingId;?>"/>
-                                        <input type="text" name="money" class="form-control" style="height:25px;"/>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-primary btn-xs" type="submit">Pay</button>
-                                    </td>
-                                </tr>
-                            </table>
-                            <?php echo form_close(); ?>
-                            <?php } else { ?>
-                            <span style="background-color:orange;padding: 5px;">
-                            No Reading Amount
-                            </span>
-                            <?php  } ?>
-                        <?php } else { ?>
-                              <?php if ($balanceAmount != 0 && $balanceAmount < 0) { ?>
-                                  Deposit <?php echo number_format(abs($balanceAmount), 2); ?>
-                              <?php } else if($balanceAmount == 0) { ?>
-                              <?php } else { ?>
-                                  Costumer Balance : <?php echo number_format($balanceAmount, 2); ?>
-                                  <a class="btn btn-success btn-xs" onclick="payBalance(<?php echo $balanceId;?>, <?php echo $balanceAmount;?>)">Pay current balance</a>
-                              <?php } ?>
-                        <?php } ?>
-
-                    </td>
+                    
                 </tr>
               <?php endforeach; 
               // end of if

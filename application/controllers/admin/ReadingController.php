@@ -11,6 +11,7 @@ class ReadingController extends CI_Controller {
         $this->load->model('CustomerReadingModel');
         $this->load->library('alert');
         $this->auth->checkLogin();
+        $this->login_id = $this->session->userdata('AdminId');
     }
     
     public function index() {
@@ -45,13 +46,12 @@ class ReadingController extends CI_Controller {
         $reading_cover = $this->session->userdata('setReadingMonthValue').'-'.$this->session->userdata('setReadingYear');
         date_default_timezone_set("Asia/Manila");
         $reading_date = date('Y-m-d h:i:s');
-        $user_id = $this->session->userdata('AdminId');
         $data = array(
             'customer_id' => $customer_id,
             'customer_reading_amount' => $reading_amount,
             'customer_reading_date' => $reading_date,
             'customer_reading_month_cover' => $reading_cover,
-            'customer_readed_by' => $user_id
+            'customer_readed_by' => $this->login_id
         );
         $response =  $this->CustomerReading->insertData($data);
         if ($response) {
@@ -63,17 +63,50 @@ class ReadingController extends CI_Controller {
         exit();       
     }
     
-    public function editReading() {
-        $readingAmount = $this->input->post('amountValue');
-        $id = $this->input->post('customerId');
-        $response = $this->CustomerReadingModel->edit($id, $readingAmount);
-        if($response['valid']) {
-            $this->session->set_flashdata('success', $this->alert->successAlert('Reading amount updated successfully.'));
+    public function refreshData() {
+        $id = $this->input->post('id');
+        $fields = 'customer_reading_amount';
+        $response = $this->CustomerReading->selectData($id, $fields);
+        if ($response['select'] == false) {
+            $result = array(
+                'error' => true,
+                'message' => 'Cannot query result!');
         } else {
-            $this->session->set_flashdata('error', $this->alert->dangerAlert('Reading amount not failed to update'));
+            $result = array(
+                'error' => false,
+                'amount' => $response['data']
+            );
         }
-        redirect(base_url().'index.php/AdminReadingController/');
-        exit();
+        echo json_encode($result);
+    }
+    
+    public function editReading() {
+        $this->form_validation->set_rules('amount', 'Amount', 'required');
+        if ($this->form_validation->run() == false) {
+            $response = array(
+                'error' => true,
+                'message' => $this->form_validation->error_array(),
+                'common' => true
+            );
+        } else {
+            $amount = $this->input->post('amount');
+            $id = $this->input->post('id');
+            $data = array(
+                'customer_reading_amount' => $amount,
+                'customer_updated_by' => $this->login_id);
+            $update = $this->CustomerReading->updateById($id, $data);
+            if ($update == false) {
+                $response = array(
+                    'error' => true,
+                    'message' => 'Cannot update reading amount! Maybe nothing change.',
+                    'common' => false
+                );
+            } else {
+                $response = array('error' => false);
+            }
+        }
+        echo json_encode($response);
+
     }
     
     /**
