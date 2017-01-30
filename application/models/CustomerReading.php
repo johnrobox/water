@@ -9,7 +9,15 @@ class CustomerReading extends CI_Model {
     
     public function insertData($data) {
         $this->db->insert($this->table, $data);
-        return ($this->db->affected_rows()) ? true : false;
+        if ($this->db->affected_rows()) {
+            $result = array(
+                'inserted' => true,
+                'inserted_id' => $this->db->insert_id()
+            );
+        } else {
+            $result = array('inserted' => false);
+        }
+        return $result;
     }
     
     public function selectData($id, $fields) {

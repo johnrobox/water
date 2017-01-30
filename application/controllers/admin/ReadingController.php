@@ -43,24 +43,39 @@ class ReadingController extends CI_Controller {
     public function addReading() {
         $customer_id = $this->input->post('customer_id');
         $reading_amount = $this->input->post('reading_amount');
-        $reading_cover = $this->session->userdata('setReadingMonthValue').'-'.$this->session->userdata('setReadingYear');
-        date_default_timezone_set("Asia/Manila");
-        $reading_date = date('Y-m-d h:i:s');
-        $data = array(
-            'customer_id' => $customer_id,
-            'customer_reading_amount' => $reading_amount,
-            'customer_reading_date' => $reading_date,
-            'customer_reading_month_cover' => $reading_cover,
-            'customer_readed_by' => $this->login_id
-        );
-        $response =  $this->CustomerReading->insertData($data);
-        if ($response) {
-            $this->session->set_flashdata('success', $this->alert->successAlert('Reading amount successfully setted!'));
+        if (empty($reading_amount) || $reading_amount == '' || $reading_amount == null) {
+            $response = array(
+                'error' => true,
+                'message' => 'Field is required!'
+            );
         } else {
-            $this->session->set_flashdata('error', $this->alert->dangerAlert('Failed to set reading amount!'));
+            $reading_amount = number_format($reading_amount, 2);
+            $reading_cover = $this->session->userdata('setReadingMonthValue').'-'.$this->session->userdata('setReadingYear');
+            date_default_timezone_set("Asia/Manila");
+            $reading_date = date('Y-m-d h:i:s');
+            $data = array(
+                'customer_id' => $customer_id,
+                'customer_reading_amount' => $reading_amount,
+                'customer_reading_date' => $reading_date,
+                'customer_reading_month_cover' => $reading_cover,
+                'customer_readed_by' => $this->login_id
+            );
+            $result =  $this->CustomerReading->insertData($data);
+            if ($result['inserted'] == false) {
+                $response = array(
+                    'error' =>  true,
+                    'message' => 'Cannot complete request!'
+                );
+            } else {
+                $response = array(
+                    'error' => false,
+                    'reading_amount' => $reading_amount,
+                    'reading_date' => date('M d, Y', strtotime($reading_date)),
+                    'reading_id' => $result['inserted_id']
+                );
+            }
         }
-        redirect(base_url().'index.php/admin/ReadingController');
-        exit();       
+        echo json_encode($response);     
     }
     
     public function refreshData() {
@@ -92,8 +107,8 @@ class ReadingController extends CI_Controller {
             $amount = $this->input->post('amount');
             $id = $this->input->post('id');
             $data = array(
-                'customer_reading_amount' => $amount,
-                'customer_updated_by' => $this->login_id);
+                'customer_reading_amount' => number_format($amount, 2),
+                'customer_updated_by' => 0);
             $update = $this->CustomerReading->updateById($id, $data);
             if ($update == false) {
                 $response = array(

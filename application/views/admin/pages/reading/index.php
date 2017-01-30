@@ -81,7 +81,7 @@
                                 $amount = $query->row(); 
                             ?>
                             
-                            <td id="row<?php echo $amount->id;?>"style="color:orange; text-align: center">
+                            <td id="amount_row<?php echo $row->id;?>" style="color:orange; text-align: center">
                                 <?php echo number_format($amount->customer_reading_amount, 2); ?>
                             </td>
                             <td>
@@ -90,24 +90,18 @@
                             <td>
                                 <?php echo ($amount->customer_billing_flag) ? "Paid" : "Unpaid"; ?>
                             </td>
-                            <td>
-                                <button class="btn btn-success btn-xs update_reading_amount_button" reading_id="<?php echo $row->id; ?>" amount="<?php echo $amount->customer_reading_amount; ?>">Update</button>
+                            <td id="update_button_row<?php echo $row->id;?>">
+                                <button class="btn btn-success btn-xs update_reading_amount_button" reading_id="<?php echo $amount->id; ?>" customer_id="<?php echo $row->id; ?>" amount="<?php echo $amount->customer_reading_amount; ?>">Update</button>
                             </td>
                             <?php } else { ?>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <?php echo form_open(base_url().'index.php/admin/ReadingController/addReading'); ?>
-                                <table>
+                            <td id="amount_row<?php echo $row->id;?>" style="color:orange; text-align: center"></td>
+                            <td id="date_row<?php echo $row->id;?>"></td>
+                            <td id="status_row<?php echo $row->id;?>"></td>
+                            <td id="action_row<?php echo $row->id;?>">
+                                <table id="row_form_table<?php echo $row->id; ?>">
                                     <tr>
                                         <td>
                                             <?php 
-                                            echo form_input(array(
-                                                'type' => 'hidden',
-                                                'name' => 'customer_id',
-                                                'value' => $row->id
-                                            ));
                                             
                                             echo form_input(array(
                                                 'type' => 'number',
@@ -115,17 +109,22 @@
                                                 'name' => 'reading_amount',
                                                 'required' => '',
                                                 'class' => 'form-control',
-                                                'style' => 'height:25px'
+                                                'style' => 'height:25px',
+                                                'id' => 'input_reading'.$row->id
                                             ));
                                             
                                             ?>
+                                            <br>
+                                            <small class="text-red" id="reading_error_display<?php echo $row->id; ?>" style="display: none">Cannot process request!</small>
                                         </td>
                                         <td>
-                                            <?php echo form_button(array('class' => 'btn btn-primary btn-xs', 'type' => 'submit', 'content' => 'Submit')); ?>
+                                            <button class="btn btn-primary btn-xs submit_reading_button" customer_id="<?php echo $row->id; ?>">
+                                                Submit
+                                                <img src="<?php echo base_url();?>img/admin/loading/loading8.gif" id="submit_reading_loading<?php echo $row->id;?>" style="width: 20px; height: 20px; display: none"/>
+                                            </button>
                                         </td>
                                     </tr>
                                 </table>
-                               <?php echo form_close(); ?>
                             </td>
                             <?php } ?>
                         </tr>
