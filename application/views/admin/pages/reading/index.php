@@ -91,7 +91,7 @@
                                 <?php echo ($amount->customer_billing_flag) ? "Paid" : "Unpaid"; ?>
                             </td>
                             <td id="update_button_row<?php echo $row->id;?>">
-                                <button class="btn btn-success btn-xs update_reading_amount_button" reading_id="<?php echo $amount->id; ?>" customer_id="<?php echo $row->id; ?>" amount="<?php echo $amount->customer_reading_amount; ?>">Update</button>
+                                <button class="btn btn-success btn-xs update_reading_amount_button" id="update_button_ID<?php echo $row->id;?>" reading_id="<?php echo $amount->id; ?>" customer_id="<?php echo $row->id; ?>" amount="<?php echo $amount->customer_reading_amount; ?>">Update</button>
                             </td>
                             <?php } else { ?>
                             <td id="amount_row<?php echo $row->id;?>" style="color:orange; text-align: center"></td>

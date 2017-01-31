@@ -11,9 +11,19 @@ $(document).ready(function(){
     submit_reading_button.click(function(){
         var customer_id = this.getAttribute('customer_id');
         var submit_reading_loading = $('#submit_reading_loading'+customer_id);
-        var reading_input_amount = $('#input_reading'+customer_id).val();
+        var reading_input_amount = parseFloat($('#input_reading'+customer_id).val());
         var reading_error_display = $('#reading_error_display'+customer_id);
         submit_reading_loading.show();
+        reading_input_amount = reading_input_amount.toFixed(2)
+        
+        if (isNaN(reading_input_amount) == true) {
+            reading_error_display.show();
+            reading_error_display.text("Field is required!");
+            reading_error_display.fadeIn();
+            reading_error_display.fadeOut(4000, 'linear');
+            submit_reading_loading.hide();
+            return;
+        }
         
         $.ajax({
             type: "POST",
@@ -30,7 +40,6 @@ $(document).ready(function(){
                     reading_error_display.fadeIn();
                     reading_error_display.fadeOut(4000, 'linear');
                 } else {
-                    console.log("Hellos");
                     var amount_row = $("#amount_row"+customer_id);
                     var date_row = $('#date_row'+customer_id);
                     var status_row = $('#status_row'+customer_id);
@@ -40,7 +49,7 @@ $(document).ready(function(){
                     date_row.text(data.reading_date);
                     status_row.text('Unpaid');
                     row_form_table.hide();
-                    action_row.html('<button class="btn btn-success btn-xs update_reading_amount_button" reading_id="'+data.reading_id+'" customer_id="'+customer_id+'" amount="'+reading_input_amount+'">Update</button>');
+                    action_row.html('<button class="btn btn-success btn-xs update_reading_amount_button" id="update_button_ID'+customer_id+'" reading_id="'+data.reading_id+'" customer_id="'+customer_id+'" amount="'+data.reading_amount+'">Update</button>');
                 }
                 submit_reading_loading.hide();
                 console.log(data);
@@ -52,10 +61,8 @@ $(document).ready(function(){
     });
     
     
-    
-    var update_reading_amount_button = $('.update_reading_amount_button');
     var update_reading_modal = $('#update_reading_modal');
-    var reading_amount_value = $('.reading_amount_value');
+    var reading_amount_value = document.getElementById('reading_amount_value');
     
     var update_reading_button = $('#update_reading_button');
     var refresh_reading_button = $('#refresh_reading_button');
@@ -69,37 +76,23 @@ $(document).ready(function(){
     var customer_id = 0
     
     success_display_text.hide();
-    
-//    $('#action_row7').on('click','button.update_reading_amount_button', function(){
-//        alert();
-//    });
-    
+
     $(document).on('click', '.update_reading_amount_button', function(){
-        var reading_amount = parseInt(this.getAttribute("amount"));
+        var reading_amount = parseFloat(this.getAttribute("amount"));
         reading_id  = this.getAttribute('reading_id');
         customer_id = this.getAttribute('customer_id');
-        reading_amount_value.val(reading_amount.toFixed(2));
+        console.log(reading_amount.toFixed(2));
+        reading_amount_value.value = reading_amount.toFixed(2);
         update_reading_modal.modal('show');
         error_display.text('');
         success_display_text.hide();
     });
     
-//    update_reading_amount_button.click(function(){
-//        var reading_amount = this.getAttribute("amount");
-//        reading_id  = this.getAttribute('reading_id');
-//        customer_id = this.getAttribute('customer_id');
-//        console.log(reading_amount);
-//        console.log(reading_id);
-//        reading_amount_value.val(reading_amount);
-//        update_reading_modal.modal('show');
-//        error_display.text('');
-//        success_display_text.hide();
-//    });
     
     update_reading_button.click(function(){
         loading_image.show();
         var amount_row = $("#amount_row"+customer_id);
-        var amount = reading_amount_value.val();
+        var amount = parseFloat(reading_amount_value.value).toFixed(2);
         $.ajax({
             type: "POST",
             url: window.base_url + "ReadingController/editReading",
@@ -119,7 +112,8 @@ $(document).ready(function(){
                     success_text_content.html('<strong>Successfully!</strong> update!');
                     amount_row.text(amount);
                     update_reading_modal.modal('hide');
-                    update_reading_amount_button.attr('amount', amount);
+                    var update_button_ID = document.getElementById('update_button_ID'+customer_id);   
+                    update_button_ID.setAttribute('amount', amount);
                 }
                 loading_image.hide();
                 console.log(data);
@@ -146,7 +140,8 @@ $(document).ready(function(){
                 if (data.error == true) 
                     error_display.text(data.message);
                 else 
-                    reading_amount_value.val(data.amount.customer_reading_amount);
+                    var reading_amount = parseFloat(data.amount.customer_reading_amount);
+                    reading_amount_value.value = reading_amount.toFixed(2);
                     loading_image.hide();
             },
             error: function(error){

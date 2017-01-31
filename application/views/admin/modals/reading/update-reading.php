@@ -18,8 +18,8 @@
                         'type' => 'number',
                         'step' => '0.01',
                         'name' => 'amountValue',
-                        'id' => 'AmountValue',
-                        'class' => 'form-control reading_amount_value'
+                        'id' => 'reading_amount_value',
+                        'class' => 'form-control'
                     );
                     echo form_input($AmountValue);
                     ?>

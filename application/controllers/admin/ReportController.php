@@ -7,6 +7,8 @@ class ReportController extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->auth->checkLogin();
+        $this->load->model('Customer');
+        $this->load->model('CustomerReading');
     }
     
     public function index(){
@@ -19,6 +21,16 @@ class ReportController extends CI_Controller {
         $this->load->view('admin/pages/report/index');
         $this->load->view('admin/default/footer');
         
+    }
+    
+    public function individualReport($customer_id = null) {
+        if (!isset($customer_id)) {
+            return;
+        }
+        
+        $data['customer'] = $this->Customer->getInfo($customer_id);
+        $data['billing'] = $this->CustomerReading->selectByCustomerId($customer_id);
+        $this->load->view('admin/pages/report/individual-reports', $data);
     }
     
 }

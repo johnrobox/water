@@ -68,7 +68,7 @@
                         <div class="col-sm-10">
                             <div class="form-group">
                                 <?php
-                                echo form_label('Meter Number', 'CusMeternumberUp');?>
+                                echo form_label('Meter Number', 'CusMeternumberUp');
                                 ?>
                                 <div class="text-red meternumberUpErr"></div>
                                 <?php 

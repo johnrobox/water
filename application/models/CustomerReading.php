@@ -20,6 +20,12 @@ class CustomerReading extends CI_Model {
         return $result;
     }
     
+    public function selectByCustomerId($customer_id) {
+        $this->db->where('customer_id', $customer_id);
+        $query = $this->db->get($this->table);
+        return $query->result();
+    }
+    
     public function selectData($id, $fields) {
         $this->db->select($fields);
         $this->db->where('id', $id);

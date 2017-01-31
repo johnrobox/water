@@ -49,7 +49,7 @@ class ReadingController extends CI_Controller {
                 'message' => 'Field is required!'
             );
         } else {
-            $reading_amount = number_format($reading_amount, 2);
+            $reading_amount = $reading_amount;
             $reading_cover = $this->session->userdata('setReadingMonthValue').'-'.$this->session->userdata('setReadingYear');
             date_default_timezone_set("Asia/Manila");
             $reading_date = date('Y-m-d h:i:s');
@@ -107,7 +107,7 @@ class ReadingController extends CI_Controller {
             $amount = $this->input->post('amount');
             $id = $this->input->post('id');
             $data = array(
-                'customer_reading_amount' => number_format($amount, 2),
+                'customer_reading_amount' => $amount,
                 'customer_updated_by' => 0);
             $update = $this->CustomerReading->updateById($id, $data);
             if ($update == false) {
@@ -117,7 +117,10 @@ class ReadingController extends CI_Controller {
                     'common' => false
                 );
             } else {
-                $response = array('error' => false);
+                $response = array(
+                    'error' => false, 
+                    'reading_amount' => number_format($amount, 2)
+                    );
             }
         }
         echo json_encode($response);

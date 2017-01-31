@@ -49,7 +49,7 @@ $(document).ready(function(){
         loading_image_unpaid_billing_customer.show();
         $.ajax({
             type: "POST",
-            url: "unPayBilling",
+            url: window.base_url + "BillingController/unPayBilling",
             dataType: "json",
             data: {
                id : reading_id
@@ -82,7 +82,7 @@ $(document).ready(function(){
         loading_image_billing_customer.show();
         $.ajax({
             type: "POST",
-            url: "payBilling",
+            url: window.base_url + "BillingController/payBilling",
             dataType: "json",
             data: {
                id : reading_id,

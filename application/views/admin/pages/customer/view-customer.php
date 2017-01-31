@@ -11,6 +11,7 @@
                         <th>Name</th>
                         <th>Meter No</th>
                         <th>Contact</th>
+                        <th>Reports</th>
                         <th>Address</th>
                         <th>Option</th>
                     </tr>
@@ -33,6 +34,9 @@
                     <td><?php echo ucwords(strtolower($row->customer_firstname.' '.$row->customer_middlename.' '.$row->customer_lastname));?></td>
                     <td><?php echo $row->customer_meter_no;?></td>
                     <td><?php echo $row->customer_contact;?></td>
+                    <td>
+                        <a href="<?php echo base_url();?>index.php/admin/ReportController/individualReport/<?php echo $id;?>" target="blank">View Reports</a>
+                    </td>
                     <td><?php echo $row->customer_address;?></td>
                     <td>
                         <?php
