@@ -11,6 +11,11 @@
         <link href="<?php echo base_url();?>fonts/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url();?>css/styles.css" rel="stylesheet">
         <script src="<?php echo base_url();?>js/jquery.min.js"></script>
+        <style>
+            .table td , th {
+                text-align: center;   
+             }
+        </style>
     </head>       
     <body>
         <div class="container">
@@ -23,24 +28,43 @@
                 <div class="panel-body">
                     <table class="table table-bordered">
                         <tr>
-                            <td>Reading Month Covered</td>
-                            <td>Reading Amount</td>
-                            <td>Reading Date</td>
-                            <td>Status</td>
-                            <td>Paid Amount</td>
-                            <td>Paid Date</td>
+                            <th>Reading Month Covered</th>
+                            <th>Reading Amount</th>
+                            <th>Reading Date</th>
+                            <th>Status</th>
+                            <th>Paid Amount</th>
+                            <th>Paid Date</th>
                         </tr>
                         <?php 
                         if (isset($billing)) {
                             foreach ($billing as $row) {
+                               $tr_style = ($row->customer_billing_flag) ? 'green' : 'red';
                         ?>
                         <tr>
-                            <td><?php echo $row->customer_reading_month_cover;?></td>
-                            <td><?php echo $row->customer_reading_amount;?></td>
-                            <td><?php echo $row->customer_reading_date;?></td>
-                            <td><?php echo ($row->customer_billing_flag) ? "Paid" : "Unpaid"?></td>
-                            <td><?php echo $row->customer_billing_amount;?></td>
-                            <td><?php echo $row->customer_billing_date;?></td>
+                            <td>
+                                <?php 
+                                $date_cover = $row->customer_reading_month_cover;
+                                $cover = explode("-", $date_cover);
+                                $monthName = date('F', mktime(0, 0, 0, $cover[0], 10));
+                                echo $cover[1] . ', ' . $monthName;
+                                ?>
+                            </td>
+                            <td>
+                                <i class="glyphicon glyphicon-ruble"></i>
+                                <?php echo $row->customer_reading_amount;?>
+                            </td>
+                            <td>
+                                <?php echo $row->customer_reading_date;?>
+                            </td>
+                            <td style="background-color: <?php echo $tr_style;?>">
+                                <?php echo ($row->customer_billing_flag) ? "Paid" : "Unpaid"?>
+                            </td>
+                            <td>
+                                <?php echo ($row->customer_billing_amount != '0.00') ? $row->customer_billing_amount : '';?>
+                            </td>
+                            <td>
+                                <?php echo ($row->customer_billing_date != '0000-00-00 00:00:00') ? $row->customer_billing_date : "";?>
+                            </td>
                         </tr>
                             <?php } ?>
                         <?php } ?>
