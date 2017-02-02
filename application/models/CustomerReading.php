@@ -47,4 +47,12 @@ class CustomerReading extends CI_Model {
         return ($this->db->affected_rows()) ? true : false;
     }
     
+    public function selectOverdue($date, $fields, $id = null) {
+        $this->db->select($fields);
+        $this->db->where('customer_reading_month_cover', $date);
+        $this->db->where('customer_billing_flag', 0);
+        $query = $this->db->get($this->table);
+        return $query->result();
+    }
+    
 }

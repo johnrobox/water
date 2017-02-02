@@ -8,41 +8,56 @@
           <h1 class="page-header">
                 Dashboard
           </h1>
-          <?php if($overdue) { ?>
           <div class="panel panel-warning">
               <div class="panel-heading">
                   Overdue in the month
               </div>
               <div class="panel-body">
+                  <?php
+                  if (isset($overdue)) {
+                  ?>
                   <table class="table table-bordered">
                       <tr>
+                          <th>No.</th>
                           <th>Name</th>
                           <th>Meter No</th>
-                          <th>Action</th>
+                          <th>Amount</th>
+                          <th>Reading Date</th>
+                          <th></th>
                       </tr>
-                  <?php
-                  foreach($overdue as $due) { ?>
+                      <?php 
+                      $counter = 1;
+                      foreach($overdue as $row) {
+                          $this->db->where('id', $row->customer_id);
+                          $query = $this->db->get('customers');
+                          $customer = $query->row();
+                      ?>
                       <tr>
+                          <td><?php echo $counter++; ?></td>
                           <td>
-                              <?php echo $due['name'];?>
+                              <?php echo ucwords(strtolower($customer->customer_firstname.' '.$customer->customer_lastname));?>
                           </td>
                           <td>
-                              <?php echo $due['meterno']; ?>
+                              <?php echo $customer->customer_meter_no; ?>
                           </td>
                           <td>
-                              <a href="<?php echo base_url().'index.php/AdminOverdueController/view/'.$due['id'];?>" class="btn btn-primary btn-xs">View</a>
+                              <?php echo $row->customer_reading_amount; ?>
+                          </td>
+                          <td>
+                              <?php echo $row->customer_reading_date;?>
+                          </td>
+                          <td>
+                              
                           </td>
                       </tr>
-                  <?php   
-                  }
-                  ?>
+                      <?php } ?>
                   </table>
+                  <?php } ?>
               </div>
               <div class="panel-footer">
                   
               </div>
           </div>
-          <?php } ?>
           
         </div><!--/row-->
     </div>
