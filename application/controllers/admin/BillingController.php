@@ -122,4 +122,22 @@ class BillingController extends CI_Controller {
         $this->CustomerBillingModel->payBalance($id, $amount);
     }
     
+    
+    public function singleReport($customer_id = null) {
+        if (!isset($customer_id)) {
+            redirect(base_url().'index.php/admin/CustomerController/viewCustomer');
+        }
+        $data['page_number'] = 0;
+        $data['script'] = array('customer-report');
+        $data['customer'] = $this->Customer->getInfo($customer_id);
+        $data['billing'] = $this->CustomerReading->selectByCustomerId($customer_id);
+        
+        $this->load->view('admin/default/header', $data);
+        $this->load->view('admin/default/top-menu');
+        $this->load->view('admin/default/side-bar');
+        $this->load->view('admin/pages/billing/single-report');
+        $this->load->view('admin/modals/billing/mark-as-paid');
+        $this->load->view('admin/default/footer');
+    }
+    
 }

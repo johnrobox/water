@@ -47,7 +47,7 @@
                               <?php echo $row->customer_reading_date;?>
                           </td>
                           <td>
-                              
+                              <a href="<?php echo base_url();?>index.php/admin/BillingController/singleReport/<?php echo $customer->id;?>" target="blank">View Reports</a>
                           </td>
                       </tr>
                       <?php } ?>

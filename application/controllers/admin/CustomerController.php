@@ -9,7 +9,6 @@ class CustomerController extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-        $this->load->model('CustomerModel');
         $this->load->model('Customer');
         $this->load->library('alert');
         $this->auth->checkLogin();
@@ -251,6 +250,5 @@ class CustomerController extends CI_Controller {
         $result['change'] = $changeStatus;
         echo json_encode($result);
     }
-
     
 }

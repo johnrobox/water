@@ -35,7 +35,7 @@
                     <td><?php echo $row->customer_meter_no;?></td>
                     <td><?php echo $row->customer_contact;?></td>
                     <td>
-                        <a href="<?php echo base_url();?>index.php/admin/ReportController/individualReport/<?php echo $id;?>" target="blank">View Reports</a>
+                        <a href="<?php echo base_url();?>index.php/admin/BillingController/singleReport/<?php echo $id;?>" target="blank">View Reports</a>
                     </td>
                     <td><?php echo $row->customer_address;?></td>
                     <td>

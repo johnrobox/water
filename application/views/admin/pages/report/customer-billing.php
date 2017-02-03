@@ -11,34 +11,41 @@
         <link href="<?php echo base_url();?>fonts/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url();?>css/styles.css" rel="stylesheet">
         <script src="<?php echo base_url();?>js/jquery.min.js"></script>
-        <style>
-            .table td , th {
-                text-align: center;   
-             }
-        </style>
-    </head>       
+    </head>
     <body>
+        <style>
+                .table td , th {
+                    text-align: center;   
+                 }
+            </style>
         <div class="container">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3>
-                        <?php echo ucwords(strtolower($customer->customer_firstname. ' ' .  $customer->customer_lastname)); ?>
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>Reading Month Covered</th>
-                            <th>Reading Amount</th>
-                            <th>Reading Date</th>
-                            <th>Status</th>
-                            <th>Paid Amount</th>
-                            <th>Paid Date</th>
-                        </tr>
-                        <?php 
+            <button class="btn btn-primary btn-xs pull-right">Print Report</button>
+            <table class="table table-bordered">
+                <tr style="background: #ccc">
+                    <td><b class="pull-left">Name : </b> <?php echo $customer->customer_firstname.' '.$customer->customer_lastname;?></td>
+                    
+                </tr>
+                <tr style="background: #ccc">
+                    <td><b class="pull-left">Meter No : </b> <?php echo $customer->customer_meter_no;?></td>
+                </tr>
+                <tr style="background: #ccc">
+                    <td><b class="pull-left">Contact No : </b> <?php echo $customer->customer_contact;?></td>
+                </tr>
+                <tr style="background: #ccc">
+                    <td><b class="pull-left">Meter No : </b> <?php echo $customer->customer_address;?></td>
+                </tr>
+                <tr style="background: black"><td></td></tr>
+                <tr style="background: #ccc">
+                    <th style="color: green">Reading Month Covered</th>
+                    <th style="color: green">Reading Amount</th>
+                    <th style="color: green">Reading Date</th>
+                    <th style="color: green">Status</th>
+                    <th style="color: green">Paid Amount</th>
+                    <th style="color: green">Paid Date</th>
+                </tr>
+                <?php 
                         if (isset($billing)) {
                             foreach ($billing as $row) {
-                               $tr_style = ($row->customer_billing_flag) ? 'green' : 'red';
                         ?>
                         <tr>
                             <td>
@@ -50,13 +57,13 @@
                                 ?>
                             </td>
                             <td>
-                                <i class="glyphicon glyphicon-ruble"></i>
-                                <?php echo $row->customer_reading_amount;?>
+                                <b><?php echo $row->customer_reading_amount;?></b>
                             </td>
                             <td>
-                                <?php echo $row->customer_reading_date;?>
+                                <?php $date = date_create($row->customer_reading_date);?>
+                                <?php echo date_format($date, 'm-d-Y'); ?>
                             </td>
-                            <td style="background-color: <?php echo $tr_style;?>">
+                            <td>
                                 <?php echo ($row->customer_billing_flag) ? "Paid" : "Unpaid"?>
                             </td>
                             <td>
@@ -68,10 +75,7 @@
                         </tr>
                             <?php } ?>
                         <?php } ?>
-                    </table>
-                </div>
-                <div class="panel-footer">Panel Footer</div>
-            </div>
+            </table>
         </div>
     </body>
 </html>

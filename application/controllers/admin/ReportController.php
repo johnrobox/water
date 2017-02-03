@@ -23,14 +23,15 @@ class ReportController extends CI_Controller {
         
     }
     
-    public function individualReport($customer_id = null) {
+    public function generateReport($customer_id = null) {
         if (!isset($customer_id)) {
-            return;
+            redirect(base_url().'index.php/admin/CustomerController/viewCustomer');
         }
-        
+
         $data['customer'] = $this->Customer->getInfo($customer_id);
         $data['billing'] = $this->CustomerReading->selectByCustomerId($customer_id);
-        $this->load->view('admin/pages/report/individual-reports', $data);
+        
+        $this->load->view('admin/pages/report/customer-billing', $data);
     }
-    
+
 }
