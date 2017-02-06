@@ -28,8 +28,8 @@ class ReadingController extends CI_Controller {
             );
             $this->session->set_userdata($toSet);
         }
-
-        $data["results"] = $this->Customer->getAll();
+        $condition = "WHERE customer_status !=0";
+        $data["results"] = $this->Customer->getAll($condition);
 
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');

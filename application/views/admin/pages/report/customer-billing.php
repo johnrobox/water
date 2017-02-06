@@ -14,16 +14,16 @@
     </head>
     <body>
         <style>
-                .table td , th {
-                    text-align: center;   
-                 }
-            </style>
+            .table td , th {
+                text-align: center;   
+             }
+        </style>
         <div class="container">
-            <button class="btn btn-primary btn-xs pull-right">Print Report</button>
+            <button onclick="printReport()" class="btn btn-primary btn-xs pull-right">Print Report</button>
             <table class="table table-bordered">
                 <tr style="background: #ccc">
                     <td><b class="pull-left">Name : </b> <?php echo $customer->customer_firstname.' '.$customer->customer_lastname;?></td>
-                    
+
                 </tr>
                 <tr style="background: #ccc">
                     <td><b class="pull-left">Meter No : </b> <?php echo $customer->customer_meter_no;?></td>
@@ -47,7 +47,7 @@
                         if (isset($billing)) {
                             foreach ($billing as $row) {
                         ?>
-                        <tr>
+                        <tr style="background : <?php echo ($row->customer_billing_flag != 0)? "#eee" : ""; ?>">
                             <td>
                                 <?php 
                                 $date_cover = $row->customer_reading_month_cover;
@@ -63,19 +63,26 @@
                                 <?php $date = date_create($row->customer_reading_date);?>
                                 <?php echo date_format($date, 'm-d-Y'); ?>
                             </td>
-                            <td>
+                            <td style="color : <?php echo ($row->customer_billing_flag != 0)? "green" : "orange"; ?>">
                                 <?php echo ($row->customer_billing_flag) ? "Paid" : "Unpaid"?>
                             </td>
                             <td>
                                 <?php echo ($row->customer_billing_amount != '0.00') ? $row->customer_billing_amount : '';?>
                             </td>
                             <td>
+                                <?php if ($row->customer_billing_flag != 0) { ?>
                                 <?php echo ($row->customer_billing_date != '0000-00-00 00:00:00') ? $row->customer_billing_date : "";?>
+                                <?php } ?>
                             </td>
                         </tr>
                             <?php } ?>
                         <?php } ?>
             </table>
         </div>
+        <script>
+        function printReport() {
+            window.print();
+        }
+        </script>
     </body>
 </html>

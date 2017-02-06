@@ -14,7 +14,7 @@ class Customer extends CI_Model {
             return $query->row();
 	}
         
-        public function getAll() {
+        public function getAll($condition = null) {
             $query = $this->db->query("SELECT 
             customers.id,
             customers.customer_firstname,
@@ -26,7 +26,7 @@ class Customer extends CI_Model {
             customers.customer_contact,
             customers.customer_birthdate,
             customer_logs.customer_status
-            FROM customers JOIN customer_logs ON customers.id = customer_logs.customer_id");
+            FROM customers JOIN customer_logs ON customers.id = customer_logs.customer_id ". $condition);
             return $query->result();
         }
         
