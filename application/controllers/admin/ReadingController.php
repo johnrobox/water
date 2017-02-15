@@ -8,7 +8,6 @@ class ReadingController extends CI_Controller {
         parent::__construct();
         $this->load->model('Customer');
         $this->load->model('CustomerReading');
-        $this->load->model('CustomerReadingModel');
         $this->load->library('alert');
         $this->auth->checkLogin();
         $this->login_id = $this->session->userdata('AdminId');

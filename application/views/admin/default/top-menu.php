@@ -8,7 +8,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+<!--            <a class="navbar-brand" href="#"> </a>-->
+<image src="<?php echo base_url();?>img/capai.jpg" style="height: 50px; margin-left: 30px !important" class="pull-left"/>
+<a class="navbar-brand" href="#">CAPAI</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">

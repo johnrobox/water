@@ -21,7 +21,7 @@
        
         
         
-            <link rel="stylesheet" href="<?php echo base_url();?>datatables/css/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="<?php echo base_url();?>datatables/css/dataTables.bootstrap.css">
         <link rel="stylesheet" href="<?php echo base_url();?>datatables/css/dataTables.responsive.css">
 
 

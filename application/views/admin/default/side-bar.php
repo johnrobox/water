@@ -26,9 +26,6 @@
               <li <?php echo ($page_number == 6) ? 'class="active"' : ''?> >
                   <a href="<?php echo base_url();?>index.php/admin/OverdueController/index">Overdue</a>
               </li>
-              <li <?php echo ($page_number == 7)? 'class="active"' : ''?> >
-                  <a href="<?php echo base_url();?>index.php/admin/ReportController/index">Report</a>
-              </li>
               <li <?php echo ($page_number == 8)? 'class="active"' : ''?> >
                   <a href="<?php echo base_url();?>index.php/admin/RequestController/index">Customer Request</a>
               </li>
