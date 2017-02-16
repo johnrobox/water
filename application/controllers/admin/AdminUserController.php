@@ -11,15 +11,21 @@ class AdminUserController extends CI_Controller {
         $this->load->library('alert');
         $this->load->model('Administrator');
         $this->load->model('AdministratorLog');
+        $this->login_id = $this->session->userdata('AdminId');
+        
+        // get login account detail
+        $this->account = $this->Administrator->getById($this->login_id);
     }
     
     public function index() {
         $data['page_number'] = 10;
         $data['page_title'] = 'Admin - add user';
+        $data['account'] = $this->account;
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');
         $this->load->view('admin/default/side-bar');
         $this->load->view('admin/pages/user/add-user');
+        $this->load->view('admin/modals/administrator/change-profile');
         $this->load->view('admin/default/footer');
         
     }
@@ -101,10 +107,12 @@ class AdminUserController extends CI_Controller {
         $data['page_number'] = 11;
         $data['page_title'] = 'Admin - View User';
         $data['results'] = $this->Administrator->getAll();
+        $data['account'] = $this->account;
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');
         $this->load->view('admin/default/side-bar');
         $this->load->view('admin/pages/user/view-user');
+        $this->load->view('admin/modals/administrator/change-profile');
         $this->load->view('admin/default/footer');
     }
     

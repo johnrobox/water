@@ -11,7 +11,7 @@ class AccountController extends CI_Controller {
         $this->load->library('alert');
         $this->user_id = $this->session->userdata('AdminId');
         $this->token = $this->session->userdata('AdminToken');
-        
+        $this->auth->checkLogin();
         // Change password common error
         $this->common_error = array(
                     'error' => true,
@@ -30,6 +30,7 @@ class AccountController extends CI_Controller {
         $this->load->view('admin/default/side-bar');
         $this->load->view('admin/pages/user/settings');
         $this->load->view('admin/modals/administrator/change-password');
+        $this->load->view('admin/modals/administrator/change-profile');
         $this->load->view('admin/default/footer');
     }
     
@@ -164,7 +165,47 @@ class AccountController extends CI_Controller {
         echo json_encode($response);
     }
     
-   
+   public function changeProfile() {
+        // sanitize image 
+        $profile = $_FILES['profile_image'];
+        if (empty($profile['name'])) {
+            $response = array(
+                'error' => true,
+                'message' => 'Please select profile image!'
+            );
+        } else {
+            // get old image used to delete if new file is upload successful.
+            $old_profile = $this->Administrator->getOldProfile($this->user_id);
+            if (!$old_profile['had_profile']) {
+                $response = array(
+                    'error' => true,
+                    'message' => 'Error in uploading profile image!'
+                );
+            } else {
+                // udpate profile name in database
+                $update_profile = $this->Administrator->updateProfile($this->user_id, $profile['name']);
+                if (!$update_profile) {
+                    $response = array(
+                        'error' => true,
+                        'message' => 'Cannot update profile image!'
+                    );
+                } else {
+                    if ($old_profile['image_profile']->admin_image && !empty($old_profile['image_profile']->admin_image)) {
+                        // check old file if exist 
+                        if (file_exists('img/admin/users/'.$old_profile['image_profile']->admin_image)) {
+                            // remove old profile
+                            unlink('img/admin/users/'.$old_profile['image_profile']->admin_image);
+                        }
+                    }
+                    // updload new profile
+                    move_uploaded_file($profile['tmp_name'], 'img/admin/users/'.$profile['name']);
+                    $this->session->set_flashdata('success', $this->alert->successAlert('Profile successfully updated.'));
+                    $response = array("error" => false);
+                }
+            }
+        }
+        echo json_encode($response);
+   }
     
 }
 

@@ -9,9 +9,8 @@
                 Reading Information
           </h1>
           
-          
-          <?php echo $this->session->flashdata('success'); ?>
-          <?php echo $this->session->flashdata('error'); ?>
+          <?php echo $this->session->flashdata("success"); ?>
+            <?php echo $this->session->flashdata("error"); ?>
           
           <div class="breadcrumb" style="border: 1px solid #428bca">
               <?php echo form_open(base_url().'index.php/admin/ReadingController/setReadingDate');?>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2017 at 11:14 AM
+-- Generation Time: Feb 16, 2017 at 11:11 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -33,17 +33,18 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `admin_email` varchar(100) DEFAULT NULL,
   `admin_password` varchar(250) DEFAULT NULL,
   `admin_gender` tinyint(3) DEFAULT NULL COMMENT '1-male 2-female',
-  `admin_birthdate` date DEFAULT NULL
+  `admin_birthdate` date DEFAULT NULL,
+  `admin_image` varchar(250) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `admin_firstname`, `admin_lastname`, `admin_email`, `admin_password`, `admin_gender`, `admin_birthdate`) VALUES
-(1, 'john robert', 'jerodiaz', 'johnrobertjerodiaz@gmail.com', '9df7a7314e3884b26222e2ccd834aa24', 1, '2015-10-14'),
-(4, 'Grazelle', 'Villaso', 'grazellevillaso@gmail.com', '9df7a7314e3884b26222e2ccd834aa24', 2, '2017-01-26'),
-(5, 'John Ro', 'Jerodiaz', 'johnrojerodiaz@gmail.com', '9df7a7314e3884b26222e2ccd834aa24', 1, '2017-01-12');
+INSERT INTO `admin` (`id`, `admin_firstname`, `admin_lastname`, `admin_email`, `admin_password`, `admin_gender`, `admin_birthdate`, `admin_image`) VALUES
+(1, 'john robert', 'jerodiaz', 'johnrobertjerodiaz@gmail.com', '9df7a7314e3884b26222e2ccd834aa24', 1, '2015-10-14', 'davao.jpg'),
+(4, 'Grazelle', 'Villaso', 'grazellevillaso@gmail.com', '9df7a7314e3884b26222e2ccd834aa24', 2, '2017-01-26', ''),
+(5, 'John Ro', 'Jerodiaz', 'johnrojerodiaz@gmail.com', '9df7a7314e3884b26222e2ccd834aa24', 1, '2017-01-12', '');
 
 -- --------------------------------------------------------
 
@@ -55,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `admin_logs` (
   `id` bigint(20) NOT NULL,
   `admin_id` bigint(20) NOT NULL,
   `admin_role` tinyint(7) DEFAULT NULL,
-  `admin_status` tinyint(3) DEFAULT NULL,
+  `admin_status` tinyint(3) DEFAULT '0',
   `admin_token` varchar(250) NOT NULL,
   `admin_last_login` datetime DEFAULT NULL,
   `admin_last_logout` datetime DEFAULT NULL,
@@ -68,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `admin_logs` (
 --
 
 INSERT INTO `admin_logs` (`id`, `admin_id`, `admin_role`, `admin_status`, `admin_token`, `admin_last_login`, `admin_last_logout`, `admin_date_created`, `admin_date_modified`) VALUES
-(1, 1, 1, 1, 'I51JxrJ8KafT4A25Hz5kosQGl4hMhMSGppB0sjVPEkNKHOHRPA', '2017-02-15 11:14:29', NULL, '2015-10-17 01:33:07', '2017-01-25 04:32:02'),
+(1, 1, 1, 1, 'P9na0gURFPVhahvDlCfGyhfBCg58T2SvdxcpWha4UblesLQ4qW', '2017-02-16 01:34:33', NULL, '2015-10-17 01:33:07', '2017-01-25 04:32:02'),
 (4, 4, 1, 1, '', NULL, NULL, '2017-01-23 10:03:29', '2017-01-23 10:03:29'),
 (5, 5, 1, 1, '', NULL, NULL, '2017-01-26 03:03:14', '2017-01-26 03:03:14');
 
@@ -184,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `customer_readings` (
   `customer_billing_date` datetime NOT NULL,
   `customer_readed_by` int(11) NOT NULL,
   `customer_updated_by` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer_readings`
@@ -211,7 +212,8 @@ INSERT INTO `customer_readings` (`id`, `customer_id`, `customer_reading_amount`,
 (94, 2, 45.00, '2017-02-03 04:05:55', '05-2016', 0.00, 0, '0000-00-00 00:00:00', 1, 0),
 (95, 2, 899.00, '2017-02-03 04:06:07', '06-2016', 899.00, 1, '2017-02-03 04:09:35', 1, 0),
 (96, 2, 23.00, '2017-02-03 04:06:15', '07-2016', 23.00, 1, '2017-02-03 04:09:20', 1, 0),
-(97, 2, 677.00, '2017-02-03 04:06:24', '08-2016', 0.00, 0, '0000-00-00 00:00:00', 1, 0);
+(97, 2, 677.00, '2017-02-03 04:06:24', '08-2016', 0.00, 0, '0000-00-00 00:00:00', 1, 0),
+(98, 2, 4.00, '2017-02-16 05:15:29', '02-2017', 0.00, 0, '0000-00-00 00:00:00', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -224,14 +226,7 @@ CREATE TABLE IF NOT EXISTS `customer_requests` (
   `customer_id` int(11) DEFAULT NULL,
   `request` longtext,
   `date_send` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `customer_requests`
---
-
-INSERT INTO `customer_requests` (`id`, `customer_id`, `request`, `date_send`) VALUES
-(8, 2, 'sfsdfsdf', NULL);
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -247,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `notices` (
   `date_created` datetime NOT NULL,
   `date_modified` datetime NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `notices`
@@ -255,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `notices` (
 
 INSERT INTO `notices` (`id`, `note`, `created_by`, `modified_by`, `date_created`, `date_modified`, `status`) VALUES
 (3, 'sdfsdfsd', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
-(11, 'sdfs', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(11, 'sdfs1111111111111111111111111111', 1, 1, '0000-00-00 00:00:00', '2017-02-16 04:08:58', 1),
 (15, 'john rnsdfsd121212121', 1, 1, '0000-00-00 00:00:00', '2017-02-15 10:41:11', 1),
 (16, 'sdfsdfs', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
 (19, 'sdfsdfsdf', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
@@ -346,17 +341,17 @@ ALTER TABLE `customer_logs`
 -- AUTO_INCREMENT for table `customer_readings`
 --
 ALTER TABLE `customer_readings`
-  MODIFY `id` bigint(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=98;
+  MODIFY `id` bigint(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=99;
 --
 -- AUTO_INCREMENT for table `customer_requests`
 --
 ALTER TABLE `customer_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `notices`
 --
 ALTER TABLE `notices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

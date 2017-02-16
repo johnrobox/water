@@ -18,11 +18,8 @@
             ?>
             <br><br>
             
-            <?php
-            echo $this->session->userdata("success");
-            echo $this->session->userdata("error");
-            ?>
-            
+            <?php echo $this->session->flashdata("success"); ?>
+            <?php echo $this->session->flashdata("error"); ?>
             <div class="alert" id="alertContainer">
                 <div id="messageContainer"></div>
             </div>

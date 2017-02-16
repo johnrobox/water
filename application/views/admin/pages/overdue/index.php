@@ -8,6 +8,8 @@
             <h1 class="page-header">
                   Customer with Overdue
             </h1>
+            <?php echo $this->session->flashdata("success"); ?>
+            <?php echo $this->session->flashdata("error"); ?>
             <div class="panel panel-default">
                 <table class="table table-bordered">
                     <tr>

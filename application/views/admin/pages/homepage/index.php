@@ -6,6 +6,8 @@
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
             </p>
             <h1 class="page-header"> Dashboard </h1>
+            <?php echo $this->session->flashdata("success"); ?>
+            <?php echo $this->session->flashdata("error"); ?>
             <?php if (isset($overdue)) { ?>
             <div class="panel panel-warning">
                 <div class="panel-heading">

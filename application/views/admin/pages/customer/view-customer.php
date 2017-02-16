@@ -1,8 +1,8 @@
 
         <div class="col-sm-9 col-md-10 main">
             <h1 class="page-header"><span class="fa fa-pencil"></span> View Customer </h1>
-            <?php echo $this->session->flashdata('error');?>
-            <?php echo $this->session->flashdata('success');?>
+            <?php echo $this->session->flashdata("success"); ?>
+            <?php echo $this->session->flashdata("error"); ?>
             <div id="commonAlertMessage"></div>
             <div class="dataTable_wrapper">
             <table class="table table-bordered" id="customer-datatable">

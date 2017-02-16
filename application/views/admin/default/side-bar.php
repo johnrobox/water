@@ -7,10 +7,27 @@
          <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
            
             <ul class="nav nav-sidebar">
+            <div style="" class="row">
+                <div class="col-xs-6" style="padding: 8px 8px 8px 35px">
+                    <?php 
+                    if ($account[0]->admin_image == "") {
+                        $account_image = "github img.png";
+                    } else {
+                        $account_image = $account[0]->admin_image;
+                    }
+                    ?>
+                    <img src="<?php echo base_url().'img/admin/users/' . $account_image?>" style="height: 100px; width: 100px; border: 1px solid black" class="img-circle img-responsive changeProfile"/>
+                </div>
+                <div class="col-xs-4 text-center" style="padding: 35px 0px 0px 0px;">
+                    <?php echo ucwords(strtolower($account[0]->admin_firstname. ' '. $account[0]->admin_lastname )); ?>
+                    <br>
+                    <span class="glyphicon glyphicon-ok-circle" style="color: green"></span>
+                    <small>Online</small>
+                </div>
+            </div>
               <li <?php echo ($page_number == 1)? 'class="active"' : ''?> >
                   <a href="<?php echo base_url();?>index.php/admin/DashboardController/index">Dashboard</a>
               </li>
-              <hr>
               <li <?php echo ($page_number == 2)? 'class="active"' : ''?> >
                   <a href="<?php echo base_url();?>index.php/admin/CustomerController/viewCustomer">All Customer</a>
               </li>

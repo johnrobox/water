@@ -7,9 +7,11 @@ class NoticeController extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Notice');
+        $this->load->model("Administrator");
         $this->load->library('alert');
         $this->auth->checkLogin();
         $this->login_id = $this->session->userdata('AdminId');
+        $this->account = $this->Administrator->getById($this->login_id);
     }
     
     public function index(){
@@ -17,6 +19,7 @@ class NoticeController extends CI_Controller {
         $data['page_title'] = 'Admin - notice';
         $data['notices'] = $this->Notice->getAll();
         $data['script'] = array('notice');
+        $data['account'] = $this->account;
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');
         $this->load->view('admin/default/side-bar');
@@ -24,6 +27,7 @@ class NoticeController extends CI_Controller {
         $this->load->view('admin/modals/notice/add-notice');
         $this->load->view('admin/modals/notice/delete-notice');
         $this->load->view('admin/modals/notice/update-notice');
+        $this->load->view('admin/modals/administrator/change-profile');
         $this->load->view('admin/default/footer');
         
     }

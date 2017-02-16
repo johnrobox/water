@@ -8,16 +8,18 @@ class ReadingController extends CI_Controller {
         parent::__construct();
         $this->load->model('Customer');
         $this->load->model('CustomerReading');
+        $this->load->model("Administrator");
         $this->load->library('alert');
         $this->auth->checkLogin();
         $this->login_id = $this->session->userdata('AdminId');
+        $this->account = $this->Administrator->getById($this->login_id);
     }
     
     public function index() {
         $data['script'] = array('customer-reading');
         $data['page_number'] = 4;
         $data['page_title'] = 'Admin - reading';
-
+        $data['account'] = $this->account;
         // Session the month you like
         if (!$this->session->has_userdata('setReadingMonth') && !$this->session->has_userdata('setReadingYear')) {
             $toSet = array(
@@ -35,6 +37,7 @@ class ReadingController extends CI_Controller {
         $this->load->view('admin/default/side-bar');
         $this->load->view('admin/pages/reading/index');
         $this->load->view('admin/modals/reading/update-reading');
+        $this->load->view('admin/modals/administrator/change-profile');
         $this->load->view('admin/default/footer');
     }
     

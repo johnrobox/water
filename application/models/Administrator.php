@@ -23,8 +23,27 @@ class Administrator extends CI_Model {
     }
     
     public function getAll() {  
-        $data = $this->db->get($this->table);
-        return $data->result();
+        
+        $query = $this->db->query(
+                'SELECT '
+                . $this->table.'.`id`, '
+                . $this->table.'.`admin_firstname`, '
+                . $this->table.'.`admin_lastname`, '
+                . $this->table.'.`admin_email`, '
+                . $this->table.'.`admin_gender`, '
+                . $this->table.'.`admin_birthdate`, '
+                . $this->table.'.`admin_image`, '
+                . '`admin_logs`.`admin_role`, '
+                . '`admin_logs`.`admin_status`, '
+                . '`admin_logs`.`admin_last_login`, '
+                . '`admin_logs`.`admin_last_logout` '
+                . 'FROM '
+                . $this->table
+                . ' JOIN '
+                . 'admin_logs '
+                . 'WHERE '
+                . $this->table.'.`id` = `admin_logs`.`admin_id`');
+        return $query->result();
     }
     
     public function addAdmin($data) {
@@ -59,6 +78,27 @@ class Administrator extends CI_Model {
             $result['select'] = false;
         }
         return $result;
+    }
+    
+    public function getOldProfile($id) {
+        $this->db->where('id', $id);
+        $this->db->select(array('admin_image'));
+        $query = $this->db->get($this->table);
+        if ($query->num_rows() > 0) {
+            $result = array(
+                'had_profile' => true,
+                'image_profile' => $query->row()
+            );
+        } else {
+            $result['had_profile'] = false;
+        }
+        return $result;
+    }
+    
+    public function updateProfile($id, $image) {
+        $this->db->where('id', $id);
+        $this->db->update($this->table, array('admin_image' => $image));
+        return ($this->db->affected_rows()) ? true : false;
     }
         
 }

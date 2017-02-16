@@ -13,6 +13,7 @@
         <script src="<?php echo base_url();?>js/jquery.min.js"></script>
         <script src="<?php echo base_url();?>js/scripts.js"></script>
          <script src="<?php echo base_url();?>js/common-script.js"></script>   
+         <script src="<?php echo base_url();?>js/change-profile.js"></script>
         <?php 
         if (isset($script)) {
         	foreach ($script as $js) { ?>

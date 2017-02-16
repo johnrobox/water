@@ -8,15 +8,18 @@ class BillingController extends CI_Controller {
         parent::__construct();
         $this->load->model('Customer');
         $this->load->model('CustomerReading');
+        $this->load->model("Administrator");
         $this->load->library('alert');
         $this->auth->checkLogin();
+        $this->login_id = $this->session->userdata('AdminId');
+        $this->account = $this->Administrator->getById($this->login_id);
     }
     
     public function index() {
         $data['script'] = array('customer_billing');
         $data['page_number'] = 5;
         $data['page_title'] = 'Admin - billing';
-
+        $data['account'] = $this->account;
         // Session the month you like
         if (!$this->session->has_userdata('setBillingMonth') && !$this->session->has_userdata('setBillingYear')) {
             $toSet = array(
@@ -35,6 +38,7 @@ class BillingController extends CI_Controller {
         $this->load->view('admin/pages/billing/index');
         $this->load->view('admin/modals/billing/mark-as-paid');
         $this->load->view('admin/modals/billing/mark-as-unpaid');
+        $this->load->view('admin/modals/administrator/change-profile');
         $this->load->view('admin/default/footer');       
     }
     
@@ -131,12 +135,14 @@ class BillingController extends CI_Controller {
         $data['script'] = array('customer-report');
         $data['customer'] = $this->Customer->getInfo($customer_id);
         $data['billing'] = $this->CustomerReading->selectByCustomerId($customer_id);
+        $data['account'] = $this->account;
         
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');
         $this->load->view('admin/default/side-bar');
         $this->load->view('admin/pages/billing/single-report');
         $this->load->view('admin/modals/billing/mark-as-paid');
+        $this->load->view('admin/modals/administrator/change-profile');
         $this->load->view('admin/default/footer');
     }
     

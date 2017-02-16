@@ -19,6 +19,7 @@ class ReportController extends CI_Controller {
         $this->load->view('admin/default/top-menu');
         $this->load->view('admin/default/side-bar');
         $this->load->view('admin/pages/report/index');
+        $this->load->view('admin/modals/administrator/change-profile');
         $this->load->view('admin/default/footer');
         
     }

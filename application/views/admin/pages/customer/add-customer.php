@@ -1,6 +1,8 @@
 
         <div class="col-sm-9 col-md-10 main">
             <h1 class="page-header"><span class="fa fa-pencil"></span> Add Customer </h1>
+            <?php echo $this->session->flashdata("success"); ?>
+            <?php echo $this->session->flashdata("error"); ?>
             <?php 
                 echo $this->session->flashdata('okay'); 
                 echo form_open(base_url().'index.php/admin/CustomerController/addExec'); ?>

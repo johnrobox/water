@@ -50,6 +50,8 @@
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                 <span class="success_text_content"></span>
           </div>
+            <?php echo $this->session->flashdata("success"); ?>
+            <?php echo $this->session->flashdata("error"); ?>
           
           <table class="table table-bordered table-hover" id="billing-datatable">
                 <thead>
