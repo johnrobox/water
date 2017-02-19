@@ -8,6 +8,26 @@ class Customer extends CI_Model {
 		$this->table = 'customers';
 	}
 
+	
+	public function addCustomer($customer) {
+		$this->db->insert('customers', $customer);
+        $check = $this->db->get_where('customers', array('customer_meter_no' => $customer['customer_meter_no']));
+        $row = $check->row();
+        date_default_timezone_set("Asia/Manila");
+        $log = array(
+            'customer_id' => $row->id,
+            'customer_status' => 1,
+            'customer_date_created' => date('Y-m-d h:i:s')
+        );
+        $balance = array(
+            'customer_id' => $row->id,
+            'balance_amount' => 0
+        );
+        $this->db->insert('customer_logs', $log);
+        $this->db->insert('balance', $balance);
+        return true;
+	}
+	
 	public function getInfo($customer_id) {
             $this->db->where('id', $customer_id);
             $query = $this->db->get($this->table);

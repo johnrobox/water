@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | environments.
   |
  */
-$base = 1;
+$base = 0;
 
 switch ($base) {
     case 0:

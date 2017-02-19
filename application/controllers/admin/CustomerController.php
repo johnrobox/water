@@ -85,7 +85,7 @@ class CustomerController extends CI_Controller {
                 'customer_contact' => $this->input->post('contact'),
                 'customer_birthdate' => $this->input->post('birthdate')
             );
-            $result = $this->CustomerModel->add($data);
+            $result = $this->Customer->addCustomer($data);
             if ($result) {
                 $this->session->set_flashdata('success', $this->alert->successAlert('Customer successfully added.'));
             } else {

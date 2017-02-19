@@ -57,7 +57,7 @@ class ReadingController extends CI_Controller {
             $reading_date = date('Y-m-d h:i:s');
             $data = array(
                 'customer_id' => $customer_id,
-                'customer_reading_amount' => $reading_amount,
+                'customer_reading_amount' => $reading_amount * 27,
                 'customer_reading_date' => $reading_date,
                 'customer_reading_month_cover' => $reading_cover,
                 'customer_readed_by' => $this->login_id
@@ -71,7 +71,7 @@ class ReadingController extends CI_Controller {
             } else {
                 $response = array(
                     'error' => false,
-                    'reading_amount' => $reading_amount,
+                    'reading_amount' => $reading_amount * 27,
                     'reading_date' => date('M d, Y', strtotime($reading_date)),
                     'reading_id' => $result['inserted_id']
                 );

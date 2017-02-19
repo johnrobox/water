@@ -109,7 +109,8 @@
                                                 'required' => '',
                                                 'class' => 'form-control',
                                                 'style' => 'height:25px',
-                                                'id' => 'input_reading'.$row->id
+                                                'id' => 'input_reading'.$row->id,
+												'placeholder' => 'Enter CU'
                                             ));
                                             
                                             ?>
