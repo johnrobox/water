@@ -16,7 +16,7 @@
                         $account_image = $account[0]->admin_image;
                     }
                     ?>
-                    <img src="<?php echo base_url().'img/admin/users/' . $account_image?>" style="height: 100px; width: 100px; border: 1px solid black" class="img-circle img-responsive changeProfile"/>
+                    <img src="<?php echo base_url().'img/admin/users/' . $account_image?>" style="height: 80px; width: 100px; border: 1px solid black" class="img-circle img-responsive changeProfile"/>
                 </div>
                 <div class="col-xs-4 text-center" style="padding: 35px 0px 0px 0px;">
                     <?php echo ucwords(strtolower($account[0]->admin_firstname. ' '. $account[0]->admin_lastname )); ?>
