@@ -26,6 +26,7 @@ class OverdueController extends CI_Controller {
         $this->load->view('admin/default/side-bar');
         $this->load->view('admin/pages/overdue/index');
         $this->load->view('admin/modals/administrator/change-profile');
+        $this->load->view('admin/modals/administrator/logout-confirmation');
         $this->load->view('admin/default/footer');
     }
     

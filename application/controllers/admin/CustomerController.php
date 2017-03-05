@@ -31,6 +31,7 @@ class CustomerController extends CI_Controller {
         $this->load->view('admin/default/side-bar');
         $this->load->view('admin/pages/customer/add-customer');
         $this->load->view('admin/modals/administrator/change-profile');
+        $this->load->view('admin/modals/administrator/logout-confirmation');
         $this->load->view('admin/default/footer');
     }
     
@@ -116,6 +117,7 @@ class CustomerController extends CI_Controller {
         $this->load->view('admin/modals/customer/customer-view-info');
         $this->load->view('admin/modals/customer/customer-update');
         $this->load->view('admin/modals/administrator/change-profile');
+        $this->load->view('admin/modals/administrator/logout-confirmation');
         $this->load->view('admin/default/footer');
         
     }

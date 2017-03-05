@@ -14,7 +14,8 @@ class AccountAuthentication {
              !$this->ses->session->has_userdata('AdminEmail') ||
              !$this->ses->session->has_userdata('AdminToken')
             ) {
-            redirect($this->base.'AuthController/logoutExec');
+            $this->forceLogout();
+            redirect(base_url().'admin');
         }  
     }
     
@@ -39,7 +40,6 @@ class AccountAuthentication {
         );
         $this->ses->session->unset_userdata($adminUser);
         $this->ses->session->sess_destroy();
-        redirect(base_url().'admin');
     }   
 }
 

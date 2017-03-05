@@ -31,6 +31,7 @@ class AccountController extends CI_Controller {
         $this->load->view('admin/pages/user/settings');
         $this->load->view('admin/modals/administrator/change-password');
         $this->load->view('admin/modals/administrator/change-profile');
+        $this->load->view('admin/modals/administrator/logout-confirmation');
         $this->load->view('admin/default/footer');
     }
     

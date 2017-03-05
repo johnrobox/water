@@ -39,6 +39,7 @@ class BillingController extends CI_Controller {
         $this->load->view('admin/modals/billing/mark-as-paid');
         $this->load->view('admin/modals/billing/mark-as-unpaid');
         $this->load->view('admin/modals/administrator/change-profile');
+        $this->load->view('admin/modals/administrator/logout-confirmation');
         $this->load->view('admin/default/footer');       
     }
     
@@ -143,6 +144,7 @@ class BillingController extends CI_Controller {
         $this->load->view('admin/pages/billing/single-report');
         $this->load->view('admin/modals/billing/mark-as-paid');
         $this->load->view('admin/modals/administrator/change-profile');
+        $this->load->view('admin/modals/administrator/logout-confirmation');
         $this->load->view('admin/default/footer');
     }
     
