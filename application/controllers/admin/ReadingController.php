@@ -38,6 +38,7 @@ class ReadingController extends CI_Controller {
         $this->load->view('admin/pages/reading/index');
         $this->load->view('admin/modals/reading/update-reading');
         $this->load->view('admin/modals/administrator/change-profile');
+        $this->load->view('admin/modals/administrator/logout-confirmation');
         $this->load->view('admin/default/footer');
     }
     

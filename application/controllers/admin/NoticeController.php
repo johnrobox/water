@@ -28,6 +28,7 @@ class NoticeController extends CI_Controller {
         $this->load->view('admin/modals/notice/delete-notice');
         $this->load->view('admin/modals/notice/update-notice');
         $this->load->view('admin/modals/administrator/change-profile');
+        $this->load->view('admin/modals/administrator/logout-confirmation');
         $this->load->view('admin/default/footer');
         
     }

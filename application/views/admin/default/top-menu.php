@@ -28,7 +28,7 @@
                             <a class="changeProfile"><i class="glyphicon glyphicon-user"></i> Change Profile</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url();?>index.php/admin/AuthController/logoutExec"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <a id="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

@@ -14,6 +14,7 @@
         <script src="<?php echo base_url();?>js/scripts.js"></script>
          <script src="<?php echo base_url();?>js/common-script.js"></script>   
          <script src="<?php echo base_url();?>js/change-profile.js"></script>
+         <script src="<?php echo base_url();?>js/admin-logout.js"></script>
         <?php 
         if (isset($script)) {
         	foreach ($script as $js) { ?>

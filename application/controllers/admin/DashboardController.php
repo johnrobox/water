@@ -17,6 +17,13 @@ class DashboardController extends CI_Controller {
     }
     
     public function index(){
+        $prefs['template'] = array(
+                'table_open'           => '<table class="calendar table table-bordered table-hover">', 
+                'cal_cell_start'       => '<td class="day">',
+                'cal_cell_start_today' => '<td class="today" style="color: blue; font-size : 15px">'
+        );
+
+        $this->load->library('calendar', $prefs);
         $data['page_number'] = 1;
         $data['page_title'] = 'Admin - homepage';
         $data['account'] = $this->account;
@@ -29,6 +36,7 @@ class DashboardController extends CI_Controller {
         $this->load->view('admin/default/side-bar');
         $this->load->view('admin/pages/homepage/index');
         $this->load->view('admin/modals/administrator/change-profile');
+        $this->load->view('admin/modals/administrator/logout-confirmation');
         $this->load->view('admin/default/footer');
     }
     

@@ -1,81 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>
-      <?php echo isset($pageTitle) ? $pageTitle : 'Water'; ?>
-  </title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo base_url();?>css/styles.css">
-  <script src="<?php echo base_url();?>js/jquery.min.js"></script>
-  <script src="<?php echo base_url();?>js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="<?php echo base_url();?>fonts/font-awesome-4.4.0/css/font-awesome.min.css">
-  
-</head>
-<body>
-    <div class="row" style="margin-top:100px;">
-        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-sm-offset-4 col-md-offset-4 col-lg-offset-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Admin
-                </div>
-                <?php echo form_open(base_url().'index.php/admin/AuthController/loginExec');?>
-                <div class="panel-body">
-                    <span class="text-red"><?php echo $this->session->flashdata('error');?></span>
-                    <div class="form-group">
-                        <span class="text-red"><?php echo form_error('email');?></span>
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                            <?php 
-                            $email_login = array(
-                                'type' => 'text',
-                                'name' => 'email',
-                                'class' => 'form-control',
-                                'placeholder' => 'Email',
-                                'aria-describedby' => 'basic-addon1'
-                            );
-                            echo form_input($email_login);
-                            ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <span class="text-red"><?php echo form_error('password'); ?></span>
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-lock"></i></span>
-                            <?php 
-                            $password_login = array(
-                                'type' => 'password',
-                                'name' => 'password',
-                                'class' => 'form-control',
-                                'placeholder' => 'Password',
-                                'aria-describedby' => 'basic-addon1'
-                            );
-                            echo form_input($password_login);
-                            ?>
-                        </div>
-                    </div>
-                    <?php
-                    $login_button = array(
-                        'type' => 'submit',
-                        'class' => 'btn btn-primary justify',
-                        'content' => 'Login'
-                    );
-                    echo form_button($login_button);
-                    
-                    $clear_button = array(
-                        'type' => 'reset',
-                        'class' => 'btn btn-default',
-                        'content' => 'Clear'
-                    );
-                    echo form_button($clear_button);
-                    ?>
-                </div>
-                <div class="panel-footer">
-                </div>
-                <?php echo form_close();?>
+
+<html>	
+    <head>
+        <title>
+            <?php echo isset($page_title) ? $page_title : 'Water'; ?>
+        </title>
+        <meta charset="utf-8">
+        <link href="<?php echo base_url(); ?>css/admin/admin-login.css" rel='stylesheet' type='text/css' />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <script src="<?php echo base_url();?>js/jquery.min.js"></script>
+        <script src="<?php echo base_url();?>js/common-script.js"></script> 
+        <script src="<?php echo base_url();?>js/admin-login.js"></script>
+        <!--webfonts-->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+        <!--//webfonts-->
+    </head>
+    <body>
+        <div class="login-form">
+            <div class="head">
+                <img src="<?php echo base_url(); ?>img/admin/login/login-header-logo1.png" alt="" style="width: 120px; height: 120px;"/>
             </div>
-        </div>
-    </div>
-</body>
+            <form id="loginForm" style="text-align: center">
+                <img src="<?php echo base_url();?>img/admin/loading/admin-loading4.gif" id="loginLoading" style="width: 100px; height: 100px;display: block; margin-top: -70px !important; margin: 0 auto;"/>
+                <small style="color: red; display: block; margin-left: auto; margin-right: auto;" id="emailError"></small>
+                <li>
+                    
+                    <?php
+                    $username_field = array(
+                        'type' => 'text',
+                        'class' => 'text',
+                        'onfocus' => "this.value = '';",
+                        'onblur' => "if (this.value == '') {this.value = 'EMAIL';}",
+                        'name' => 'email'
+                    );
+                    echo form_input($username_field);
+                    ?>
+                    <a href="#" class=" icon user"></a>
+                </li>
+                <span style="color: red" id="passwordError"></span>
+                <li>
+                    <?php 
+                    $password_field = array(
+                        'type' => 'password',
+                        'onfocus' => "this.value = '';",
+                        'onblur' => "if (this.value == '') {this.value = 'Password';}",
+                        'name' => 'password'
+                    );
+                    echo form_input($password_field);
+                    ?>
+                    <a href="#" class=" icon lock"></a>
+                </li>
+                <div class="p-container">
+                    <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Remember Me</label>
+                    <?php echo form_button(array('type' => 'button', 'id' => 'loginSubmit', 'content' => 'SIGN IN')); ?>
+                    <div class="clear"> </div>
+                </div>
+            </form>
+        </div>		
+    </body>
 </html>

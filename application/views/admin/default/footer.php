@@ -1,6 +1,6 @@
 
 <footer>
-  <p class="pull-right">©2014 Company</p>
+  <p class="pull-right">©2017 CAPAI</p>
 </footer>
 	<!-- script references -->
 		<script src="<?php echo base_url();?>js/bootstrap.min.js"></script>

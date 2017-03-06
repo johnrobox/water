@@ -14,7 +14,8 @@ class AuthController extends CI_Controller {
 
     public function index() {
         $this->auth->checkAuth();
-        $this->load->view('admin/default/login');
+        $data['page_title'] = 'Administrator Login Panel';
+        $this->load->view('admin/default/login', $data);
     }
     
     public function loginExec(){
@@ -32,7 +33,11 @@ class AuthController extends CI_Controller {
         );
         $this->form_validation->set_rules($validate);
         if ($this->form_validation->run() == false){
-            $this->index();
+            $response = array(
+                'error' => true,
+                'type' => 'required',
+                'message' => $this->form_validation->error_array()
+            );
         } else {
             $loginData = array(
                 'admin_email' => $this->input->post('email'),
@@ -40,9 +45,11 @@ class AuthController extends CI_Controller {
             );
             $login = $this->Administrator->login($loginData);
             if ($login['valid'] == false) {
-                $this->session->set_flashdata('error', $this->alert->dangerAlert('Invalid Email / Password'));
-                redirect(base_url().'admin');
-                exit();
+                $response = array(
+                    'error' => true,
+                    'type' => 'common',
+                    'message' => 'Invalid Email / Password'
+                );
             } else {
                 $row = $login['data'];
                 $id = $row->id;
@@ -61,20 +68,35 @@ class AuthController extends CI_Controller {
                         'AdminEmail' => $row->admin_email,
                         'AdminToken' => $login_token
                     );
+                    $response = array(
+                        'error' => false
+                    );
                     $this->session->set_userdata($session);
-                    redirect(base_url().'index.php/admin/DashboardController/index');
-                    exit();
                 } else {
-                    $this->session->set_flashdata('error', $this->alert->dangerAlert('Cannot login your account.'));
-                    redirect(base_url().'admin');
-                    exit();
+                    $response = array(
+                        'error' => true,
+                        'type' => 'common',
+                        'message' => 'Cannot login your account'
+                    );
                 }
             }
         }
+        echo json_encode($response);
     }
     
     public function logoutExec() {
-        $this->auth->forceLogout();
+        if ($this->input->post("type")) {
+           $type = $this->input->post("type");
+           if ($type == "logout") {
+               $this->auth->forceLogout();
+               $response = array("logout" => true);
+           } else {
+               $response = array("logout" => false);
+           }
+        } else {
+            $response = array("logout" => false);
+        }
+        echo json_encode($response);
     }
     
 }
