@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | environments.
   |
  */
-$base = 0;
+$base = 4;
 
 switch ($base) {
     case 0:
@@ -29,6 +29,9 @@ switch ($base) {
         break;
     case 3:
         $url = 'https://water.com';
+        break;
+    case 4:
+        $url = 'http://localhost:8888/water/';
         break;
     default :
         $url = 'https://steve-water.com';

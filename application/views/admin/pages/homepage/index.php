@@ -1,11 +1,10 @@
 
-      
-
 <script>
 $(document).ready(function(){
-    
+    var number = 1;
     setInterval(function(){ 
-        $("#displayTime").load();
+        var time = new Date();
+        $("#displayTime").text(time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds());
     }, 1000);
 });
 </script>
@@ -15,9 +14,13 @@ $(document).ready(function(){
             <p class="visible-xs">
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
             </p>
+            
+            <div class="pull-right" style="font-size: 30px;">
+                <div id="displayTime"></div>
+            </div>
+            
             <h1 class="page-header"> Dashboard </h1>
             
-            <div id="displayTime"><?php echo date("H:i:s"); ?></div>
             <?php echo $this->session->flashdata("success"); ?>
             <?php echo $this->session->flashdata("error"); ?>
             
@@ -76,8 +79,6 @@ $(document).ready(function(){
                     <?php echo $this->calendar->generate();?>
                 </div>
             </div>
-            
-            
             
         </div><!--/row-->
     </div>

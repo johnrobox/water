@@ -5,7 +5,7 @@
  */
 
 // Defined javascript base url
-    var url = 1;
+    var url = 4;
     var base_url = '';
     var base_segment = '/water/index.php/admin/';
     switch (url) {
@@ -18,6 +18,10 @@
         case 3 :
             // subject to change, it depends on registered ip address
             base_url = 'http://192.168.0.3' + base_segment;
+            break;
+        case 4 :
+            base_url = 'http://localhost:8888' + base_segment;
+            break;
         default:
             base_url = 'http://localhost' + base_segment;
             

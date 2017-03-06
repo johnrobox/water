@@ -3,6 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 Change Profile Picture
+                <img id="changeProfileImageLoading" style="height: 30px; width:30px;" src="<?php echo base_url().'img/admin/loading/loading6.gif';?>" class="center-block">
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -21,6 +22,7 @@
                     <?php
                     echo form_open('', array('id' => 'fileinfo', 'name' => 'fileinfo', 'onsubmit' => 'return submitForm()'));
                     ?>
+                    
                     <div class="col-xs-6">
                         <?php 
                         $for_profile = array(

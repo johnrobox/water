@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.11
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 16, 2017 at 11:11 AM
--- Server version: 5.6.24
--- PHP Version: 5.5.24
+-- Host: localhost:8889
+-- Generation Time: Mar 06, 2017 at 11:07 AM
+-- Server version: 5.6.35
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `water`
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
+CREATE TABLE `admin` (
   `id` bigint(20) NOT NULL,
   `admin_firstname` varchar(100) DEFAULT NULL,
   `admin_lastname` varchar(100) DEFAULT NULL,
@@ -35,14 +35,14 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `admin_gender` tinyint(3) DEFAULT NULL COMMENT '1-male 2-female',
   `admin_birthdate` date DEFAULT NULL,
   `admin_image` varchar(250) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `admin_firstname`, `admin_lastname`, `admin_email`, `admin_password`, `admin_gender`, `admin_birthdate`, `admin_image`) VALUES
-(1, 'john robert', 'jerodiaz', 'johnrobertjerodiaz@gmail.com', '9df7a7314e3884b26222e2ccd834aa24', 1, '2015-10-14', 'davao.jpg'),
+(1, 'john robert', 'jerodiaz', 'johnrobertjerodiaz@gmail.com', '9df7a7314e3884b26222e2ccd834aa24', 1, '2015-10-14', 'avatar1.jpg'),
 (4, 'Grazelle', 'Villaso', 'grazellevillaso@gmail.com', '9df7a7314e3884b26222e2ccd834aa24', 2, '2017-01-26', ''),
 (5, 'John Ro', 'Jerodiaz', 'johnrojerodiaz@gmail.com', '9df7a7314e3884b26222e2ccd834aa24', 1, '2017-01-12', '');
 
@@ -52,7 +52,7 @@ INSERT INTO `admin` (`id`, `admin_firstname`, `admin_lastname`, `admin_email`, `
 -- Table structure for table `admin_logs`
 --
 
-CREATE TABLE IF NOT EXISTS `admin_logs` (
+CREATE TABLE `admin_logs` (
   `id` bigint(20) NOT NULL,
   `admin_id` bigint(20) NOT NULL,
   `admin_role` tinyint(7) DEFAULT NULL,
@@ -62,14 +62,14 @@ CREATE TABLE IF NOT EXISTS `admin_logs` (
   `admin_last_logout` datetime DEFAULT NULL,
   `admin_date_created` datetime DEFAULT NULL,
   `admin_date_modified` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin_logs`
 --
 
 INSERT INTO `admin_logs` (`id`, `admin_id`, `admin_role`, `admin_status`, `admin_token`, `admin_last_login`, `admin_last_logout`, `admin_date_created`, `admin_date_modified`) VALUES
-(1, 1, 1, 1, 'P9na0gURFPVhahvDlCfGyhfBCg58T2SvdxcpWha4UblesLQ4qW', '2017-02-16 01:34:33', NULL, '2015-10-17 01:33:07', '2017-01-25 04:32:02'),
+(1, 1, 1, 1, 'vwWa1gryVFmceGHj0kb8sMacMi0RY0KtwHExY55TLr508Nj87u', '2017-03-06 02:50:07', NULL, '2015-10-17 01:33:07', '2017-01-25 04:32:02'),
 (4, 4, 1, 1, '', NULL, NULL, '2017-01-23 10:03:29', '2017-01-23 10:03:29'),
 (5, 5, 1, 1, '', NULL, NULL, '2017-01-26 03:03:14', '2017-01-26 03:03:14');
 
@@ -79,12 +79,12 @@ INSERT INTO `admin_logs` (`id`, `admin_id`, `admin_role`, `admin_status`, `admin
 -- Table structure for table `balance`
 --
 
-CREATE TABLE IF NOT EXISTS `balance` (
+CREATE TABLE `balance` (
   `id` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `balance_amount` double DEFAULT NULL,
   `balance_responsibility` tinyint(3) DEFAULT NULL COMMENT '1-company 2-customer'
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `balance`
@@ -108,7 +108,7 @@ INSERT INTO `balance` (`id`, `customer_id`, `balance_amount`, `balance_responsib
 -- Table structure for table `customers`
 --
 
-CREATE TABLE IF NOT EXISTS `customers` (
+CREATE TABLE `customers` (
   `id` bigint(20) NOT NULL,
   `customer_firstname` varchar(100) DEFAULT NULL,
   `customer_middlename` varchar(200) NOT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `customer_address` varchar(100) DEFAULT NULL,
   `customer_contact` varchar(50) NOT NULL,
   `customer_birthdate` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customers`
@@ -141,7 +141,7 @@ INSERT INTO `customers` (`id`, `customer_firstname`, `customer_middlename`, `cus
 -- Table structure for table `customer_logs`
 --
 
-CREATE TABLE IF NOT EXISTS `customer_logs` (
+CREATE TABLE `customer_logs` (
   `id` bigint(20) NOT NULL,
   `customer_id` int(3) DEFAULT NULL,
   `customer_last_login` datetime DEFAULT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `customer_logs` (
   `customer_status` tinyint(3) DEFAULT NULL COMMENT '0-active 1-inactive',
   `customer_date_created` datetime DEFAULT NULL,
   `customer_date_modified` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer_logs`
@@ -174,7 +174,7 @@ INSERT INTO `customer_logs` (`id`, `customer_id`, `customer_last_login`, `custom
 -- Table structure for table `customer_readings`
 --
 
-CREATE TABLE IF NOT EXISTS `customer_readings` (
+CREATE TABLE `customer_readings` (
   `id` bigint(100) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `customer_reading_amount` double(65,2) NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `customer_readings` (
   `customer_billing_date` datetime NOT NULL,
   `customer_readed_by` int(11) NOT NULL,
   `customer_updated_by` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer_readings`
@@ -221,12 +221,12 @@ INSERT INTO `customer_readings` (`id`, `customer_id`, `customer_reading_amount`,
 -- Table structure for table `customer_requests`
 --
 
-CREATE TABLE IF NOT EXISTS `customer_requests` (
+CREATE TABLE `customer_requests` (
   `id` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `request` longtext,
   `date_send` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -234,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `customer_requests` (
 -- Table structure for table `notices`
 --
 
-CREATE TABLE IF NOT EXISTS `notices` (
+CREATE TABLE `notices` (
   `id` int(11) NOT NULL,
   `note` longtext CHARACTER SET latin1,
   `created_by` int(50) NOT NULL,
@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `notices` (
   `date_created` datetime NOT NULL,
   `date_modified` datetime NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `notices`
@@ -255,6 +255,27 @@ INSERT INTO `notices` (`id`, `note`, `created_by`, `modified_by`, `date_created`
 (16, 'sdfsdfs', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
 (19, 'sdfsdfsdf', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
 (20, 'sdfsdfsdfsdf', 1, 0, '2017-02-15 10:40:30', '0000-00-00 00:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `system_settings`
+--
+
+CREATE TABLE `system_settings` (
+  `id` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `value` double(65,2) NOT NULL,
+  `date_modified` datetime NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `system_settings`
+--
+
+INSERT INTO `system_settings` (`id`, `type`, `value`, `date_modified`, `status`) VALUES
+(1, 1, 134.60, '0000-00-00 00:00:00', 1);
 
 --
 -- Indexes for dumped tables
@@ -309,6 +330,12 @@ ALTER TABLE `notices`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `system_settings`
+--
+ALTER TABLE `system_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -316,42 +343,47 @@ ALTER TABLE `notices`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `admin_logs`
 --
 ALTER TABLE `admin_logs`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `balance`
 --
 ALTER TABLE `balance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `customer_logs`
 --
 ALTER TABLE `customer_logs`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `customer_readings`
 --
 ALTER TABLE `customer_readings`
-  MODIFY `id` bigint(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=99;
+  MODIFY `id` bigint(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 --
 -- AUTO_INCREMENT for table `customer_requests`
 --
 ALTER TABLE `customer_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `notices`
 --
 ALTER TABLE `notices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `system_settings`
+--
+ALTER TABLE `system_settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,8 +1,16 @@
 
 $(document).ready(function() {
+    
+    var change_profile_loading_image = $("#changeProfileImageLoading");
+    
+    change_profile_loading_image.hide();
+    
     $('.changeProfile').click(function() {
         $('#changeProfileModal').modal('show');
-        $('#update').click(function(){
+    }); 
+    
+    $('#update').click(function(){
+            change_profile_loading_image.show();
             var res_field = document.getElementById("profile_image").value;
             var extension = res_field.substr(res_field.lastIndexOf('.') + 1).toLowerCase();
             var allowedExtensions = ['jpg', 'jpeg', 'png'];
@@ -32,10 +40,10 @@ $(document).ready(function() {
                     return false;
                 }
             }
-
-        })
-    });
-});
+            change_profile_loading_image.hide()
+        }); // end of 
+    
+}); // end of document ready function
 
 var loadFile = function(event) {
     var reader = new FileReader();

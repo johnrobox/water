@@ -73,7 +73,7 @@ $(document).ready(function(){
     
     var loading_image = $('#loading_image_update_customer');
     var reading_id = 0;
-    var customer_id = 0
+    var customer_id = 0;
     
     success_display_text.hide();
 
@@ -116,7 +116,6 @@ $(document).ready(function(){
                     update_button_ID.setAttribute('amount', amount);
                 }
                 loading_image.hide();
-                console.log(data);
             },
             error: function(error){
                 console.log(error);
