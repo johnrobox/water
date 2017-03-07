@@ -9,10 +9,12 @@ class ReadingController extends CI_Controller {
         $this->load->model('Customer');
         $this->load->model('CustomerReading');
         $this->load->model("Administrator");
+        $this->load->model("SystemSetting");
         $this->load->library('alert');
         $this->auth->checkLogin();
         $this->login_id = $this->session->userdata('AdminId');
         $this->account = $this->Administrator->getById($this->login_id);
+        
     }
     
     public function index() {
@@ -52,17 +54,27 @@ class ReadingController extends CI_Controller {
                 'message' => 'Field is required!'
             );
         } else {
-            $reading_amount = $reading_amount;
             $reading_cover = $this->session->userdata('setReadingMonthValue').'-'.$this->session->userdata('setReadingYear');
             date_default_timezone_set("Asia/Manila");
             $reading_date = date('Y-m-d h:i:s');
+            
+            $per_cubic = $this->SystemSetting->getPerCubic();
+            $minimum = $this->SystemSetting->getMinimumAmount();
+            
+            $reading_in_peso = $reading_amount * $per_cubic;
+            $final_amount_to_pay =  ($reading_in_peso < $minimum) ? $minimum : $reading_in_peso;
+            
             $data = array(
                 'customer_id' => $customer_id,
-                'customer_reading_amount' => $reading_amount * 27,
+                'customer_reading_amount' => $final_amount_to_pay,
+                'customer_reading_cubic' => $reading_amount,
+                'customer_reading_per_cubic' => $per_cubic,
+                'customer_reading_minimum'=> $minimum,
                 'customer_reading_date' => $reading_date,
                 'customer_reading_month_cover' => $reading_cover,
                 'customer_readed_by' => $this->login_id
             );
+            
             $result =  $this->CustomerReading->insertData($data);
             if ($result['inserted'] == false) {
                 $response = array(
@@ -72,9 +84,10 @@ class ReadingController extends CI_Controller {
             } else {
                 $response = array(
                     'error' => false,
-                    'reading_amount' => $reading_amount * 27,
+                    'reading_amount' => $final_amount_to_pay,
                     'reading_date' => date('M d, Y', strtotime($reading_date)),
-                    'reading_id' => $result['inserted_id']
+                    'reading_id' => $result['inserted_id'],
+                    'per_cubic' => $per_cubic
                 );
             }
         }
@@ -83,7 +96,7 @@ class ReadingController extends CI_Controller {
     
     public function refreshData() {
         $id = $this->input->post('id');
-        $fields = 'customer_reading_amount';
+        $fields = 'customer_reading_amount, customer_reading_cubic, customer_reading_per_cubic, customer_reading_minimum';
         $response = $this->CustomerReading->selectData($id, $fields);
         if ($response['select'] == false) {
             $result = array(
@@ -92,14 +105,16 @@ class ReadingController extends CI_Controller {
         } else {
             $result = array(
                 'error' => false,
-                'amount' => $response['data']
+                'data' => $response['data']
             );
         }
         echo json_encode($result);
     }
     
     public function editReading() {
-        $this->form_validation->set_rules('amount', 'Amount', 'required');
+        $this->form_validation->set_rules('cubic_used', 'Cubic Used', 'required');
+        $this->form_validation->set_rules('minimum_amount', 'Minimum Amount', 'required');
+        $this->form_validation->set_rules('per_cubic', 'Per Cubic', 'required');
         if ($this->form_validation->run() == false) {
             $response = array(
                 'error' => true,
@@ -107,10 +122,18 @@ class ReadingController extends CI_Controller {
                 'common' => true
             );
         } else {
-            $amount = $this->input->post('amount');
+            
             $id = $this->input->post('id');
+            $cubic_used = $this->input->post('cubic_used');
+            $minimum_amount = $this->input->post('minimum_amount');
+            $per_cubic = $this->input->post('per_cubic');
+            $amount = $cubic_used * $per_cubic;
+            $final_amount = ($amount < $minimum_amount) ? $minimum_amount : $amount;
+            
             $data = array(
-                'customer_reading_amount' => $amount,
+                'customer_reading_amount' => $final_amount,
+                'customer_reading_cubic' => $cubic_used,
+                'customer_reading_per_cubic' => $per_cubic,
                 'customer_updated_by' => 0);
             $update = $this->CustomerReading->updateById($id, $data);
             if ($update == false) {
@@ -122,8 +145,11 @@ class ReadingController extends CI_Controller {
             } else {
                 $response = array(
                     'error' => false, 
-                    'reading_amount' => number_format($amount, 2)
-                    );
+                    'customer_reading_amount' => number_format($final_amount, 2),
+                    'customer_reading_cubic' => number_format($cubic_used, 2),
+                    'customer_reading_minimum' => number_format($minimum_amount, 2),
+                    'customer_reading_per_cubic' => number_format($per_cubic, 2)
+                );
             }
         }
         echo json_encode($response);

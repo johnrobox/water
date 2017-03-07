@@ -60,6 +60,8 @@
                         <tr style="background-color: #eee">
                             <th>Name</th>
                             <th>Meter No.</th>
+                            <th>CU</th>
+                            <th>Per Cubic</th>
                             <th>Reading Amount</th>
                             <th>Reading Date</th>
                             <th>Status</th>
@@ -79,7 +81,12 @@
                                 if ($query->num_rows() > 0) { 
                                 $amount = $query->row(); 
                             ?>
-                            
+                            <td id="reading_cubic_row<?php echo $row->id;?>" class="text-center">
+                                <?php echo number_format($amount->customer_reading_cubic, 2); ?>
+                            </td>
+                            <td id="reading_per_cubic_row<?php echo $row->id;?>" class="text-center">
+                                <?php echo number_format($amount->customer_reading_per_cubic, 2); ?>
+                            </td>
                             <td id="amount_row<?php echo $row->id;?>" style="color:orange; text-align: center">
                                 <?php echo number_format($amount->customer_reading_amount, 2); ?>
                             </td>
@@ -93,6 +100,8 @@
                                 <button class="btn btn-success btn-xs update_reading_amount_button" id="update_button_ID<?php echo $row->id;?>" reading_id="<?php echo $amount->id; ?>" customer_id="<?php echo $row->id; ?>" amount="<?php echo $amount->customer_reading_amount; ?>">Update</button>
                             </td>
                             <?php } else { ?>
+                            <td id="reading_cubic_row<?php echo $row->id;?>"></td>
+                            <td id="reading_per_cubic_row<?php echo $row->id;?>"></td>
                             <td id="amount_row<?php echo $row->id;?>" style="color:orange; text-align: center"></td>
                             <td id="date_row<?php echo $row->id;?>"></td>
                             <td id="status_row<?php echo $row->id;?>"></td>
@@ -110,7 +119,7 @@
                                                 'class' => 'form-control',
                                                 'style' => 'height:25px',
                                                 'id' => 'input_reading'.$row->id,
-												'placeholder' => 'Enter CU'
+					        'placeholder' => 'Enter CU'
                                             ));
                                             
                                             ?>

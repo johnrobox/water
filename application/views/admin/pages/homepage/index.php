@@ -26,6 +26,8 @@ $(document).ready(function(){
             
             <div class="row">
                 <div class="col-sm-9">
+                    
+                    <!-- Overdue starts here -->
                     <?php if (isset($overdue)) { ?>
                     <div class="panel panel-warning">
                         <div class="panel-heading">
@@ -69,11 +71,11 @@ $(document).ready(function(){
                                 <?php } ?>
                             </table>
                         </div>
-                        <div class="panel-footer">
-
-                        </div>
                     </div>
                     <?php } ?>
+                    <!-- Overdue ends here -->
+                    
+                    
                 </div>
                 <div class="col-sm-3 pull-right">
                     <?php echo $this->calendar->generate();?>

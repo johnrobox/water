@@ -1,7 +1,5 @@
 <?php
 
-
-
 class SystemSettingsController extends CI_Controller {
     
     public function __construct() {
@@ -18,19 +16,29 @@ class SystemSettingsController extends CI_Controller {
         $data['page_title'] = 'Admin - System Settings';
         $data['script'] = array('system-setting');
         $data['account'] = $this->account;
-        $data['system_settings'] = $this->SystemSetting->getPerCubic();
+        $data['cubic_settings'] = $this->SystemSetting->getPerCubic();
+        $data['minimum_settings'] = $this->SystemSetting->getMinimumAmount();
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');
         $this->load->view('admin/default/side-bar');
         $this->load->view('admin/pages/system_settings/index');
         $this->load->view('admin/modals/system_setting/edit-cubic');
+        $this->load->view('admin/modals/system_setting/edit-minimum');
         $this->load->view('admin/default/footer');
     }
     
-    public function editCubic() {
-        $cubic = $this->input->post('cubic');
-        $result = $this->SystemSetting->udpateSetting($cubic, 1);
-        $response = ($result) ? true : false;
+    public function updateSetting() {
+        $id = $this->input->post("id");
+        if (!isset($id)) {
+            $response = array(
+                'error' => true,
+                'message' => "Invalid request"
+            );
+        } else {
+            $value = $this->input->post('value');
+            $result = $this->SystemSetting->udpateSetting($value, $id);
+            $response = ($result) ? array('error' => false) : array("error" => true, "message" => "Cannot complete process! Nothing change...");
+        }
         echo json_encode($response);
     }
     

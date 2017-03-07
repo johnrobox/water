@@ -8,26 +8,51 @@
                 <?php echo $this->session->flashdata("success"); ?>
                 <?php echo $this->session->flashdata("error"); ?>
               
+                <!-- PER CUBIC PANEL -->
                 <div class="panel panel-default">
-                    <div class="panel-heading"> Per Cubic </div>
+                    <div class="panel-heading"> PER CUBIC </div>
                     <div class="panel-body">
                         <?php
                         $edit_per_cubic_button = array(
                             'id' => 'editPerCubic',
                             'class' => 'btn btn-primary pull-right',
                             'content' => 'EDIT',
-                            'value' => $system_settings->value
+                            'value' => $cubic_settings
                         );
                         echo form_button($edit_per_cubic_button);
                         ?>
                         <div id="cubicValueContainer">
-                            <?php echo $system_settings->value; ?>
+                            <?php echo $cubic_settings; ?>
                         </div>
                     </div>
                     <div class="panel-footer">
                         
                     </div>
                 </div>
+                <!-- END PER CUBIC PANEL -->
+                
+                <!-- MINIMUM AMOUNT PANEL-->
+                <div class="panel panel-default">
+                    <div class="panel-heading"> MINIMUM AMOUNT </div>
+                    <div class="panel-body">
+                        <?php
+                        $edit_minimum_amount_button = array(
+                            'id' => 'editMinimumAmountButton',
+                            'class' => 'btn btn-primary pull-right',
+                            'content' => 'EDIT',
+                            'value' => $minimum_settings
+                        );
+                        echo form_button($edit_minimum_amount_button);
+                        ?>
+                        <div id="minimumAmountContainer">
+                            <?php echo $minimum_settings; ?>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        
+                    </div>
+                </div>
+                <!-- END MINIMUM AMOUNT PANEL -->
                 
             </div>
         </div><!--/row-->
