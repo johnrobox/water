@@ -24,6 +24,7 @@ class SystemSettingsController extends CI_Controller {
         $this->load->view('admin/pages/system_settings/index');
         $this->load->view('admin/modals/system_setting/edit-cubic');
         $this->load->view('admin/modals/system_setting/edit-minimum');
+        $this->load->view('admin/modals/administrator/logout-confirmation');
         $this->load->view('admin/default/footer');
     }
     

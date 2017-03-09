@@ -2,7 +2,7 @@
           <p class="visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
           </p>
-          <h1 class="page-header">Administrator Users </h1>
+          <h1 class="page-header"> <i class="glyphicon glyphicon-th-list"></i> Administrator Users </h1>
           <?php echo $this->session->flashdata('error'); ?>
           <?php echo $this->session->flashdata('success'); ?>
           <table class="table table-hover table-bordered" id="admin-user-datatable">

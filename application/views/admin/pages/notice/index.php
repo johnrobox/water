@@ -6,7 +6,7 @@
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
             </p>
             <h1 class="page-header">
-                Notice to Customer
+                <i class="glyphicon glyphicon-paperclip"></i> Notice to Customer
             </h1>
             <?php
             $add_button = array(

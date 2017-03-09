@@ -21,9 +21,11 @@
         <div class="container">
             <button onclick="printReport()" class="btn btn-primary btn-xs pull-right">Print Report</button>
             <table class="table table-bordered">
+                <tr>
+                    <td>ACT NAME : <?php echo $customer->customer_firstname." ".$customer->customer_lastname; ?></td>
+                </tr>
                 <tr style="background: #ccc">
                     <td><b class="pull-left">Name : </b> <?php echo $customer->customer_firstname.' '.$customer->customer_lastname;?></td>
-
                 </tr>
                 <tr style="background: #ccc">
                     <td><b class="pull-left">Meter No : </b> <?php echo $customer->customer_meter_no;?></td>
@@ -32,11 +34,14 @@
                     <td><b class="pull-left">Contact No : </b> <?php echo $customer->customer_contact;?></td>
                 </tr>
                 <tr style="background: #ccc">
-                    <td><b class="pull-left">Meter No : </b> <?php echo $customer->customer_address;?></td>
+                    <td><b class="pull-left">Address : </b> <?php echo $customer->customer_address;?></td>
                 </tr>
                 <tr style="background: black"><td></td></tr>
                 <tr style="background: #ccc">
                     <th style="color: green">Reading Month Covered</th>
+                    <th style="color: green">Cubic Used</th>
+                    <th style="color: green">Per Cubic</th>
+                    <th style="color: green">Minimum Amount</th>
                     <th style="color: green">Reading Amount</th>
                     <th style="color: green">Reading Date</th>
                     <th style="color: green">Status</th>
@@ -55,6 +60,15 @@
                                 $monthName = date('F', mktime(0, 0, 0, $cover[0], 10));
                                 echo $cover[1] . ', ' . $monthName;
                                 ?>
+                            </td>
+                            <td>
+                                <?php echo $row->customer_reading_cubic; ?>
+                            </td>
+                            <td>
+                                <?php echo $row->customer_reading_per_cubic; ?>
+                            </td>
+                            <td>
+                                <?php echo $row->customer_reading_minimum; ?>
                             </td>
                             <td>
                                 <b><?php echo $row->customer_reading_amount;?></b>

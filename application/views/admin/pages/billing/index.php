@@ -1,13 +1,12 @@
 
         
-        <div class="col-sm-9 col-md-10 main">
-          
+        <div class="col-sm-9 col-md-10 main">   
           <!--toggle sidebar button-->
           <p class="visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
           </p>
           <h1 class="page-header">
-                Billing Information
+                <i class="glyphicon glyphicon-shopping-cart"></i> Billing Information
           </h1>
           
           <div class="breadcrumb" style="border: 1px solid #428bca">
@@ -39,7 +38,14 @@
                             </select>
                         </td>
                         <td>
-                            <button class="btn btn-primary" type="submit">View all</button>
+                            <?php
+                            $view_all_button = array(
+                                'class' => 'btn btn-primary',
+                                'type' => 'submit',
+                                'content' => 'View All'
+                            );
+                            echo form_button($view_all_button);
+                            ?>
                         </td>
                     </tr>
                 </table>
@@ -58,6 +64,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Meter No.</th>
+                        <th>CU</th>
                         <th>Reading Amount</th>
                         <th>Status</th>
                         <th>Date Paid</th>
@@ -71,19 +78,26 @@
                 <tr>
                     <td><?php echo ucwords(strtolower($row->customer_firstname.' '.$row->customer_middlename.' '.$row->customer_lastname));?></td>
                     <td><?php echo $row->customer_meter_no;?></td>
-                    <td class="text-center">
-                        <?php 
-                        $this->db->where('customer_id', $row->id); 
-                        $this->db->where('customer_reading_month_cover', $this->session->userdata('setBillingMonthValue').'-'.$this->session->userdata('setBillingYear')); 
-                        $query = $this->db->get('customer_readings');
-                        if ($query->num_rows() > 0) { 
-                           $reading_row = $query->row(); 
-                           $readingAmount = $reading_row->customer_reading_amount;
-                           echo number_format($readingAmount, 2); 
-                        } else { 
-                           echo '<small><i style="color: red">No Reading</i></small>';
-                        } ?>
-                    </td>
+                    
+                    <?php 
+                    $this->db->where('customer_id', $row->id); 
+                    $this->db->where('customer_reading_month_cover', $this->session->userdata('setBillingMonthValue').'-'.$this->session->userdata('setBillingYear')); 
+                    $query = $this->db->get('customer_readings');
+                    ?>
+                    
+                    <!--- CU and reading amount TR start -->
+                    <?php 
+                    if ($query->num_rows() > 0) { 
+                       $reading_row = $query->row(); 
+                       $readingAmount = $reading_row->customer_reading_amount;
+                    ?>
+                    <td><?php echo number_format($reading_row->customer_reading_cubic, 2); ?></td>
+                    <td class="text-center"><?php echo number_format($readingAmount, 2); ?></td>
+                    <?php } else {  ?>
+                    <td></td>       
+                    <td><small><i style="color: red">No Reading</i></small></td>
+                    <?php } ?>
+                    <!--- CU and reading amount TR end -->
                     
                     <!-- this is for status TD -->
                      <?php 
@@ -95,8 +109,6 @@
                         <td></td>
                     <?php } ?>
                         
-                        
-                    
                     <?php
                     // this is for date TD 
                     if ($query->num_rows() > 0){

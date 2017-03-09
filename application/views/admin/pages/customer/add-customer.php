@@ -1,6 +1,6 @@
 
         <div class="col-sm-9 col-md-10 main">
-            <h1 class="page-header"><span class="fa fa-pencil"></span> Add Customer </h1>
+            <h1 class="page-header"><i class="glyphicon glyphicon-plus"></i> Add Customer </h1>
             <?php echo $this->session->flashdata("success"); ?>
             <?php echo $this->session->flashdata("error"); ?>
             <?php 

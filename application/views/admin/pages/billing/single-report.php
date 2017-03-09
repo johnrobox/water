@@ -1,6 +1,6 @@
         <div class="col-sm-9 col-md-10 main">
             <div class="breadcrumb">
-                <h2>(<?php echo $customer->customer_meter_no; ?>)</h2>
+                <h3>ACT NAME : <?php echo $customer->customer_firstname." ".$customer->customer_lastname; ?></h3>
             </div>
             
             <style>
@@ -15,6 +15,8 @@
                     <br>
                     <b>Meter No : </b><?php echo $customer->customer_meter_no; ?>
                     <br>
+                    <b>Contact No : </b><?php echo $customer->customer_contact;?>
+                    <br>
                     <b>Address : </b> <?php echo $customer->customer_address; ?>
                 </div>
                 <div class="panel-body">
@@ -23,6 +25,9 @@
                         <thead>
                             <tr>
                                 <th>Reading Month Covered</th>
+                                <th>CU</th>
+                                <th>Per Cubic</th>
+                                <th>Minimum</th>
                                 <th>Reading Amount</th>
                                 <th>Reading Date</th>
                                 <th>Status</th>
@@ -46,6 +51,9 @@
                                 echo $cover[1] . ', ' . $monthName;
                                 ?>
                             </td>
+                            <td><?php echo $row->customer_reading_cubic; ?></td>
+                            <td><?php echo $row->customer_reading_per_cubic; ?></td>
+                            <td><?php echo $row->customer_reading_minimum; ?></td>
                             <td style="background: #eee">
                                 <b><?php echo $row->customer_reading_amount;?></b>
                             </td>

@@ -5,7 +5,9 @@ class Administrator extends CI_Model {
     
     public function __construct() {
         parent::__construct();
-        $this->table = 'admin';
+        $this->table = "admin";
+        $this->table_join = "admin_logs";
+        $this->id = "id";
     }
     
     public function login($data) {
@@ -26,23 +28,23 @@ class Administrator extends CI_Model {
         
         $query = $this->db->query(
                 'SELECT '
-                . $this->table.'.`id`, '
+                . $this->table.'.'.$this->id.', '
                 . $this->table.'.`admin_firstname`, '
                 . $this->table.'.`admin_lastname`, '
                 . $this->table.'.`admin_email`, '
                 . $this->table.'.`admin_gender`, '
                 . $this->table.'.`admin_birthdate`, '
                 . $this->table.'.`admin_image`, '
-                . '`admin_logs`.`admin_role`, '
-                . '`admin_logs`.`admin_status`, '
-                . '`admin_logs`.`admin_last_login`, '
-                . '`admin_logs`.`admin_last_logout` '
-                . 'FROM '
+                . $this->table_join.'.`admin_role`, '
+                . $this->table_join.'.`admin_status`, '
+                . $this->table_join.'.`admin_last_login`, '
+                . $this->table_join.'.`admin_last_logout` '
+                . ' FROM '
                 . $this->table
                 . ' JOIN '
-                . 'admin_logs '
-                . 'WHERE '
-                . $this->table.'.`id` = `admin_logs`.`admin_id`');
+                . $this->table_join
+                . ' WHERE '
+                . $this->table.'.'.$this->id.' = '.$this->table_join.'.`admin_id`');
         return $query->result();
     }
     
@@ -53,20 +55,20 @@ class Administrator extends CI_Model {
     }
     
     public function getById($id) {
-        $this->db->where('id', $id);
+        $this->db->where($this->id, $id);
         $query = $this->db->get($this->table);
         return $query->result();
     }
     
     public function updateById($id, $data) {
-        $this->db->where('id', $id);
+        $this->db->where($this->id, $id);
         $this->db->update($this->table, $data);
         return ($this->db->affected_rows()) ? true : false;
     }
     
     public function selectById($id, $fields) {
         $this->db->select($fields);
-        $this->db->where('id', $id);
+        $this->db->where($this->id, $id);
         $this->db->from($this->table);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -81,7 +83,7 @@ class Administrator extends CI_Model {
     }
     
     public function getOldProfile($id) {
-        $this->db->where('id', $id);
+        $this->db->where($this->id, $id);
         $this->db->select(array('admin_image'));
         $query = $this->db->get($this->table);
         if ($query->num_rows() > 0) {
@@ -96,7 +98,7 @@ class Administrator extends CI_Model {
     }
     
     public function updateProfile($id, $image) {
-        $this->db->where('id', $id);
+        $this->db->where($this->id, $id);
         $this->db->update($this->table, array('admin_image' => $image));
         return ($this->db->affected_rows()) ? true : false;
     }

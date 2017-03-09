@@ -48,7 +48,11 @@ class CustomerReading extends CI_Model {
     }
     
     public function selectOverdue($date, $id = null) {
-        $this->db->select("customer_id, customer_reading_amount, customer_reading_date");
+        $this->db->select("customer_id, customer_reading_cubic, "
+                . "customer_reading_per_cubic, "
+                . "customer_reading_minimum, "
+                . "customer_reading_amount, "
+                . "customer_reading_date");
         $this->db->where('customer_reading_month_cover', $date);
         $this->db->where('customer_billing_flag', 0);
         $query = $this->db->get($this->table);

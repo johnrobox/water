@@ -4,7 +4,9 @@
                 <p class="visible-xs">
                   <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
                 </p>
-                <h1 class="page-header">System Settings</h1>
+                <h1 class="page-header">
+                    <i class="glyphicon glyphicon-cog"></i> System Settings
+                </h1>
                 <?php echo $this->session->flashdata("success"); ?>
                 <?php echo $this->session->flashdata("error"); ?>
               

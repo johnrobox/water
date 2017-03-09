@@ -3,7 +3,7 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
           </p>
           <h1 class="page-header">
-                Add Admin
+                <i class="glyphicon glyphicon-plus"></i> Add Admin
           </h1>
           <?php echo form_open(base_url().'index.php/admin/AdminUserController/addExec'); ?>
           <div class="form-group">

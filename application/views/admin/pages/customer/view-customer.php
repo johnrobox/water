@@ -1,6 +1,6 @@
 
         <div class="col-sm-9 col-md-10 main">
-            <h1 class="page-header"><span class="fa fa-pencil"></span> View Customer </h1>
+            <h1 class="page-header"> <i class="glyphicon glyphicon-th-list"></i>  View Customer </h1>
             <?php echo $this->session->flashdata("success"); ?>
             <?php echo $this->session->flashdata("error"); ?>
             <div id="commonAlertMessage"></div>
@@ -43,18 +43,20 @@
                         $view_info_button = array(
                             'value' => $id,
                             'class' => 'btn btn-default btn-xs viewCustomerInfoButton',
-                            'content' => 'View Info'
+                            'content' => '<i class="glyphicon glyphicon-eye-open"></i> View Info',
+                            'title' => 'View Customer Information'
                         );
                         echo form_button($view_info_button);
                         
                         $edit_button = array(
                             'value' => $id,
                             'class' => 'btn btn-success btn-xs editCustomerButton',
-                            'content' => 'Edit'
+                            'content' => '<i class="glyphicon glyphicon-pencil"></i> Edit',
+                            'title' => 'Edit Customer Information'
                         );
                         echo form_button($edit_button);
                         ?>
-                        <button class="btn btn-<?php echo $btn_type;?> btn-xs changeStatusCustomerButton" id="changeStatusButton<?php echo $id;?>" value="<?php echo $id;?>" status="<?php echo $row->customer_status;?>">
+                        <button class="btn btn-<?php echo $btn_type;?> btn-xs changeStatusCustomerButton" id="changeStatusButton<?php echo $id;?>" value="<?php echo $id;?>" status="<?php echo $row->customer_status;?>" title="Change Customer Status">
                             <span id="changeStatusText<?php echo $id;?>"><?php echo $btn_text;?></span>
                             <img src="<?php echo base_url();?>img/admin/loading/loading8.gif" id="changeStatusLoading<?php echo $id;?>" style="width: 20px; height: 20px; display: none"/>
                         </button>

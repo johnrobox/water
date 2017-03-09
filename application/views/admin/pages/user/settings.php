@@ -15,7 +15,7 @@
           echo form_button($change_password);
           ?>
           <h1 class="page-header">
-                Settings
+                <i class="glyphicon glyphicon-user"></i> Settings
           </h1>
           <div class="alert alert-success" id="success_message">
               <span id="success_message_cont"></span>

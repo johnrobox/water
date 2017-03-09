@@ -19,7 +19,7 @@ $(document).ready(function(){
                 <div id="displayTime"></div>
             </div>
             
-            <h1 class="page-header"> Dashboard </h1>
+            <h1 class="page-header"> <i class="glyphicon glyphicon-dashboard"></i> Dashboard </h1>
             
             <?php echo $this->session->flashdata("success"); ?>
             <?php echo $this->session->flashdata("error"); ?>

@@ -6,7 +6,7 @@
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
             </p>
             <h1 class="page-header">
-                  Customer with Overdue
+                 <i class="glyphicon glyphicon-thumbs-down"></i> Customer with Overdue
             </h1>
             <?php echo $this->session->flashdata("success"); ?>
             <?php echo $this->session->flashdata("error"); ?>
@@ -16,6 +16,9 @@
                         <th>No.</th>
                         <th>Name</th>
                         <th>Meter No</th>
+                        <th>CU</th>
+                        <th>Per Cubic</th>
+                        <th>Minimum</th>
                         <th>Amount</th>
                         <th>Reading Date</th>
                         <th></th>
@@ -32,15 +35,12 @@
                         <td>
                             <?php echo ucwords(strtolower($customer->customer_firstname.' '.$customer->customer_lastname));?>
                         </td>
-                        <td>
-                            <?php echo $customer->customer_meter_no; ?>
-                        </td>
-                        <td>
-                            <?php echo $row->customer_reading_amount; ?>
-                        </td>
-                        <td>
-                            <?php echo $row->customer_reading_date;?>
-                        </td>
+                        <td><?php echo $customer->customer_meter_no; ?></td>
+                        <td><?php echo $row->customer_reading_cubic; ?></td>
+                        <td><?php echo $row->customer_reading_per_cubic; ?></td>
+                        <td><?php echo $row->customer_reading_minimum; ?></td>
+                        <td><?php echo $row->customer_reading_amount; ?></td>
+                        <td><?php echo $row->customer_reading_date; ?></td>
                         <td>
                             <a href="<?php echo base_url();?>index.php/admin/BillingController/singleReport/<?php echo $customer->id;?>" target="blank">View Reports</a>
                         </td>
