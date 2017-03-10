@@ -6,7 +6,7 @@
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
             </p>
             <h1 class="page-header">
-                 <i class="glyphicon glyphicon-thumbs-down"></i> Customer with Overdue
+                 <i class="glyphicon glyphicon-list"></i> OVERDUE LIST
             </h1>
             <?php echo $this->session->flashdata("success"); ?>
             <?php echo $this->session->flashdata("error"); ?>

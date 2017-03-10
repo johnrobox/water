@@ -6,10 +6,10 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
           </p>
           <h1 class="page-header">
-                <i class="glyphicon glyphicon-shopping-cart"></i> Billing Information
+                <i class="glyphicon glyphicon-shopping-cart"></i> BILLING INFORMATION
           </h1>
           
-          <div class="breadcrumb" style="border: 1px solid #428bca">
+          <div class="breadcrumb">
             <?php echo form_open(base_url().'index.php/admin/BillingController/setBillingDate');?>
                 <table class="table">
                     <tr>

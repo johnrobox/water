@@ -57,7 +57,7 @@ $(document).ready(function(){
                     date_row.text(data.reading_date);
                     status_row.text('Unpaid');
                     row_form_table.hide();
-                    action_row.html('<button class="btn btn-success btn-xs update_reading_amount_button" id="update_button_ID'+customer_id+'" reading_id="'+data.reading_id+'" customer_id="'+customer_id+'" amount="'+data.reading_amount+'">Update</button>');
+                    action_row.html('<button class="btn btn-success btn-xs update_reading_amount_button" id="update_button_ID'+customer_id+'" reading_id="'+data.reading_id+'" customer_id="'+customer_id+'" amount="'+data.reading_amount+'"><i class="glyphicon glyphicon-pencil"></i> Update</button>');
                 }
                 submit_reading_loading.hide();
                 console.log(data);

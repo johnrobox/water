@@ -5,7 +5,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                Paid
+                PAID
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -24,24 +24,23 @@
                     echo form_input($AmountValue);
                     ?>
                 </div>
+            </div>
+            <div class="modal-footer">
                 <?php 
                 $refresh_button = array(
                     'class' => 'btn btn-primary',
                     'id' => 'mark_as_paid_submit_button',
-                    'content' => 'Mark As Paid ?'
+                    'content' => '<i class="glyphicon glyphicon-thumbs-up"></i> Mark As PAID ?'
                 );
                 echo form_button($refresh_button);
                 
                 $updateSubmit = array(
                     'class' => 'btn btn-default',
                     'data-dismiss' => 'modal',
-                    'content' => 'Cancel'
+                    'content' => '<i class="glyphicon glyphicon-thumbs-down"></i> Cancel'
                 );
                 echo form_button($updateSubmit);
                 ?>
-            </div>
-            <div class="modal-footer">
-                
             </div>
         </div>
     </div>

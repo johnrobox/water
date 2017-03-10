@@ -19,6 +19,8 @@ $(document).ready(function(){
     
     var loading_image = $("#loading_image");
     
+    var deleteButtonModal = $("#deleteButtonModal");
+    
     // initialize global variable
     var id = 0;
     alertContainer.hide();
@@ -28,7 +30,7 @@ $(document).ready(function(){
         deleteRequestConfirmModal.modal('show');
     });
     
-    deleteRequestConfirmModal.click(function(){
+    deleteButtonModal.click(function(){
         loading_image.show();
         $.ajax({
             type: 'POST',

@@ -1,6 +1,6 @@
 
         <div class="col-sm-9 col-md-10 main">
-            <h1 class="page-header"> <i class="glyphicon glyphicon-th-list"></i>  View Customer </h1>
+            <h1 class="page-header"> <i class="glyphicon glyphicon-th-list"></i> CUSTOMER LIST </h1>
             <?php echo $this->session->flashdata("success"); ?>
             <?php echo $this->session->flashdata("error"); ?>
             <div id="commonAlertMessage"></div>

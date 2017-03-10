@@ -3,7 +3,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <img id="loadingImage" style="height: 30px; width:30px; display: none" src="<?php echo base_url().'img/admin/loading/loading6.gif';?>" class="center-block">
+                <i class="glyphicon glyphicon-user"></i>
+                Customer Information
+                <img id="loadingImage" style="height: 30px; width:30px;" src="<?php echo base_url().'img/admin/loading/loading6.gif';?>" class="center-block">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -96,8 +98,16 @@
             </div>
             <div class="modal-footer">
                 <ul class="pager">
-                    <li class="previous nextAndPrevButtonInModal" id="viewPreviousButtonInModal" state="previous" value=""><a href="#">Previous</a></li>
-                    <li class="next nextAndPrevButtonInModal"  id="viewNextButtonInModal" state="next" value=""><a href="#">Next</a></li>
+                    <li class="previous nextAndPrevButtonInModal" id="viewPreviousButtonInModal" state="previous" value="">
+                        <a href="#">
+                            <i class="glyphicon glyphicon-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li class="next nextAndPrevButtonInModal"  id="viewNextButtonInModal" state="next" value="">
+                        <a href="#">
+                            <i class="glyphicon glyphicon-arrow-right"></i> Next
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

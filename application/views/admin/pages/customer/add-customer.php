@@ -1,6 +1,6 @@
 
         <div class="col-sm-9 col-md-10 main">
-            <h1 class="page-header"><i class="glyphicon glyphicon-plus"></i> Add Customer </h1>
+            <h1 class="page-header"><i class="glyphicon glyphicon-plus"></i> CUSTOMER REGISTRATION </h1>
             <?php echo $this->session->flashdata("success"); ?>
             <?php echo $this->session->flashdata("error"); ?>
             <?php 
@@ -48,7 +48,7 @@
                         </div>
                         <div class="form-group">
                             <?php
-                            echo form_label('Meter Serial No', 'meterNo');
+                            echo form_label('<i class="glyphicon glyphicon-book"></i> Meter Serial No', 'meterNo');
                             echo form_error('meterNo', '<span class="text-red">', '</span>');
                             echo form_input(array(
                                 'type' => 'text',
@@ -61,7 +61,7 @@
                         </div>
                         <div class="form-group">
                             <?php
-                            echo form_label('Address', 'address');
+                            echo form_label('<i class="glyphicon glyphicon-map-marker"></i> Address', 'address');
                             echo form_error('address', '<span class="text-red">', '</span>');
                             echo form_input(array(
                                 'type' => 'text',
@@ -74,7 +74,7 @@
                         </div>
                         <div class="form-group">
                             <?php
-                            echo form_label('Contact No.', 'contact');
+                            echo form_label('<i class="glyphicon glyphicon-phone-alt"></i> Contact No.', 'contact');
                             echo form_error('contact', '<span class="text-red">', '</span>');
                             echo form_input(array(
                                 'type' => 'text',
@@ -87,7 +87,7 @@
                         </div>
                         <div class="form-group">
                             <?php
-                            echo form_label('Birthdate', 'birthdate');
+                            echo form_label('<i class="glyphicon glyphicon-calendar"></i> Birthdate', 'birthdate');
                             echo form_error('birthdate', '<span class="text-red">', '</span>');
                             echo form_input(array(
                                 'type' => 'text',
@@ -102,7 +102,7 @@
                         echo form_button(array(
                             'class' => 'btn btn-primary',
                             'type' => 'submit',
-                            'content' => 'Add Customer'
+                            'content' => '<i class="glyphicon glyphicon-send"></i> Submit'
                         ));
                         
                         echo form_button(array(

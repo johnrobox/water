@@ -1,10 +1,11 @@
 <div class="modal fade" id="CustomerUpdateModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">Edit
+            <div class="modal-header">
+                <i class="pull-right fa fa-times" data-dismiss="modal"></i>
+                <i class="glyphicon glyphicon-pencil"></i> Edit Costumer Information
                 <div class="text-red commonError"></div>
                 <img id="loadingImageUpdateCustomer" style="height: 100px; width:100px; display: none" src="<?php echo base_url().'img/admin/loading.gif';?>" class="center-block">
-                <i class="pull-right fa fa-times" data-dismiss="modal"></i>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -135,7 +136,7 @@
                     'class' => 'btn btn-success',
                     'id' => 'BtnRefreshUpCos',
                     'value' => '',
-                    'content' => 'Refresh Data'
+                    'content' => '<i class="glyphicon glyphicon-refresh"></i> Refresh Data'
                 );
                 echo form_button($refresh_button);
                 
@@ -143,7 +144,7 @@
                     'class' => 'btn btn-primary',
                     'id' => 'BtnSubmitUpCos',
                     'value' => '',
-                    'content' => 'Update'
+                    'content' => '<i class="glyphicon glyphicon-send"></i> Update'
                 );
                 echo form_button($update_button);
                 ?>

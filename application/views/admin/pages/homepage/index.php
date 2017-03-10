@@ -16,10 +16,11 @@ $(document).ready(function(){
             </p>
             
             <div class="pull-right" style="font-size: 30px;">
-                <div id="displayTime"></div>
+                <i class="glyphicon glyphicon-time"></i>
+                <span id="displayTime"></>
             </div>
             
-            <h1 class="page-header"> <i class="glyphicon glyphicon-dashboard"></i> Dashboard </h1>
+            <h1 class="page-header"> <i class="glyphicon glyphicon-dashboard"></i> DASHBOARD </h1>
             
             <?php echo $this->session->flashdata("success"); ?>
             <?php echo $this->session->flashdata("error"); ?>
@@ -82,6 +83,7 @@ $(document).ready(function(){
                     
                 </div>
                 <div class="col-sm-3 pull-right">
+                    <i class="glyphicon glyphicon-calendar"></i>
                     <?php echo $this->calendar->generate();?>
                 </div>
             </div>

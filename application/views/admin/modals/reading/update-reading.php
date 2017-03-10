@@ -5,7 +5,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                Update reading amount.
+                <i class="glyphicon glyphicon-pencil"></i>
+                UPDATE READING AMOUNT
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -54,14 +55,14 @@
                 $refresh_button = array(
                     'class' => 'btn btn-success',
                     'id' => 'refresh_reading_button',
-                    'content' => 'Refresh'
+                    'content' => '<i class="glyphicon glyphicon-refresh"></i> Refresh'
                 );
                 echo form_button($refresh_button);
                 
                 $updateSubmit = array(
                     'class' => 'btn btn-primary',
                     'id' => 'update_reading_button',
-                    'content' => 'Update'
+                    'content' => '<i class="glyphicon glyphicon-pencil"></i> Update'
                 );
                 echo form_button($updateSubmit);
                 ?>

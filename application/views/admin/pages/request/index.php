@@ -4,7 +4,7 @@
                 <p class="visible-xs">
                   <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
                 </p>
-                <h1 class="page-header"> <i class="glyphicon glyphicon-envelope"></i> Customer Request</h1>
+                <h1 class="page-header"> <i class="glyphicon glyphicon-envelope"></i> CUSTOMER REQUEST </h1>
                 <?php echo $this->session->flashdata("success"); ?>
             <?php echo $this->session->flashdata("error"); ?>
                 <div class="alert" id="alertContainer">
@@ -33,7 +33,7 @@
                                 $delete_button = array(
                                     'class' => 'btn btn-danger btn-xs delete_request_button',
                                     'request_id' => $id,
-                                    'content' => '<span class="glyphicon glyphicon-trash"></span>Delete'
+                                    'content' => '<span class="glyphicon glyphicon-trash"></span> Delete'
                                 );
                                 echo form_button($delete_button);
                                 ?>

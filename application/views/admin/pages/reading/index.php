@@ -6,13 +6,13 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
           </p>
           <h1 class="page-header">
-                <i class="glyphicon glyphicon-pencil"></i> Reading Information
+                <i class="glyphicon glyphicon-pencil"></i> CUSTOMER READING INFORMATION
           </h1>
           
           <?php echo $this->session->flashdata("success"); ?>
             <?php echo $this->session->flashdata("error"); ?>
           
-          <div class="breadcrumb" style="border: 1px solid #428bca">
+          <div class="breadcrumb">
               <?php echo form_open(base_url().'index.php/admin/ReadingController/setReadingDate');?>
               <table class="table">
                   <tr>
@@ -97,7 +97,9 @@
                                 <?php echo ($amount->customer_billing_flag) ? "Paid" : "Unpaid"; ?>
                             </td>
                             <td id="update_button_row<?php echo $row->id;?>">
-                                <button class="btn btn-success btn-xs update_reading_amount_button" id="update_button_ID<?php echo $row->id;?>" reading_id="<?php echo $amount->id; ?>" customer_id="<?php echo $row->id; ?>" amount="<?php echo $amount->customer_reading_amount; ?>">Update</button>
+                                <button class="btn btn-success btn-xs update_reading_amount_button" id="update_button_ID<?php echo $row->id;?>" reading_id="<?php echo $amount->id; ?>" customer_id="<?php echo $row->id; ?>" amount="<?php echo $amount->customer_reading_amount; ?>">
+                                    <i class="glyphicon glyphicon-pencil"></i> Update
+                                </button>
                             </td>
                             <?php } else { ?>
                             <td id="reading_cubic_row<?php echo $row->id;?>"></td>
