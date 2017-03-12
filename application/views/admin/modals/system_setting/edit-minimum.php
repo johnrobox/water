@@ -5,7 +5,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                Update Minimum Amount
+                <i class="glyphicon glyphicon-pencil"></i>
+                UPDATE MINIMUM AMOUNT
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -28,7 +29,7 @@
                 $updateSubmit = array(
                     'class' => 'btn btn-primary',
                     'id' => 'updateMinimumButtonModal',
-                    'content' => 'Update'
+                    'content' => '<i class="glyphicon glyphicon-pencil"></i> Update'
                 );
                 echo form_button($updateSubmit);
                 ?>

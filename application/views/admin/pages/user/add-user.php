@@ -3,7 +3,7 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
           </p>
           <h1 class="page-header">
-                <i class="glyphicon glyphicon-plus"></i> Add Admin
+                <i class="glyphicon glyphicon-plus"></i> ADD ADMINISTRATOR USER
           </h1>
           <?php echo form_open(base_url().'index.php/admin/AdminUserController/addExec'); ?>
           <div class="form-group">
@@ -113,7 +113,7 @@
           $add_button = array(
               'class' => 'btn btn-primary',
               'type' => 'submit',
-              'content' => 'Add'
+              'content' => '<i class="glyphicon glyphicon-send"></i> Register'
           );
           echo form_button($add_button);
           ?>

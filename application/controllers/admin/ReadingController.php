@@ -20,7 +20,7 @@ class ReadingController extends CI_Controller {
     public function index() {
         $data['script'] = array('customer-reading');
         $data['page_number'] = 4;
-        $data['page_title'] = 'Admin - reading';
+        $data['page_title'] = 'ADMIN - READING';
         $data['account'] = $this->account;
         // Session the month you like
         if (!$this->session->has_userdata('setReadingMonth') && !$this->session->has_userdata('setReadingYear')) {

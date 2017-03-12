@@ -11,7 +11,7 @@
             <?php
             $add_button = array(
                 'class' => 'btn btn-primary',
-                'content' => 'Add Notice',
+                'content' => '<i class="glyphicon glyphicon-plus"></i> Add Notice',
                 'id' => 'addNoticeButton'
             );
             echo form_button($add_button);
@@ -44,14 +44,14 @@
                         <td>
                             <?php
                             if ($row->status) {
-                                $status_color = 'green';
+                                $status_color = 'text-green';
                                 $status_text = 'ENABLE'; 
                             } else {
-                                $status_color = 'red';
+                                $status_color = 'text-red';
                                 $status_text = 'DISABLE';
                             }
                             ?>
-                            <span style="color:<?php echo $status_color; ?>"><?php echo $status_text; ?></span>
+                            <span id="statusSpan<?php echo $id; ?>" class="<?php echo $status_color; ?>"><?php echo $status_text; ?></span>
                         </td>
                         <td>
                             

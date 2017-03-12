@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <i class="pull-right fa fa-times" data-dismiss="modal"></i>
-                Change Account Password
+                CHANGE ACCOUNT PASSWORD
                 <img id="loading_image" style="height: 30px; width:30px; display: none" src="<?php echo base_url().'img/admin/loading/loading6.gif';?>" class="center-block">
             </div>
             <div class="modal-body">
@@ -65,7 +65,7 @@
                 $submit_button = array(
                     'id' => 'submit_button',
                     'class' => 'btn btn-primary',
-                    'content' => 'Update'
+                    'content' => '<i class="glyphicon glyphicon-pencil"></i> Update'
                 );
                 echo form_button($submit_button);
                 

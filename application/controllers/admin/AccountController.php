@@ -23,7 +23,7 @@ class AccountController extends CI_Controller {
     public function settings() {
         $data['script'] = array('admin');
         $data['page_number'] = 12;
-        $data['page_title'] = 'Admin - Account Settings';
+        $data['page_title'] = 'ADMIN - ACCOUNT SETTING';
         $data['account'] = $this->Administrator->getById($this->user_id);
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');

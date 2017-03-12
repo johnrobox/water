@@ -15,7 +15,7 @@ class RequestController extends CI_Controller{
     
     public function index(){
         $data['page_number'] = 8;
-        $data['page_title'] = 'Admin - request';
+        $data['page_title'] = 'ADMIN - REQUEST';
         $data['script'] = array('customer_request');
         $data['allRequest'] = $this->CustomerRequest->getAll();
         $data['account'] = $this->account;

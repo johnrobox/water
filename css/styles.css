@@ -80,6 +80,10 @@ footer {
     color: red;
 }
 
+.text-green {
+    color: green;
+}
+
 .loading-margin-top {
     height: 30px; 
     width: 30px; 

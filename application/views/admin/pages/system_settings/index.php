@@ -5,7 +5,7 @@
                   <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
                 </p>
                 <h1 class="page-header">
-                    <i class="glyphicon glyphicon-cog"></i> System Settings
+                    <i class="glyphicon glyphicon-cog"></i> SYSTEM SETTINGS
                 </h1>
                 <?php echo $this->session->flashdata("success"); ?>
                 <?php echo $this->session->flashdata("error"); ?>
@@ -18,7 +18,7 @@
                         $edit_per_cubic_button = array(
                             'id' => 'editPerCubic',
                             'class' => 'btn btn-primary pull-right',
-                            'content' => 'EDIT',
+                            'content' => '<i class="glyphicon glyphicon-pencil"></i> EDIT',
                             'value' => $cubic_settings
                         );
                         echo form_button($edit_per_cubic_button);
@@ -41,7 +41,7 @@
                         $edit_minimum_amount_button = array(
                             'id' => 'editMinimumAmountButton',
                             'class' => 'btn btn-primary pull-right',
-                            'content' => 'EDIT',
+                            'content' => '<i class="glyphicon glyphicon-pencil"></i> EDIT',
                             'value' => $minimum_settings
                         );
                         echo form_button($edit_minimum_amount_button);

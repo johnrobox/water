@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <i class="pull-right fa fa-times" data-dismiss="modal"></i>
-                Are you sure want to logout this time ?
+                ARE YOU SURE WANT TO LOGOUT THIS TIME ?
             </div>
             <div class="modal-body">
                 <div class="text-center" id="loadingImageLogout">
@@ -19,13 +19,13 @@
                 $cancel_button = array(
                     'class' => 'btn btn-default',
                     'data-dismiss' => 'modal',
-                    'content' => 'Cancel'
+                    'content' => '<i class="glyphicon glyphicon-thumbs-down"></i> Cancel'
                 );
                 echo form_button($cancel_button);
                 
                 $submit_button = array(
                     'class' => 'btn btn-primary',
-                    'content' => 'Continue',
+                    'content' => '<i class="fa fa-sign-out fa-fw"></i> Continue',
                     'id' => 'confirm'
                 );
                 echo form_button($submit_button);

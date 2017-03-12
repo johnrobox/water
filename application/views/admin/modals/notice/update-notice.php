@@ -24,21 +24,21 @@
                 <?php 
                 $refresh_button = array(
                     'class' => 'btn btn-success',
-                    'content' => 'Refresh',
+                    'content' => '<i class="glyphicon glyphicon-refresh"></i> Refresh',
                     'id' => 'refreshButton'
                 );
                 echo form_button($refresh_button);
                 
                 $delete_button = array(
                     'class' =>  'btn btn-primary',
-                    'content' => 'Update',
+                    'content' => '<i class="glyphicon glyphicon-pencil"></i> Update',
                     'id' => 'updateButtonModal'
                 );
                 echo form_button($delete_button);
                 
                 $cancel_btn = array(
                     'class' => 'btn btn-default',
-                    'content' => 'Cancel',
+                    'content' => '<i class="glyphicon glyphicon-thumbs-down"></i> Cancel',
                     'data-dismiss' => 'modal'
                 );
                 echo form_button($cancel_btn);

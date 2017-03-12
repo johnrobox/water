@@ -16,7 +16,7 @@ class NoticeController extends CI_Controller {
     
     public function index(){
         $data['page_number'] = 9;
-        $data['page_title'] = 'Admin - notice';
+        $data['page_title'] = 'ADMIN - NOTICE';
         $data['notices'] = $this->Notice->getAll();
         $data['script'] = array('notice');
         $data['account'] = $this->account;

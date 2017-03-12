@@ -13,7 +13,7 @@ class SystemSettingsController extends CI_Controller {
     
     public function index() {
         $data['page_number'] = 13;
-        $data['page_title'] = 'Admin - System Settings';
+        $data['page_title'] = 'ADMIN - SYSTEM SETTINGS';
         $data['script'] = array('system-setting');
         $data['account'] = $this->account;
         $data['cubic_settings'] = $this->SystemSetting->getPerCubic();

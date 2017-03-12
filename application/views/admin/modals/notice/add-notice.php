@@ -24,14 +24,14 @@
                 <?php 
                 $delete_button = array(
                     'class' =>  'btn btn-primary',
-                    'content' => 'Okay',
+                    'content' => '<i class="glyphicon glyphicon-thumbs-up"></i> Okay',
                     'id' => 'addButtonModal'
                 );
                 echo form_button($delete_button);
                 
                 $cancel_btn = array(
                     'class' => 'btn btn-default',
-                    'content' => 'Cancel',
+                    'content' => '<i class="glyphicon glyphicon-thumbs-down"></i> Cancel',
                     'data-dismiss' => 'modal'
                 );
                 echo form_button($cancel_btn);

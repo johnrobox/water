@@ -13,7 +13,7 @@ class ReportController extends CI_Controller {
     
     public function index(){
         $data['page_number'] = 7;
-        $data['page_title'] = 'Admin - report';
+        $data['page_title'] = 'ADMIN - REPORT';
 
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');

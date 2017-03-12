@@ -14,7 +14,7 @@ class AuthController extends CI_Controller {
 
     public function index() {
         $this->auth->checkAuth();
-        $data['page_title'] = 'Administrator Login Panel';
+        $data['page_title'] = 'ADMINISTRATOR LOGIN';
         $this->load->view('admin/default/login', $data);
     }
     

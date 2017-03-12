@@ -16,7 +16,7 @@ class OverdueController extends CI_Controller {
     
     public function index() {
         $data['page_number'] = 6;
-        $data['page_title'] = 'Admin - overdue';
+        $data['page_title'] = 'ADMIN - OVERDUE';
         
         $overdue_date = $this->dateformater->getOverdueDate();
         $data['overdue'] = $this->CustomerReading->selectOverdue($overdue_date);

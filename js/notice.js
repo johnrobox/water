@@ -98,6 +98,8 @@ $(document).ready(function(){
         var view_button = $("#changeStatusButton"+notice_id);
         var button_content = $("#changeStatusText"+notice_id);
         
+        var status_span = $("#statusSpan"+notice_id);
+        
         var loading_image = $("#changeStatusLoading"+notice_id);
         loading_image.show();
         
@@ -114,6 +116,8 @@ $(document).ready(function(){
                 var alert_message = "";
                 var add_class = "";
                 var button_text = "";
+                var status_text = "";
+                
                 if (data.changed == true) {
                     add_class = "alert-success";
                     alert_message = "Status successfully change!";
@@ -124,19 +128,26 @@ $(document).ready(function(){
                         view_button.addClass("btn-warning");
                         view_button.removeClass("btn-primary");
                         button_text = 'Disable';
-
+                        status_text = "ENABLE";
+                        status_span.addClass("text-green");
+                        status_span.removeClass("text-red");
                     } else {
                         tr_tracker.addClass("bg-eee");
                         tr_tracker.removeClass("bg-white")
                         view_button.addClass("btn-primary");
                         view_button.removeClass("btn-warning");
                         button_text = 'Enable';
+                        status_text = "DISABLE";
+                        status_span.addClass("text-red");
+                        status_span.removeClass("text-green");
                     }
                 } else {
                     add_class = "alert-danger";
                     alert_message = "Cannot change status!";
                 }
 
+                status_span.text(status_text);
+                
                 button_content.text(button_text);
                 alertContainer.addClass(add_class);
                 messageContainer.text(alert_message);

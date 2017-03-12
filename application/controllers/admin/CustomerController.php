@@ -24,7 +24,7 @@ class CustomerController extends CI_Controller {
      */
     public function addField() {
         $data['page_number'] = 3;
-        $data['page_title'] = 'Admin - add customer';
+        $data['page_title'] = 'ADMIN - ADD CUSTOMER';
         $data['account'] = $this->account;
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');
@@ -105,7 +105,7 @@ class CustomerController extends CI_Controller {
     public function viewCustomer() {    
         $data['script'] = array('customer');
         $data['page_number'] = 2;
-        $data['page_title'] = 'Admin - view customer';
+        $data['page_title'] = 'ADMIN - VIEW CUSTOMER';
         $data['customers'] = $this->Customer->getAll();
         $data['account'] = $this->account;
 

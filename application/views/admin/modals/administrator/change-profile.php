@@ -2,7 +2,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                Change Profile Picture
+                <i class="glyphicon glyphicon-pencil"></i>
+                CHANGE PROFILE PICTURE
                 <img id="changeProfileImageLoading" style="height: 30px; width:30px;" src="<?php echo base_url().'img/admin/loading/loading6.gif';?>" class="center-block">
             </div>
             <div class="modal-body">
@@ -41,7 +42,7 @@
                         $submit_button = array(
                             'class' => 'btn btn-primary',
                             'id' => 'update',
-                            'content' => 'Update Profile'
+                            'content' => '<i class="glyphicon glyphicon-pencil"></i> Update Profile'
                         );
                         echo form_button($submit_button);
                         ?>
@@ -57,7 +58,7 @@
                 <?php
                     $cancel_button = array(
                         'class' => 'btn btn-default',
-                        'content' => 'Cancel',
+                        'content' => '<i class="glyphicon glyphicon-thumbs-down"></i> Cancel',
                         'data-dismiss' => 'modal'
                     );
                     echo form_button($cancel_button);

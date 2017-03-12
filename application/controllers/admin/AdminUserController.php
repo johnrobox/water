@@ -19,7 +19,7 @@ class AdminUserController extends CI_Controller {
     
     public function index() {
         $data['page_number'] = 10;
-        $data['page_title'] = 'Admin - add user';
+        $data['page_title'] = 'ADMIN - ADD USER';
         $data['account'] = $this->account;
         $this->load->view('admin/default/header', $data);
         $this->load->view('admin/default/top-menu');
@@ -106,7 +106,7 @@ class AdminUserController extends CI_Controller {
     
     public function viewUsers() {
         $data['page_number'] = 11;
-        $data['page_title'] = 'Admin - View User';
+        $data['page_title'] = 'ADMIN - VIEW USER';
         $data['results'] = $this->Administrator->getAll();
         $data['account'] = $this->account;
         $this->load->view('admin/default/header', $data);

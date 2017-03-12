@@ -18,7 +18,7 @@ class BillingController extends CI_Controller {
     public function index() {
         $data['script'] = array('customer_billing');
         $data['page_number'] = 5;
-        $data['page_title'] = 'Admin - billing';
+        $data['page_title'] = 'ADMIN - BILLING';
         $data['account'] = $this->account;
         // Session the month you like
         if (!$this->session->has_userdata('setBillingMonth') && !$this->session->has_userdata('setBillingYear')) {
@@ -133,6 +133,7 @@ class BillingController extends CI_Controller {
             redirect(base_url().'index.php/admin/CustomerController/viewCustomer');
         }
         $data['page_number'] = 0;
+        $data['page_title'] = "CUSTOMER SINGLE REPORT";
         $data['script'] = array('customer-report');
         $data['customer'] = $this->Customer->getInfo($customer_id);
         $data['billing'] = $this->CustomerReading->selectByCustomerId($customer_id);

@@ -4,18 +4,20 @@
           
           <!--toggle sidebar button-->
           <p class="visible-xs">
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+            </button>
           </p>
           <?php
           $change_password = array(
               'class' => 'btn btn-primary pull-right',
               'id' => 'change_password',
-              'content' => 'Change Password'
+              'content' => '<i class="glyphicon glyphicon-pencil"></i> Change Password'
           );
           echo form_button($change_password);
           ?>
           <h1 class="page-header">
-                <i class="glyphicon glyphicon-user"></i> Settings
+                <i class="glyphicon glyphicon-user"></i> SETTINGS
           </h1>
           <div class="alert alert-success" id="success_message">
               <span id="success_message_cont"></span>
@@ -100,7 +102,7 @@
           $add_button = array(
               'class' => 'btn btn-primary center-block',
               'type' => 'submit',
-              'content' => 'Update'
+              'content' => '<i class="glyphicon glyphicon-pencil"></i> Update'
           );
           echo form_button($add_button);
           ?>

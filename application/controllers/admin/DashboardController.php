@@ -25,7 +25,7 @@ class DashboardController extends CI_Controller {
 
         $this->load->library('calendar', $prefs);
         $data['page_number'] = 1;
-        $data['page_title'] = 'Admin - homepage';
+        $data['page_title'] = 'ADMIN - HOMEPAGE';
         $data['account'] = $this->account;
         // request the overdue date
         $overdue_date = $this->dateformater->getOverdueDate();
