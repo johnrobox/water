@@ -24,6 +24,12 @@ class Administrator extends CI_Model {
         return $result;
     }
     
+    public function logout($id, $data) {
+        $this->db->where("admin_id", $id);
+        $this->db->update($this->table_join, $data);
+        return ($this->db->affected_rows()) ? true : false;
+    }
+    
     public function getAll() {  
         
         $query = $this->db->query(
@@ -101,6 +107,22 @@ class Administrator extends CI_Model {
         $this->db->where($this->id, $id);
         $this->db->update($this->table, array('admin_image' => $image));
         return ($this->db->affected_rows()) ? true : false;
+    }
+    
+    public function getUserStatus() {
+        $query = $this->db->query(
+                'SELECT '
+                . $this->table.'.'.$this->id.', '
+                . $this->table_join.'.`admin_status`, '
+                . $this->table_join.'.`admin_last_login`, '
+                . $this->table_join.'.`admin_last_logout` '
+                . ' FROM '
+                . $this->table
+                . ' JOIN '
+                . $this->table_join
+                . ' WHERE '
+                . $this->table.'.'.$this->id.' = '.$this->table_join.'.`admin_id`');
+        return $query->result();
     }
         
 }

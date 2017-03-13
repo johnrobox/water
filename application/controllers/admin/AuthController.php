@@ -57,7 +57,8 @@ class AuthController extends CI_Controller {
                 date_default_timezone_set("Asia/Manila");
                 $log_data = array(
                     'admin_last_login' => date('Y-m-d h:i:s'),
-                    'admin_token' => $login_token
+                    'admin_token' => $login_token,
+                    'admin_status' => 1
                 );
                 $response = $this->AdministratorLog->update($id, $log_data);
                 if ($response ==  true) {
@@ -88,8 +89,22 @@ class AuthController extends CI_Controller {
         if ($this->input->post("type")) {
            $type = $this->input->post("type");
            if ($type == "logout") {
-               $this->auth->forceLogout();
-               $response = array("logout" => true);
+               
+               date_default_timezone_set("Asia/Manila");
+               $user_id = $this->session->userdata('AdminId');
+               $user_last_logout = date('Y-m-d h:i:s');
+               
+               $data = array(
+                   "admin_status" => 0,
+                   "admin_last_logout" => $user_last_logout
+               );
+               $result = $this->Administrator->logout($user_id, $data);
+               if ($result) {
+                    $this->auth->forceLogout();
+                    $response = array("logout" => true);
+               } else {
+                    $response = array("logout" => false);
+               }
            } else {
                $response = array("logout" => false);
            }

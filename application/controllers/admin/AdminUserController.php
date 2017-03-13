@@ -118,4 +118,8 @@ class AdminUserController extends CI_Controller {
         $this->load->view('admin/default/footer');
     }
     
+    public function getUserStatus() {
+        echo json_encode($this->Administrator->getUserStatus());
+    }
+    
 }
